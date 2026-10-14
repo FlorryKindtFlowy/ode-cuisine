@@ -1,0 +1,173 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  schema?: object | object[];
+  image?: string;
+}
+const { title, description, schema, image } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const fullTitle = title === 'Ode Cuisine' ? 'Ode Cuisine · Een ode aan de recepten die ons hebben grootgebracht' : `${title} · Ode Cuisine`;
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Ode Cuisine',
+  url: 'https://www.odecuisine.be',
+  logo: 'https://www.odecuisine.be/logo/ode-o.png',
+  slogan: 'Een ode aan de recepten die ons hebben grootgebracht.',
+  founder: [
+    { '@type': 'Person', name: 'Florry Kindt' },
+    { '@type': 'Person', name: 'Gilles' },
+  ],
+  areaServed: ['Oost-Vlaanderen', 'West-Vlaanderen'],
+};
+const schemas = [orgSchema, ...(schema ? (Array.isArray(schema) ? schema : [schema]) : [])];
+const pad = Astro.url.pathname;
+const huidig = (p: string) => (pad.startsWith(p) ? 'page' : undefined);
+---
+<!doctype html>
+<html lang="nl-BE">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#51121a" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="nl_BE" />
+    <meta property="og:image" content={new URL(image ?? '/logo/ode-o.png', Astro.site)} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
+    {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+  </head>
+  <body class={Astro.url.pathname === "/" ? "home" : undefined}>
+    <header class="kop">
+      <a class="hoek hoek-lb" href="/recepten/" aria-current={huidig('/recepten')}>recepten</a>
+      <a class="logo" href="/" aria-label="Ode Cuisine, naar de homepage">
+        <span class="o-mark" aria-hidden="true"></span><span class="logo-naam">ode cuisine.</span>
+      </a>
+      <a class="hoek hoek-rb hoek-knop" href="/aan-tafel/" aria-current={huidig('/aan-tafel')}>aan tafel</a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="nav-mobiel">menu</button>
+    </header>
+    <a class="hoek hoek-lo" href="/verhaal/" aria-current={huidig('/verhaal')}>het verhaal</a>
+    <a class="hoek hoek-ro" href="/kookboek/" aria-current={huidig('/kookboek')}>kookboek</a>
+    <nav class="nav-mobiel" id="nav-mobiel" aria-label="Mobiel menu">
+      <a href="/">Home</a>
+      <a href="/recepten/">Recepten</a>
+      <a href="/verhaal/">Het verhaal</a>
+      <a href="/aan-tafel/">Aan tafel</a>
+      <a href="/kookboek/">Kookboek</a>
+    </nav>
+
+    <main><slot /></main>
+
+    <footer class="voet">
+      <div class="voet-o" aria-hidden="true"><span class="o-mark"></span></div>
+      <div class="wrap">
+        <div>
+          <p class="groot">Smaken die je <em>nooit</em> echt vergeet.</p>
+          <p>Private dining aan huis in Oost en West-Vlaanderen, door Florry en Gilles. Elke zondag een nieuw recept.</p>
+        </div>
+        <div>
+          <a href="/recepten/">Recepten</a>
+          <a href="/aan-tafel/">Aan tafel</a>
+          <a href="/verhaal/">Het verhaal</a>
+          <a href="/kookboek/">Kookboek</a>
+        </div>
+        <div>
+          <a href="https://www.instagram.com/" rel="noopener">Instagram</a>
+          <a href="https://www.pinterest.com/" rel="noopener">Pinterest</a>
+          <a href="/aan-tafel/#aanvraag">Contact</a>
+        </div>
+        <p class="klein">© {new Date().getFullYear()} Ode Cuisine · www.odecuisine.be</p>
+      </div>
+    </footer>
+
+    <script>
+      import Lenis from 'lenis';
+
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // zacht scrollen
+      if (!reduce) {
+        const lenis = new Lenis({ lerp: 0.09 });
+        const raf = (t: number) => { lenis.raf(t); requestAnimationFrame(raf); };
+        requestAnimationFrame(raf);
+      }
+
+      // intro animaties starten
+      requestAnimationFrame(() => setTimeout(() => document.body.classList.add('geladen'), 80));
+
+      // header: kleiner na scrollen, verstopt bij naar beneden scrollen
+      const kop = document.querySelector('.kop')!;
+      let vorige = 0;
+      const opScroll = () => {
+        const y = window.scrollY;
+        kop.classList.toggle('klein', y > 40);
+        kop.classList.toggle('weg', y > 400 && y > vorige);
+        vorige = y;
+      };
+      window.addEventListener('scroll', opScroll, { passive: true }); opScroll();
+
+      // elementen laten verschijnen bij scrollen
+      const io = new IntersectionObserver((items) => items.forEach((i) => {
+        if (i.isIntersecting) { i.target.classList.add('zichtbaar'); io.unobserve(i.target); }
+      }), { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('[data-stagger]').forEach((g) => {
+        Array.from(g.children).forEach((c, i) => (c as HTMLElement).style.setProperty('--i', String(i)));
+      });
+      document.querySelectorAll('.reveal, .reveal-foto').forEach((el) => io.observe(el));
+      document.querySelectorAll('main .sectie h2, main .sectie > .wrap > p, main .smal > p, main .kaart, main .formule, main .faq, main .cta-kader, main .gerecht-rij').forEach((el) => {
+        if (el.closest('.hero') || el.classList.contains('reveal')) return;
+        el.classList.add('reveal'); io.observe(el);
+      });
+
+      // parallax op elementen met data-snelheid
+      const para = document.querySelectorAll<HTMLElement>('[data-snelheid]');
+      if (!reduce && para.length) {
+        const tik = () => {
+          para.forEach((el) => {
+            const r = el.getBoundingClientRect();
+            const mid = r.top + r.height / 2 - window.innerHeight / 2;
+            el.style.translate = `0 ${mid * Number(el.dataset.snelheid)}px`;
+          });
+          requestAnimationFrame(tik);
+        };
+        tik();
+      }
+
+      // achtergrondkleur van de pagina vloeit mee met de sectie in beeld
+      // pagina's zonder eigen kleurinstelling: afleiden uit de sectieklasse
+      if (!document.querySelector('[data-kleur]')) {
+        document.querySelectorAll<HTMLElement>('main > section').forEach((s) => {
+          s.dataset.kleur = s.classList.contains('sectie--wijn') ? 'wijn' : s.classList.contains('sectie--zand') || s.classList.contains('sectie--room') ? 'room' : 'zand';
+        });
+      }
+      const kleurSecties = document.querySelectorAll<HTMLElement>('[data-kleur]');
+      if (kleurSecties.length) {
+        document.body.dataset.kleur = kleurSecties[0].dataset.kleur;
+        const kio = new IntersectionObserver((items) => items.forEach((i) => {
+          if (i.isIntersecting) document.body.dataset.kleur = (i.target as HTMLElement).dataset.kleur;
+        }), { rootMargin: '-50% 0px -50% 0px' });
+        kleurSecties.forEach((s) => kio.observe(s));
+      }
+
+      // mobiel menu
+      const t = document.querySelector('.menu-toggle');
+      const n = document.getElementById('nav-mobiel');
+      t?.addEventListener('click', () => {
+        const open = n?.classList.toggle('open');
+        t.setAttribute('aria-expanded', String(!!open));
+        t.textContent = open ? 'Sluit' : 'Menu';
+      });
+    </script>
+  </body>
+</html>
