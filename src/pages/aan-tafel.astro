@@ -1,0 +1,106 @@
+---
+import Base from '../layouts/Base.astro';
+
+const faq = [
+  { vraag: 'Wat kost private dining aan huis bij Ode Cuisine?', antwoord: 'Elke avond is op maat, dus je krijgt een persoonlijk voorstel met prijs na je aanvraag. Boodschappen, koken, bediening en afwas zijn altijd inbegrepen.' },
+  { vraag: 'Voor hoeveel gasten koken jullie?', antwoord: 'Voor 6 tot 12 gasten. Een romantisch diner voor 2 tot 4 personen kan op aanvraag, aan een aangepaste prijs.' },
+  { vraag: 'In welke regio komen jullie koken?', antwoord: 'In heel Oost en West-Vlaanderen, vertrekkend vanuit Gavere. Woon je verder? Vraag het gerust, we bekijken het samen.' },
+  { vraag: 'Wat moet ik zelf voorzien?', antwoord: 'Enkel een werkende keuken met fornuis en oven, en een gedekte tafel als je dat leuk vindt. Wij brengen ingrediënten, materiaal en servies mee.' },
+  { vraag: 'Kunnen jullie rekening houden met allergieën?', antwoord: 'Ja, altijd en zonder meerprijs. Geef het mee in je aanvraag, dan passen we het menu aan.' },
+  { vraag: 'Hoe ver op voorhand moet ik boeken?', antwoord: 'We koken maar een paar tafels per maand. Vraag je datum liefst 4 tot 6 weken op voorhand aan. Na bevestiging betaal je 30% voorschot.' },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: 'Ode Cuisine, private dining aan huis',
+    url: 'https://www.odecuisine.be/aan-tafel/',
+    description: 'Private chef aan huis in Oost en West-Vlaanderen voor 6 tot 12 gasten. Klassieke Belgisch-Franse familierecepten, alles zelfgemaakt door Florry en Gilles.',
+    areaServed: ['Oost-Vlaanderen', 'West-Vlaanderen'],
+    address: { '@type': 'PostalAddress', addressLocality: 'Gavere', addressCountry: 'BE' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.vraag, acceptedAnswer: { '@type': 'Answer', text: f.antwoord } })),
+  },
+];
+---
+<Base title="Private dining aan huis" description="Ode Cuisine komt bij jou thuis koken in Oost en West-Vlaanderen. Voor 6 tot 12 gasten, op aanvraag en volledig op maat, alles zelfgemaakt door Florry en Gilles." schema={schema}>
+  <section class="sectie sectie--wijn">
+    <div class="smal centraal">
+      <span class="kicker">aan tafel</span>
+      <h1><span class="lijn"><span>Ode bij jou <em>thuis</em>.</span></span></h1>
+      <p>Ode Cuisine kookt aan huis voor 6 tot 12 gasten in Oost en West-Vlaanderen, enkel op aanvraag en volledig op maat. Gilles in de keuken, Florry aan tafel. Wij brengen alles mee en laten je keuken brandschoon achter.</p>
+      <a class="knop" href="#aanvraag">Vraag je datum aan</a>
+    </div>
+  </section>
+
+  <section class="sectie">
+    <div class="wrap">
+      <div class="centraal" style="margin-bottom:48px">
+        <span class="kicker">hoe het werkt</span>
+        <h2>Elke tafel op <em>maat</em></h2>
+      </div>
+      <div class="drie stappen-tafel" data-stagger>
+        <div class="formule">
+          <p class="prijs">01</p><span class="pp">jouw aanvraag</span>
+          <p>Je vertelt ons de datum, het aantal gasten en de gelegenheid. Een verjaardag, een jubileum of gewoon goesting.</p>
+        </div>
+        <div class="formule formule--uit">
+          <p class="prijs">02</p><span class="pp">persoonlijk voorstel</span>
+          <p>Binnen 48 uur krijg je een menu op maat van het seizoen en jullie wensen, met daarin altijd een van onze familieklassiekers.</p>
+        </div>
+        <div class="formule">
+          <p class="prijs">03</p><span class="pp">de avond zelf</span>
+          <p>Wij brengen alles mee, koken bij jou thuis, vertellen het verhaal achter elk gerecht en laten je keuken brandschoon achter.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie sectie--zand">
+    <div class="wrap twee">
+      <div>
+        <h2>Altijd inbegrepen</h2>
+        <p>Een menu op maat van het seizoen. Alle boodschappen. Alles vers gemaakt door ons twee, van fond tot dessert. Servies en tafelkaartjes met het verhaal achter elk gerecht. Bediening aan tafel. Afwas en een brandschone keuken.</p>
+        <h3 style="margin-top:32px">Graag erbij</h3>
+        <p>Wijnarrangement, extra hapjes, een kaasplank, een kindermenu, of Florry die de avond fotografeert als herinnering.</p>
+      </div>
+      <div class="foto foto--breed reveal-foto"><div class="ph"><i class="o-mark"></i><span>gedekte tafel</span></div></div>
+    </div>
+  </section>
+
+  <section class="sectie" id="aanvraag">
+    <div class="smal">
+      <div class="centraal" style="margin-bottom:40px">
+        <span class="kicker">aanvraag</span>
+        <h2>Vraag je datum aan</h2>
+        <p>Je krijgt binnen 48 uur een persoonlijk voorstel met menu en prijs.</p>
+      </div>
+      <form class="formulier" name="aanvraag" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="aanvraag" />
+        <p hidden><label>Niet invullen <input name="bot-field" /></label></p>
+        <label>Naam <input name="naam" required autocomplete="name" /></label>
+        <label>E-mail <input type="email" name="email" required autocomplete="email" /></label>
+        <label>Telefoon <input type="tel" name="telefoon" autocomplete="tel" /></label>
+        <label>Gemeente <input name="gemeente" required /></label>
+        <label>Gewenste datum <input type="date" name="datum" required /></label>
+        <label>Aantal gasten <input type="number" name="gasten" min="2" max="16" required /></label>
+        <label>Gelegenheid <input name="gelegenheid" placeholder="verjaardag, jubileum, communie…" /></label>
+        <label class="vol">Allergieën of wensen <textarea name="wensen" rows="4"></textarea></label>
+        <div class="vol centraal"><button class="knop knop--vol" type="submit">Verstuur aanvraag</button></div>
+      </form>
+    </div>
+  </section>
+
+  <section class="sectie sectie--zand">
+    <div class="smal faq">
+      <h2 class="centraal" style="margin-bottom:32px">Veelgestelde vragen</h2>
+      {faq.map((f) => (
+        <details><summary>{f.vraag}</summary><p>{f.antwoord}</p></details>
+      ))}
+    </div>
+  </section>
+</Base>

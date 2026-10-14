@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Het Ode kookboek" description="Het digitale kookboek van Ode Cuisine: Belgische familierecepten van Hedwin, Frank en oma Brigitte, met de verhalen en foto's. Schrijf je in voor de wachtlijst.">
+  <section class="sectie">
+    <div class="wrap twee">
+      <div class="foto foto--boog"><span>cover kookboek</span></div>
+      <div>
+        <span class="kicker">binnenkort</span>
+        <h1><span class="lijn"><span>Het Ode <em>kookboek</em></span></span></h1>
+        <p>Alle recepten die ons hebben grootgebracht, in één digitaal kookboek. Van de mosseltjes van papa tot de tiramisu van oma, met de verhalen erachter en Florry's foto's bij elk gerecht.</p>
+        <p>Schrijf je in. Je hoort het als eerste wanneer het klaar is, met een voorstelprijs voor wie op de wachtlijst staat.</p>
+        <form class="formulier" name="wachtlijst" method="POST" data-netlify="true" style="grid-template-columns:1fr auto;align-items:end">
+          <input type="hidden" name="form-name" value="wachtlijst" />
+          <label>E-mail <input type="email" name="email" required autocomplete="email" /></label>
+          <button class="knop knop--vol" type="submit">Zet me erop</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>

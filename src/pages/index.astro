@@ -1,0 +1,203 @@
+---
+import Base from '../layouts/Base.astro';
+import { zichtbareRecepten } from '../lib/recepten';
+
+const recepten = (await zichtbareRecepten()).slice(0, 3);
+const [hoofd, ...rest] = recepten;
+const labels: Record<string, string> = { hedwin: 'van papa hedwin', frank: 'van frank', oma: 'van oma brigitte', gilles: 'van gilles', samen: 'van ons tweeën' };
+const dag = (d: Date) => d.toLocaleDateString('nl-BE', { day: 'numeric', month: 'long' });
+
+const galerij = [
+  { naam: 'mosseltjes <em>à la hedwin</em>', slash: 'curry / room / appel' },
+  { naam: 'garnaalkroket <em>à la frank</em>', slash: 'noordzeegarnaal / peterselie / citroen' },
+  { naam: 'vol au vent met <em>kalfszwezerik</em>', slash: 'kalfszwezerik / champignon / room' },
+  { naam: 'lamskroontje in <em>kruidenkorst</em>', slash: 'lam / porto / groentjes' },
+  { naam: 'tiramisu <em>van oma</em>', slash: 'mascarpone / espresso / lange vingers' },
+];
+
+const inhoud = [
+  { nr: '01', titel: 'Het verhaal', sub: 'De Barakke, papa Hedwin en een droom die bleef', href: '#verhaal' },
+  { nr: '02', titel: 'Aan tafel', sub: 'Private dining bij jou thuis, voor 6 tot 12 gasten', href: '#tafel' },
+  { nr: '03', titel: 'Recepten', sub: 'Elke zondag een familierecept om door te geven', href: '#recepten' },
+  { nr: '04', titel: 'Het kookboek', sub: 'Binnenkort, alles gebundeld', href: '#kookboek' },
+];
+
+const kaart = [
+  { gang: 'om te delen', items: [['het ode plankje', 'vleeswaren / dips / krokantjes'], ['steak tartaar op brioche', 'rund / brioche / ei']] },
+  { gang: 'voorgerechten', items: [['garnaalkroket à la frank', 'noordzeegarnaal / peterselie / citroen', 'Frank, de papa van Gilles'], ['mosseltjes à la hedwin', 'curry / room / appel', '45 jaar het hart van De Barakke']] },
+  { gang: 'hoofdgerechten', items: [['vol au vent met kalfszwezerik', 'kalfszwezerik / champignon / room'], ['lamskroontje in kruidenkorst', 'lam / porto / groentjes', 'ons eindwerk op de hotelschool']] },
+  { gang: 'om af te ronden', items: [['tiramisu van oma', 'mascarpone / espresso / lange vingers', 'aan tafel opgeschept'], ['crêpe suzette', 'sinaasappel / grand marnier / boter', 'ons eerste dessert samen']] },
+];
+---
+<Base title="Ode Cuisine" description="Ode Cuisine is private dining aan huis in Oost en West-Vlaanderen, door Florry en Gilles. Klassieke Belgische familierecepten, verfijnd naar vandaag. Elke zondag een nieuw recept.">
+
+  <!-- GALERIJ: één beeld dat wisselt terwijl je scrolt -->
+  <section class="galerij" data-kleur="wijn" style={`--n:${galerij.length}`} aria-label="Gerechten van Ode">
+    <div class="galerij-plak">
+      <span class="galerij-tag">Een ode aan de recepten die ons hebben grootgebracht</span>
+      <div class="galerij-midden">
+        <div class="galerij-kader foto-onthul">
+          {galerij.map((g, i) => (
+            <div class={`galerij-beeld${i === 0 ? ' actief' : ''}`} data-i={i}>
+              <div class="ph ph--rijk"><i class="o-mark"></i></div>
+            </div>
+          ))}
+        </div>
+        <div class="galerij-tekst in-fade">
+          {galerij.map((g, i) => (
+            <div class="galerij-regel" data-i={i} hidden={i !== 0}>
+              <p class="galerij-naam" set:html={g.naam} />
+              <p class="galerij-slash">{g.slash}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <span class="galerij-teller"><span id="teller">01</span> / {String(galerij.length).padStart(2, '0')}</span>
+      <span class="galerij-hint">scroll</span>
+    </div>
+  </section>
+
+  <!-- INTRO (Lucien) -->
+  <section class="sectie intro-lucien" data-kleur="zand">
+    <div class="wrap raster">
+      <div class="kol-6 reveal">
+        <span class="label">Private dining aan huis · Recepten</span>
+        <h2>Aan tafel bij <em>Ode</em></h2>
+      </div>
+      <div class="kol-1"></div>
+      <div class="kol-5 reveal">
+        <p class="lead">Wij komen bij jou thuis koken, en delen elke zondag een familierecept om zelf te maken.</p>
+        <div class="knoppen"><a class="knop knop--vol" href="/aan-tafel/">Vraag je datum aan <span class="pijl">→</span></a><a class="knop" href="/recepten/">Recepten</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 VERHAAL -->
+  <section class="sectie spread" id="verhaal" data-kleur="zand">
+    <div class="wrap raster">
+      <div class="kol-12 spread-kop reveal"><span class="groot-nr">01</span><h2>Het <em>verhaal</em></h2></div>
+      <aside class="kol-2 marge reveal">
+        <p><b>Zwevegem</b>De Barakke, 45 jaar lang het mosselrestaurant van de familie.</p>
+        <p><b>Michelbeke</b>De kleine hotelschool waar Florry en Gilles elkaar leerden kennen.</p>
+      </aside>
+      <div class="kol-5 kolomtekst reveal">
+        <p class="initiaal">Ode is geen restaurant dat we hebben uitgevonden. Het is een restaurant dat we hebben meegebracht. Uit de keukens waarin we zijn opgegroeid, uit de zondagen rond familietafels, uit de recepten die onze ouders en grootouders aan ons doorgaven.</p>
+        <p>Papa Hedwin stond 45 jaar in de keuken van De Barakke. Vanaf haar negende stond Florry er elk weekend, in de zomer zeven op zeven. Het was zijn droom dat zij de zaak ooit zou verderzetten. Toen hij plots ziek werd, sloot de zaak, en ze is nooit meer opengegaan.</p>
+        <p>Ode is dezelfde droom, die eindelijk volgroeid is. Op onze kaart staan namen: de mosseltjes van Hedwin, de garnaalkroket van Frank, de tiramisu van oma.</p>
+        <p class="handtekening">Florry &amp; Gilles</p>
+      </div>
+      <div class="kol-5">
+        <figure class="beeld-staand reveal-foto" data-snelheid="-0.05"><div class="ph ph--rijk"><i class="o-mark"></i><b>Florry en Gilles</b></div></figure>
+        <p class="bijschrift">fig. 02 · Florry en Gilles, in de keuken waar elke Ode-avond begint.</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <blockquote class="pull reveal">“Elk gerecht draagt een naam, een gezicht en een <em>herinnering</em>.”</blockquote>
+    </div>
+  </section>
+
+  <!-- 02 AAN TAFEL -->
+  <section class="sectie sectie--wijn spread" id="tafel" data-kleur="wijn">
+    <div class="wrap raster">
+      <div class="kol-12 spread-kop reveal"><span class="groot-nr">02</span><h2>Aan <em>tafel</em></h2></div>
+      <div class="kol-4 reveal">
+        <p class="lead">Wij komen bij jou thuis koken. Gilles in de keuken, Florry aan tafel. Alles zelfgemaakt, van fond tot dessert.</p>
+        <ul class="feiten">
+          <li><b>6 tot 12</b>gasten</li>
+          <li><b>op maat</b>enkel op aanvraag</li>
+          <li><b>Oost &amp; West</b>Vlaanderen</li>
+        </ul>
+        <a class="knop" href="/aan-tafel/">Vraag je datum aan <span class="pijl">→</span></a>
+      </div>
+      <div class="kol-1"></div>
+      <div class="kol-7 menukaart reveal">
+        <p class="menukaart-kop"><i class="o-mark"></i><span>een avond bij ode</span></p>
+        {kaart.map((g) => (
+          <div class="mk-gang">
+            <span class="mk-label">{g.gang}</span>
+            {g.items.map(([t, s, noot]) => (
+              <div class="mk-item">
+                <p class="mk-t">{t}</p>
+                <p class="mk-s">{s}</p>
+                {noot && <span class="mk-noot">{noot}</span>}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 RECEPTEN -->
+  <section class="sectie spread" id="recepten" data-kleur="room">
+    <div class="wrap raster">
+      <div class="kol-12 spread-kop reveal">
+        <span class="groot-nr">03</span><h2>Recepten om <em>door te geven</em></h2>
+        <a class="knop" href="/recepten/">Alle recepten <span class="pijl">→</span></a>
+      </div>
+      {hoofd && (
+        <a class="kol-7 feature reveal" href={`/recepten/${hoofd.slug}/`}>
+          <figure class="beeld-feature"><div class="ph ph--rijk"><i class="o-mark"></i><b>{hoofd.data.titel}</b></div></figure>
+          <span class="label">Recept van zondag {dag(hoofd.data.datum)}{hoofd.data.familie ? ` · ${labels[hoofd.data.familie]}` : ''}</span>
+          <h3>{hoofd.data.titel}</h3>
+          <p class="mk-s">{hoofd.data.slash}</p>
+          <p>{hoofd.data.beschrijving}</p>
+        </a>
+      )}
+      <div class="kol-5 zijlijst">
+        {rest.map((r, i) => (
+          <a class="zij-item reveal" href={`/recepten/${r.slug}/`}>
+            <span class="nr">0{i + 2}</span>
+            <div>
+              <span class="label">Zondag {dag(r.data.datum)}{r.data.familie ? ` · ${labels[r.data.familie]}` : ''}</span>
+              <h3>{r.data.titel}</h3>
+              <p class="mk-s">{r.data.slash}</p>
+            </div>
+          </a>
+        ))}
+        <div class="zij-item zij-noot reveal">
+          <span class="nr">→</span>
+          <div><span class="label">Volgende zondag</span><p>Een nieuw recept uit de familie, elke week om 8 uur.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 KOOKBOEK -->
+  <section class="sectie sectie--wijn spread" id="kookboek" data-kleur="wijn">
+    <div class="wrap raster">
+      <div class="kol-12 spread-kop reveal"><span class="groot-nr">04</span><h2>Het <em>kookboek</em></h2></div>
+      <div class="kol-6 reveal"><p class="lead">Alle familierecepten, met de verhalen en de foto's, gebundeld in één digitaal kookboek. Wie op de wachtlijst staat, hoort het als eerste.</p></div>
+      <div class="kol-1"></div>
+      <form class="kol-5 inschrijf reveal" name="wachtlijst" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="wachtlijst" />
+        <label>Jouw e-mail <input type="email" name="email" required autocomplete="email" placeholder="naam@voorbeeld.be" /></label>
+        <button class="knop knop--vol" type="submit">Zet me op de lijst <span class="pijl">→</span></button>
+      </form>
+    </div>
+  </section>
+  <script>
+    // galerij: wissel het beeld volgens de scrollpositie
+    const gal = document.querySelector<HTMLElement>('.galerij');
+    if (gal) {
+      const beelden = gal.querySelectorAll<HTMLElement>('.galerij-beeld');
+      const regels = gal.querySelectorAll<HTMLElement>('.galerij-regel');
+      const teller = document.getElementById('teller');
+      let huidig = 0;
+      const update = () => {
+        const r = gal.getBoundingClientRect();
+        const voortgang = Math.min(Math.max(-r.top / (r.height - window.innerHeight), 0), 0.999);
+        const i = Math.floor(voortgang * beelden.length);
+        gal.classList.toggle('voorbij', -r.top > 40);
+        if (i !== huidig) {
+          huidig = i;
+          beelden.forEach((b, j) => b.classList.toggle('actief', j === i));
+          regels.forEach((g, j) => (g.hidden = j !== i));
+          if (teller) teller.textContent = String(i + 1).padStart(2, '0');
+        }
+      };
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    }
+  </script>
+</Base>
