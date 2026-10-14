@@ -1,0 +1,12 @@
+---
+const { recept } = Astro.props;
+const labels: Record<string, string> = { hedwin: 'van papa hedwin', frank: 'van frank', oma: 'van oma brigitte', gilles: 'van gilles', samen: 'van ons tweeën' };
+const foto = recept.data.foto;
+const datum = recept.data.datum.toLocaleDateString('nl-BE', { day: 'numeric', month: 'long' });
+---
+<a class="kaart" href={`/recepten/${recept.slug}/`} data-categorie={recept.data.categorie}>
+  <div class="foto">{foto ? <img src={foto} alt={recept.data.titel} loading="lazy" /> : <div class="ph"><i class="o-mark"></i><span>foto volgt</span></div>}</div>
+  <span class="wie">{recept.data.familie ? labels[recept.data.familie] : recept.data.categorie} · zondag {datum}</span>
+  <h3>{recept.data.titel}</h3>
+  <span class="slash">{recept.data.slash}</span>
+</a>
