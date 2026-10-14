@@ -1,0 +1,37 @@
+# Bouwt de site en zet hem op GitHub Pages.
+# Draait bij elke wijziging, en elke zondagochtend zodat het recept van die dag verschijnt.
+name: Site live zetten
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 6 * * 0'   # zondag 06:00 UTC = 7u of 8u in België
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  bouwen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: withastro/action@v3
+        with:
+          node-version: 20
+  live:
+    needs: bouwen
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
