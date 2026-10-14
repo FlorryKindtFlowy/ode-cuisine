@@ -20,6 +20,11 @@ import Base from '../layouts/Base.astro';
         <p>45 jaar lang runden de ouders van Florry De Barakke, een mosselrestaurant in Zwevegem. Papa Hedwin stond in de keuken en was het kloppend hart van de zaak. Vanaf haar negende stond Florry er elk weekend, in de zomer zeven op zeven.</p>
         <p>Het was papa's droom dat zij de zaak ooit zou verderzetten. Toen hij plots ziek werd, sloot De Barakke de deuren. Zeven maanden later namen we afscheid van hem, en in dezelfde adem van de zaak.</p>
         <p>Ode is geen nieuwe droom. Het is dezelfde droom, die eindelijk volgroeid is.</p>
+        <aside class="familie-link" aria-labelledby="familie-link-titel">
+          <span class="kicker">het adres leeft verder</span>
+          <h3 id="familie-link-titel">Terug naar <em>Zwevegem</em></h3>
+          <p>Op de plek waar De Barakke 45 jaar lang mosselpotten op tafel zette, runt Florry's zus vandaag <a href="https://charrylicious.be/" target="_blank" rel="noopener">Charrylicious</a>, een roze <a href="https://charrylicious.be/" target="_blank" rel="noopener">eethuisje in Zwevegem</a> voor koffie, huisgemaakte cookies, brownies en ice tea. Een andere zaak, dezelfde liefde voor gastvrijheid. Ga zeker eens piepen!</p>
+        </aside>
       </div>
     </div>
   </section>
@@ -48,3 +53,12 @@ import Base from '../layouts/Base.astro';
     </div>
   </section>
 </Base>
+
+<style>
+  /* familie link naar Charrylicious */
+  .familie-link { margin-top: 2.2rem; padding: 1.6rem 1.8rem; border: 1px solid var(--lijn); border-left: 3px solid var(--wijn); background: var(--room); }
+  .familie-link h3 { margin: .2rem 0 .6rem; }
+  .familie-link p { margin: 0; }
+  .familie-link a { color: var(--wijn); text-decoration: underline; text-underline-offset: 3px; font-weight: 400; }
+  .familie-link a:hover { font-style: italic; }
+</style>
