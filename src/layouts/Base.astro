@@ -57,14 +57,22 @@ const huidig = (p: string) => (pad.startsWith(p) ? 'page' : undefined);
       var odeKeuze = null;
       try { odeKeuze = localStorage.getItem('ode-cookies'); } catch (e) {}
       gtag('consent', 'default', {
-        ad_storage: 'denied',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied',
+        ad_storage: odeKeuze === 'ja' ? 'granted' : 'denied',
+        ad_user_data: odeKeuze === 'ja' ? 'granted' : 'denied',
+        ad_personalization: odeKeuze === 'ja' ? 'granted' : 'denied',
         analytics_storage: odeKeuze === 'ja' ? 'granted' : 'denied',
         wait_for_update: 500
       });
       gtag('js', new Date());
       gtag('config', 'G-88NY39C14N');
+      // Meta pixel: wordt pas geladen na Akkoord in de cookiebanner
+      window.odeLaadPixel = function(){
+        if (window.fbq) return;
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1110433621482917');
+        fbq('track', 'PageView');
+      };
+      if (odeKeuze === 'ja') window.odeLaadPixel();
     </script>
     <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-88NY39C14N"></script>
   </head>
@@ -112,7 +120,7 @@ const huidig = (p: string) => (pad.startsWith(p) ? 'page' : undefined);
     </footer>
 
     <div class="cookie-banner" id="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookies" hidden>
-      <p>We gebruiken analytische cookies om te zien hoe je bij ons terechtkomt. Geen reclame, beloofd. Is dat oké?</p>
+      <p>We gebruiken cookies om te zien hoe je bij ons terechtkomt en om onze advertenties op Facebook en Instagram beter te maken. Is dat oké?</p>
       <div class="cookie-knoppen">
         <button type="button" class="cookie-nee" data-cookie="nee">Liever niet</button>
         <button type="button" class="cookie-ja" data-cookie="ja">Akkoord</button>
@@ -138,7 +146,9 @@ const huidig = (p: string) => (pad.startsWith(p) ? 'page' : undefined);
           k.addEventListener('click', function(){
             var v = k.getAttribute('data-cookie');
             try { localStorage.setItem('ode-cookies', v); } catch (e) {}
-            gtag('consent', 'update', { analytics_storage: v === 'ja' ? 'granted' : 'denied' });
+            var g = v === 'ja' ? 'granted' : 'denied';
+            gtag('consent', 'update', { analytics_storage: g, ad_storage: g, ad_user_data: g, ad_personalization: g });
+            if (v === 'ja') window.odeLaadPixel(); else if (window.fbq) fbq('consent', 'revoke');
             b.hidden = true;
           });
         });
