@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Bedankt" description="Bedankt voor je bericht aan Ode Cuisine.">
+  <section class="sectie sectie--wijn" style="min-height:80vh;display:grid;place-items:center">
+    <div class="smal centraal">
+      <span class="o-mark" aria-hidden="true" style="width:56px;color:var(--creme);margin-bottom:32px"></span>
+      <h1 id="titel">Merci, we hebben je <em>bericht</em>.</h1>
+      <p id="tekst">We laten zo snel mogelijk iets van ons horen.</p>
+      <a class="knop" href="/">Terug naar Ode</a>
+    </div>
+  </section>
+  <script>
+    const q = location.search;
+    const t = document.getElementById('titel');
+    const p = document.getElementById('tekst');
+    if (q.includes('wachtlijst') && t && p) {
+      t.innerHTML = 'Je staat op de <em>wachtlijst</em>.';
+      p.textContent = 'Zodra het Ode kookboek klaar is, hoor je het als eerste.';
+    } else if (q.includes('aanvraag') && t && p) {
+      t.innerHTML = 'Merci voor je <em>aanvraag</em>.';
+      p.textContent = 'Binnen 48 uur krijg je een persoonlijk voorstel van ons.';
+    }
+  </script>
+</Base>

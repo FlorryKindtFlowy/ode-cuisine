@@ -169,8 +169,11 @@ const kaart = [
       <div class="kol-12 spread-kop reveal"><span class="groot-nr">04</span><h2>Het <em>kookboek</em></h2></div>
       <div class="kol-6 reveal"><p class="lead">Alle familierecepten, met de verhalen en de foto's, gebundeld in één digitaal kookboek. Wie op de wachtlijst staat, hoort het als eerste.</p></div>
       <div class="kol-1"></div>
-      <form class="kol-5 inschrijf reveal" name="wachtlijst" method="POST" data-netlify="true">
-        <input type="hidden" name="form-name" value="wachtlijst" />
+      <form class="kol-5 inschrijf reveal" name="wachtlijst" action="https://formsubmit.co/florry@flowyagency.com" method="POST">
+        <input type="hidden" name="_subject" value="Nieuwe inschrijving kookboek wachtlijst · Ode Cuisine" />
+        <input type="hidden" name="_next" value="https://www.odecuisine.be/bedankt/?wachtlijst" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
         <label>Jouw e-mail <input type="email" name="email" required autocomplete="email" placeholder="naam@voorbeeld.be" /></label>
         <button class="knop knop--vol" type="submit">Zet me op de lijst <span class="pijl">→</span></button>
       </form>

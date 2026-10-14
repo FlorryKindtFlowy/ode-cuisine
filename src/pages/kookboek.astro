@@ -10,8 +10,11 @@ import Base from '../layouts/Base.astro';
         <h1><span class="lijn"><span>Het Ode <em>kookboek</em></span></span></h1>
         <p>Alle recepten die ons hebben grootgebracht, in één digitaal kookboek. Van de mosseltjes van papa tot de tiramisu van oma, met de verhalen erachter en Florry's foto's bij elk gerecht.</p>
         <p>Schrijf je in. Je hoort het als eerste wanneer het klaar is, met een voorstelprijs voor wie op de wachtlijst staat.</p>
-        <form class="formulier" name="wachtlijst" method="POST" data-netlify="true" style="grid-template-columns:1fr auto;align-items:end">
-          <input type="hidden" name="form-name" value="wachtlijst" />
+        <form class="formulier" name="wachtlijst" action="https://formsubmit.co/florry@flowyagency.com" method="POST" style="grid-template-columns:1fr auto;align-items:end">
+          <input type="hidden" name="_subject" value="Nieuwe inschrijving kookboek wachtlijst · Ode Cuisine" />
+        <input type="hidden" name="_next" value="https://www.odecuisine.be/bedankt/?wachtlijst" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
           <label>E-mail <input type="email" name="email" required autocomplete="email" /></label>
           <button class="knop knop--vol" type="submit">Zet me erop</button>
         </form>
