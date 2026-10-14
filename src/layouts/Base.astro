@@ -50,6 +50,23 @@ const huidig = (p: string) => (pad.startsWith(p) ? 'page' : undefined);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
     {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+    <!-- Google Analytics 4 met Consent Mode: standaard geen cookies tot de bezoeker akkoord geeft -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      var odeKeuze = null;
+      try { odeKeuze = localStorage.getItem('ode-cookies'); } catch (e) {}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: odeKeuze === 'ja' ? 'granted' : 'denied',
+        wait_for_update: 500
+      });
+      gtag('js', new Date());
+      gtag('config', 'G-88NY39C14N');
+    </script>
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-88NY39C14N"></script>
   </head>
   <body class={Astro.url.pathname === "/" ? "home" : undefined}>
     <header class="kop">
@@ -90,9 +107,46 @@ const huidig = (p: string) => (pad.startsWith(p) ? 'page' : undefined);
           <a href="https://www.pinterest.com/" rel="noopener">Pinterest</a>
           <a href="/aan-tafel/#aanvraag">Contact</a>
         </div>
-        <p class="klein">© {new Date().getFullYear()} Ode Cuisine · www.odecuisine.be · <span class="credit">Ontwerp en website door <a href="https://www.flowyagency.com" target="_blank" rel="noopener">Flowy</a></span></p>
+        <p class="klein">© {new Date().getFullYear()} Ode Cuisine · www.odecuisine.be · <span class="credit">Ontwerp en website door <a href="https://www.flowyagency.com" target="_blank" rel="noopener">Flowy</a></span> · <button type="button" class="cookie-link" data-cookie-open>Cookies</button></p>
       </div>
     </footer>
+
+    <div class="cookie-banner" id="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookies" hidden>
+      <p>We gebruiken analytische cookies om te zien hoe je bij ons terechtkomt. Geen reclame, beloofd. Is dat oké?</p>
+      <div class="cookie-knoppen">
+        <button type="button" class="cookie-nee" data-cookie="nee">Liever niet</button>
+        <button type="button" class="cookie-ja" data-cookie="ja">Akkoord</button>
+      </div>
+    </div>
+    <style is:inline>
+      .cookie-banner{position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;max-width:460px;margin-left:auto;background:#f6efe6;color:#51121a;border:1px solid rgba(81,18,26,.25);padding:18px 20px;border-radius:14px;font-family:'Jost',sans-serif;font-weight:300;font-size:15px;line-height:1.5;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+      .cookie-banner[hidden]{display:none}
+      .cookie-banner p{margin:0 0 14px}
+      .cookie-knoppen{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+      .cookie-knoppen button{font:inherit;font-weight:400;cursor:pointer;border-radius:999px;padding:8px 18px;border:1px solid #51121a}
+      .cookie-nee{background:transparent;color:#51121a}
+      .cookie-ja{background:#51121a;color:#f6efe6}
+      .cookie-link{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer}
+    </style>
+    <script is:inline>
+      (function(){
+        var b = document.getElementById('cookie-banner');
+        var keuze = null;
+        try { keuze = localStorage.getItem('ode-cookies'); } catch (e) {}
+        if (!keuze) b.hidden = false;
+        document.querySelectorAll('[data-cookie]').forEach(function(k){
+          k.addEventListener('click', function(){
+            var v = k.getAttribute('data-cookie');
+            try { localStorage.setItem('ode-cookies', v); } catch (e) {}
+            gtag('consent', 'update', { analytics_storage: v === 'ja' ? 'granted' : 'denied' });
+            b.hidden = true;
+          });
+        });
+        document.querySelectorAll('[data-cookie-open]').forEach(function(k){
+          k.addEventListener('click', function(){ b.hidden = false; });
+        });
+      })();
+    </script>
 
     <script>
       import Lenis from 'lenis';
