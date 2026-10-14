@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import ReceptKaart from '../../components/ReceptKaart.astro';
+import { zichtbareRecepten } from '../../lib/recepten';
+const recepten = await zichtbareRecepten();
+const cats = ['om te delen', 'voorgerechten', 'hoofdgerechten', 'desserts'];
+---
+<Base title="Recepten" description="Belgische en Vlaamse familierecepten van Ode Cuisine: mosselen in currysaus, vol au vent, tiramisu en meer. Met stappen, tips en het verhaal erachter.">
+  <section class="sectie">
+    <div class="wrap">
+      <div class="centraal" style="margin-bottom:40px">
+        <span class="kicker">recepten</span>
+        <h1>Recepten om door te geven</h1>
+        <p class="smal">Belgische klassiekers zoals ze bij ons thuis op tafel kwamen. Elk recept met het verhaal van wie het ons leerde.</p>
+        <span class="zondag">elke zondag een nieuw recept</span>
+      </div>
+      <div class="filters" role="group" aria-label="Filter op categorie">
+        <button aria-pressed="true" data-filter="alle">alle</button>
+        {cats.map((c) => <button aria-pressed="false" data-filter={c}>{c}</button>)}
+      </div>
+      <div class="drie" id="lijst" data-stagger>
+        {recepten.map((r) => <ReceptKaart recept={r} />)}
+      </div>
+    </div>
+  </section>
+  <script>
+    const knoppen = document.querySelectorAll<HTMLButtonElement>('.filters button');
+    knoppen.forEach((k) => k.addEventListener('click', () => {
+      knoppen.forEach((x) => x.setAttribute('aria-pressed', String(x === k)));
+      const f = k.dataset.filter;
+      document.querySelectorAll<HTMLElement>('#lijst .kaart').forEach((el) => {
+        el.style.display = f === 'alle' || el.dataset.categorie === f ? '' : 'none';
+      });
+    }));
+  </script>
+</Base>
