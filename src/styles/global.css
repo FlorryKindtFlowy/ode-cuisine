@@ -275,6 +275,7 @@ p { margin: 0 0 1.1em; }
 .voet .groot { font-family: var(--serif); font-size: clamp(2.2rem, 4vw, 3.4rem); line-height: 1.05; color: var(--creme); margin-bottom: 24px; }
 .voet .groot em { font-style: italic; }
 .voet .klein { grid-column: 1 / -1; border-top: 1px solid rgba(164,185,206,.2); padding-top: 26px; font-size: .8rem; opacity: .7; }
+.voet .klein .credit a { display: inline; margin: 0; font-size: inherit; letter-spacing: normal; text-transform: none; font-style: italic; border-bottom: 1px solid currentColor; }
 .voet-o { position: absolute; right: -4vw; bottom: -18vw; width: 44vw; color: var(--wijn); opacity: .5; }
 .voet-o .o-mark { width: 100%; }
 
