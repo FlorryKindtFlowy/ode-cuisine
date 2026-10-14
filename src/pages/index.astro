@@ -8,11 +8,11 @@ const labels: Record<string, string> = { hedwin: 'van papa hedwin', frank: 'van 
 const dag = (d: Date) => d.toLocaleDateString('nl-BE', { day: 'numeric', month: 'long' });
 
 const galerij = [
-  { naam: 'mosseltjes <em>à la hedwin</em>', slash: 'curry / room / appel' },
-  { naam: 'garnaalkroket <em>à la frank</em>', slash: 'noordzeegarnaal / peterselie / citroen' },
-  { naam: 'vol au vent met <em>kalfszwezerik</em>', slash: 'kalfszwezerik / champignon / room' },
-  { naam: 'lamskroontje in <em>kruidenkorst</em>', slash: 'lam / porto / groentjes' },
-  { naam: 'tiramisu <em>van oma</em>', slash: 'mascarpone / espresso / lange vingers' },
+  { foto: 'savooikool', naam: 'de <em>savooikool</em>', slash: 'herfst / winter / moestuin' },
+  { foto: 'limoen', naam: 'de <em>limoen</em>', slash: 'fris / zuur / zon' },
+  { foto: 'pruimen', naam: 'de <em>pruim</em>', slash: 'nazomer / zoet / diep' },
+  { foto: 'rode-peper', naam: 'de <em>rode peper</em>', slash: 'pit / vuur / kleur' },
+  { foto: 'gember-peper', naam: 'gember <em>en venkelbloem</em>', slash: 'warmte / scherpte / bloei' },
 ];
 
 const inhoud = [
@@ -34,12 +34,12 @@ const kaart = [
   <!-- GALERIJ: één beeld dat wisselt terwijl je scrolt -->
   <section class="galerij" data-kleur="wijn" style={`--n:${galerij.length}`} aria-label="Gerechten van Ode">
     <div class="galerij-plak">
-      <span class="galerij-tag">Een ode aan de recepten die ons hebben grootgebracht</span>
+      <span class="galerij-tag">Het begint bij het product</span>
       <div class="galerij-midden">
         <div class="galerij-kader foto-onthul">
           {galerij.map((g, i) => (
             <div class={`galerij-beeld${i === 0 ? ' actief' : ''}`} data-i={i}>
-              <div class="ph ph--rijk"><i class="o-mark"></i></div>
+              <img src={`/fotos/${g.foto}.webp`} srcset={`/fotos/${g.foto}-klein.webp 900w, /fotos/${g.foto}.webp 1800w`} sizes="(max-width: 960px) 76vw, 520px" alt={g.naam.replace(/<[^>]+>/g, '')} loading={i === 0 ? 'eager' : 'lazy'} />
             </div>
           ))}
         </div>
@@ -87,8 +87,8 @@ const kaart = [
         <p class="handtekening">Florry &amp; Gilles</p>
       </div>
       <div class="kol-5">
-        <figure class="beeld-staand reveal-foto" data-snelheid="-0.05"><div class="ph ph--rijk"><i class="o-mark"></i><b>Florry en Gilles</b></div></figure>
-        <p class="bijschrift">fig. 02 · Florry en Gilles, in de keuken waar elke Ode-avond begint.</p>
+        <figure class="beeld-staand reveal-foto" data-snelheid="-0.05"><img src="/fotos/citroenen.webp" srcset="/fotos/citroenen-klein.webp 900w, /fotos/citroenen.webp 1800w" sizes="(max-width: 960px) 100vw, 40vw" alt="Citroenen en limoen op een stenen bord" loading="lazy" /></figure>
+        <p class="bijschrift">fig. 02 · Citroen en limoen, het zuur dat elke garnaalkroket nodig heeft.</p>
       </div>
     </div>
     <div class="wrap">
