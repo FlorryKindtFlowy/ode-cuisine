@@ -6,10 +6,11 @@ interface Props {
   description: string;
   schema?: object | object[];
   image?: string;
+  rawTitle?: boolean;
 }
-const { title, description, schema, image } = Astro.props;
+const { title, description, schema, image, rawTitle } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const fullTitle = title === 'Ode Cuisine' ? 'Ode Cuisine · Een ode aan de recepten die ons hebben grootgebracht' : `${title} · Ode Cuisine`;
+const fullTitle = rawTitle ? title : title === 'Ode Cuisine' ? 'Ode Cuisine · Een ode aan de recepten die ons hebben grootgebracht' : `${title} · Ode Cuisine`;
 
 const orgSchema = {
   '@context': 'https://schema.org',
@@ -109,7 +110,7 @@ const huidig = (p: string) => (pad.startsWith(p) ? 'page' : undefined);
           <a href="/aan-tafel/">Aan tafel</a>
           <a href="/verhaal/">Het verhaal</a>
           <a href="/kookboek/">Kookboek</a>
-          <a href="/het-schriftje/">Ode bij je thuis</a>
+          <a href="/ode-aan/">Ode aan</a>
         </div>
         <div>
           <a href="https://www.instagram.com/" rel="noopener">Instagram</a>
