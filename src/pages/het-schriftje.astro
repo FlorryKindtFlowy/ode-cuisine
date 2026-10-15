@@ -18,7 +18,7 @@ const schema = {
 
 const vandaag = new Date().toISOString().slice(0, 10);
 ---
-<Base title="Ode bij je thuis, stuur je recept in" description="Aan wie breng jij een ode? Deel het verhaal achter het recept van iemand die je graag ziet. Florry komt bij je thuis, je krijgt de Ode schort aan en samen koken, proeven en vertellen we jouw verhaal." schema={schema}>
+<Base title="Ode bij je thuis, deel jouw verhaal" description="Aan wie breng jij een ode? Deel het verhaal achter het recept van iemand die je graag ziet. Florry komt bij je thuis, je krijgt de Ode schort aan en samen koken, proeven en vertellen we jouw verhaal." schema={schema}>
   <section class="sectie sectie--wijn ode-hero">
     <div class="smal centraal">
       <span class="kicker">ode bij je thuis</span>
@@ -145,14 +145,14 @@ const vandaag = new Date().toISOString().slice(0, 10);
   <section class="sectie sectie--zand">
     <div class="wrap twee">
       <div>
-        <span class="kicker">waar je recept terechtkomt</span>
+        <span class="kicker">waar je verhaal terechtkomt</span>
         <h2>Van jouw keuken naar het <em>e-boek</em></h2>
         <p>Jouw aflevering verschijnt op Instagram, TikTok, YouTube, Facebook en Pinterest van Ode Cuisine. Het volledige recept komt als blogpost op odecuisine.be, met jouw naam en jouw verhaal erbij.</p>
-        <p>En dan het mooiste: over een jaar is het schriftje vol. Dan bundel ik alles in het Ode e-boek. De recepten van papa en oma, die van Gilles zijn familie, en de jouwe. Met de verhalen, de foto's en de schort die er telkens bij was.</p>
+        <p>En dan het mooiste: over een jaar is het schriftje vol. Dan bundel ik alles in het Ode e-boek. De recepten van papa, mama, opa en oma, die van de familie van Gilles, en de jouwe. Met de verhalen, de foto's en de schort die er telkens bij was.</p>
         <h3 style="margin-top:32px">Wat je ervan krijgt</h3>
         <p>De video van jouw aflevering, je recept netjes uitgeschreven, een plaats in het e-boek, en een namiddag aan tafel met Ode.</p>
       </div>
-      <div class="foto foto--breed reveal-foto"><img src="/fotos/kookboek-cover.webp" alt="Het Ode kookboek op tafel" loading="lazy" /></div>
+      <div class="foto foto--boog reveal-foto ebook-boog"><img src="/fotos/kookboek-cover.webp" srcset="/fotos/kookboek-cover-klein.webp 800w, /fotos/kookboek-cover.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Het Ode kookboek, smaken die je nooit vergeet, door Florry Kindt" loading="lazy" /></div>
     </div>
   </section>
 
@@ -358,6 +358,7 @@ const vandaag = new Date().toISOString().slice(0, 10);
   .polaroid--klein { position: absolute; right: -24px; bottom: -120px; width: 46%; padding: 10px 10px 44px; transform: rotate(7deg); z-index: 2; }
   .polaroid--klein figcaption { font-size: 1.3rem; bottom: 10px; }
   .polaroid--klein::before { width: 70px; height: 20px; top: -10px; }
+  .ebook-boog { max-width: 480px; width: 100%; justify-self: center; }
   .album { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px; text-align: center; }
   .album article { display: flex; flex-direction: column; align-items: center; }
   .album .polaroid { width: 100%; max-width: 330px; margin-bottom: 30px; }
