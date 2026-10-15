@@ -12,7 +12,7 @@
 //
 // Extra velden die je per recept bovenaan in de Markdown kan zetten (allemaal optioneel):
 //   onderwerp:  eigen onderwerpregel voor de mail
-//   brief:      een persoonlijk woordje van Florry en Gilles voor die week
+//   brief:      een persoonlijk woordje van Florry voor die week
 //   youtube:    link naar de video op YouTube
 //   instagram:  link naar de reel of post
 //   tiktok:     link naar de TikTok
@@ -211,7 +211,7 @@ export function maakMail(r, nummer) {
           ${kicker(r.familie ? `het verhaal achter het recept van ${esc(r.familie)}` : 'het verhaal achter het recept', KLEUR.zacht)}
         </td></tr>
       </table>
-      <p style="margin:26px 0 0;font-family:${SERIF};font-style:italic;font-size:22px;color:${KLEUR.wijn};">Florry &amp; Gilles</p>
+      <p style="margin:26px 0 0;font-family:${SERIF};font-style:italic;font-size:22px;color:${KLEUR.wijn};">Florry</p>
     </td></tr>` : ''}
 
     <!-- ingredienten -->
