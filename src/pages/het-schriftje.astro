@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 
 const faq = [
-  { vraag: 'Hoe kies je welke recepten je komt maken?', antwoord: 'Ik lees elk recept zelf. Het gaat niet om het mooiste of moeilijkste gerecht, maar om het verhaal dat erachter zit. Word je gekozen, dan neem ik contact met je op om een datum af te spreken.' },
+  { vraag: 'Hoe kies je welke recepten je komt maken?', antwoord: 'Ik lees elk verhaal zelf. Het gaat niet om het mooiste of moeilijkste gerecht, maar om het verhaal dat erachter zit. Word je gekozen, dan neem ik contact met je op om een datum af te spreken.' },
   { vraag: 'Moet ik zelf in beeld komen?', antwoord: 'Het mag, het hoeft niet. Het mooiste is als je er zelf bij bent wanneer we het gerecht proeven, maar een oude foto en jouw verhaal volstaan ook.' },
   { vraag: 'Waar wordt er gefilmd?', antwoord: 'Altijd bij jou thuis, in je eigen keuken en aan je eigen tafel. Ik breng de ingrediënten, het schriftje en een Ode schort voor jou mee.' },
   { vraag: 'Moet het recept perfect uitgeschreven zijn?', antwoord: 'Helemaal niet. "Een snuifje" en "tot het goed is" zijn ook prima. Wij testen het recept, schrijven het netjes uit en laten het je nalezen voor het online gaat.' },
@@ -18,30 +18,52 @@ const schema = {
 
 const vandaag = new Date().toISOString().slice(0, 10);
 ---
-<Base title="Ode bij je thuis, stuur je recept in" description="Aan wie breng jij een ode? Stuur het recept van iemand die je graag ziet in bij Ode Cuisine. Florry komt bij je thuis, je krijgt de Ode schort aan en samen koken, proeven en filmen we jouw verhaal." schema={schema}>
+<Base title="Ode bij je thuis, stuur je recept in" description="Aan wie breng jij een ode? Deel het verhaal achter het recept van iemand die je graag ziet. Florry komt bij je thuis, je krijgt de Ode schort aan en samen koken, proeven en vertellen we jouw verhaal." schema={schema}>
   <section class="sectie sectie--wijn ode-hero">
     <div class="smal centraal">
       <span class="kicker">ode bij je thuis</span>
       <h1><span class="lijn"><span>Aan wie breng jij een <em>ode</em>?</span></span></h1>
-      <p>Elk recept heeft iemand achter zich. Een mama, een opa, een buurvrouw. Stuur me het recept van iemand die je graag ziet, en dan kom ik bij jou thuis. Jij krijgt de Ode schort aan en vertelt over die persoon en dat gerecht. Samen koken en proeven we het, en de camera loopt mee.</p>
-      <a class="knop" href="#inzenden">Breng jouw ode</a>
+      <p>Achter elk recept zit een verhaal. Van een mama, een opa, een buurvrouw. Deel het jouwe met mij, en dan kom ik bij jou thuis. Jij krijgt de Ode schort aan en vertelt over die persoon en dat gerecht. Samen koken en proeven we het, en de camera loopt mee.</p>
+      <a class="knop" href="#inzenden">Deel jouw verhaal</a>
     </div>
   </section>
 
   <section class="sectie sectie--zand oorsprong">
     <div class="wrap twee">
-      <div class="verhaal-foto">
-        <div class="foto foto--breed reveal-foto"><img src="/fotos/hedwin-oesters.webp" alt="Papaatje Hedwin met oesters op een tuinfeest" loading="lazy" /></div>
-        <span class="foto-noot">papaatje, met zijn oesters</span>
-      </div>
+      <figure class="polaroid polaroid--links">
+        <img src="/fotos/hedwin-oesters.webp" alt="Papaatje Hedwin met oesters op een tuinfeest" loading="lazy" />
+        <figcaption>papaatje, met zijn oesters</figcaption>
+      </figure>
       <div>
         <span class="kicker">waar het begon</span>
         <h2>Een ode aan de recepten die mij hebben <em>grootgebracht</em></h2>
-        <p>Ik ben opgegroeid tussen de potten en pannen van De Barakke, het mosselrestaurant van mijn ouders. Papaatje stond 45 jaar aan het fornuis en was het kloppend hart van de zaak. Zijn mosseltjes met curry, de tiramisu van oma, de zondagen aan tafel: dat zijn de smaken waarmee ik ben grootgebracht.</p>
-        <p>Toen papa er niet meer was, gingen de deuren van De Barakke voor altijd dicht. Maar de recepten bleven. Samen met Gilles, mijn partner, die zijn eigen familieklassiekers meebracht, zoals de zelfgemaakte foie gras van zijn papa Frank, ben ik ze opnieuw beginnen koken.</p>
-        <p>Daar komt de naam vandaan. Ode Cuisine is een ode aan papa, aan oma, en aan iedereen die ooit een recept heeft doorgegeven aan wie hij graag ziet.</p>
+        <p>Mijn kindertijd rook naar look, boter en zee. Ik ben opgegroeid in De Barakke, het mosselrestaurant van mijn ouders in Zwevegem. Papaatje stond er 45 jaar aan het fornuis. Hij was de chef, het kloppend hart van de zaak, en zot van oesters en van alles wat lekker was.</p>
+        <p>Als klein meisje wist ik het zeker: later neem ik de zaak over. Maar het leven liep anders. Papa werd plots ziek, en na zeven maanden was hij er niet meer. De deuren van De Barakke gingen dicht, en ze zijn nooit meer opengegaan.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie sectie--wijn ode-quote">
+    <div class="smal centraal">
+      <span class="kicker">over papaatje</span>
+      <blockquote>Koken werd mijn manier om hem te missen. Elke keer dat ik zijn mosseltjes maak, staat hij even naast me aan het <em>fornuis</em>.</blockquote>
+    </div>
+  </section>
+
+  <section class="sectie sectie--zand oorsprong">
+    <div class="wrap twee">
+      <div>
+        <span class="kicker">wat bleef</span>
+        <h2>De recepten <em>bleven</em></h2>
+        <p>Zijn mosseltjes met curry, in de zomer. De tiramisu van oma, met haar stoute vingertjes. De zondagen waarop de hele familie aan tafel schoof en niemand haast had om op te staan.</p>
+        <p>En toen kwam Gilles. Op de hotelschool waren we drie jaar water en vuur, vandaag is hij mijn grootste liefde. Hij bracht de recepten van zijn familie mee, zoals de zelfgemaakte foie gras van zijn papa Frank, elk jaar met kerst. Samen zijn we ze opnieuw beginnen koken.</p>
+        <p>Daar komt de naam vandaan. Ode Cuisine is een ode aan papa, aan oma, aan de tafels van vroeger. Aan alles wat aan tafel werd doorgegeven.</p>
         <p class="florry-sign">x Florry</p>
       </div>
+      <figure class="polaroid polaroid--rechts">
+        <img src="/fotos/florry-en-gilles.webp" alt="Florry en Gilles" loading="lazy" />
+        <figcaption>Gilles en ik</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -49,18 +71,18 @@ const vandaag = new Date().toISOString().slice(0, 10);
     <div class="wrap">
       <div class="centraal smal" style="margin-bottom:48px">
         <span class="kicker">ode bij je thuis</span>
-        <h2>En nu wil ik <em>jouw</em> recept horen</h2>
-        <p>Want elke familie heeft er zo een. Dat ene gerecht dat naar thuis smaakt. Zo gaat het in zijn werk, en zo begint elke video.</p>
+        <h2>En nu wil ik <em>jouw</em> verhaal horen</h2>
+        <p>Want ik weet dat ik niet de enige ben. Iedereen heeft zo een gerecht. Dat ene bord dat naar thuis smaakt, naar iemand die je mist of iemand die je graag ziet. Daarom kom ik naar jou, om dat verhaal samen weer naar boven te halen.</p>
       </div>
       <ol class="draaiboek" data-stagger>
         <li>
           <span class="db-nr">01</span>
-          <div class="db-tekst"><h3>Jij stuurt het <em>in</em></h3><p>Het recept, en aan wie je er een ode mee brengt. Wie maakte het, wanneer kwam het op tafel, en waarom vergeet je die smaak nooit?</p></div>
+          <div class="db-tekst"><h3>Jij deelt je <em>verhaal</em></h3><p>Vertel me over die persoon en dat gerecht. Wie maakte het, wanneer kwam het op tafel, en waarom vergeet je die smaak nooit? Het recept zelf mag erbij.</p></div>
           <span class="db-noot">een snuifje mag ook</span>
         </li>
         <li>
           <span class="db-nr">02</span>
-          <div class="db-tekst"><h3>Ik lees en <em>kies</em></h3><p>Ik lees elk recept zelf. Ik kies de recepten met een verhaal dat blijft hangen, niet het mooiste bord. Word je gekozen, dan neem ik contact met je op.</p></div>
+          <div class="db-tekst"><h3>Ik lees en <em>kies</em></h3><p>Ik lees elk verhaal zelf. Ik kies de verhalen die blijven hangen, niet het mooiste bord. Word je gekozen, dan neem ik contact met je op.</p></div>
           <span class="db-noot">met een tas koffie</span>
         </li>
         <li>
@@ -104,13 +126,13 @@ const vandaag = new Date().toISOString().slice(0, 10);
   <section class="sectie" id="inzenden">
     <div class="wrap">
       <div class="centraal smal" style="margin-bottom:56px">
-        <span class="kicker">inzenden</span>
-        <h2>Stuur je recept <em>in</em></h2>
-        <p>Vertel ons het recept, het verhaal erachter en wanneer we bij jou thuis mogen komen filmen. Kijk mee: terwijl je typt, schrijft je recept zich in mijn schriftje.</p>
+        <span class="kicker">jouw verhaal</span>
+        <h2>Deel jouw <em>verhaal</em></h2>
+        <p>Vertel me over die persoon, over het gerecht, en wanneer ik bij jou thuis mag komen. Kijk mee: terwijl je typt, schrijft het zich in mijn schriftje.</p>
       </div>
       <div class="inzend-grid">
       <form id="schriftjeForm" class="formulier" name="schriftje" action="https://formsubmit.co/ode@flowyagency.com" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="_subject" value="Nieuw recept voor Ode bij je thuis · Ode Cuisine" />
+        <input type="hidden" name="_subject" value="Nieuw verhaal voor Ode bij je thuis · Ode Cuisine" />
         <input type="hidden" name="_next" value="https://www.odecuisine.be/bedankt/?schriftje" />
         <input type="hidden" name="_template" value="table" />
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
@@ -122,9 +144,9 @@ const vandaag = new Date().toISOString().slice(0, 10);
         <label>Gemeente <input name="gemeente" required /></label>
         <label class="vol">Instagram (als je wil dat we je taggen) <input name="instagram" placeholder="@jouwnaam" /></label>
 
-        <p class="vol form-kop">Het recept</p>
-        <label>Naam van het gerecht <input name="gerecht" required placeholder="de appeltaart van oma" /></label>
+        <p class="vol form-kop">Jouw verhaal</p>
         <label>Aan wie breng je een ode? <input name="recept_van" required placeholder="mijn oma Maria, mijn papa…" /></label>
+        <label>Welk gerecht? <input name="gerecht" required placeholder="de appeltaart van oma" /></label>
         <label class="vol">Het verhaal erachter <textarea name="verhaal" rows="4" required placeholder="Wanneer werd het gemaakt, wat betekent het voor jou, welke herinnering hoort erbij?"></textarea></label>
         <label class="vol">Ingrediënten <textarea name="ingredienten" rows="5" required placeholder="Een snuifje mag ook."></textarea></label>
         <label class="vol">Bereiding <textarea name="bereiding" rows="6" required></textarea></label>
@@ -154,7 +176,7 @@ const vandaag = new Date().toISOString().slice(0, 10);
 
         <label class="vol vink akkoord"><input type="checkbox" name="akkoord" value="Ja" required /> Ik ga akkoord dat Ode Cuisine mijn recept, naam, verhaal en de beelden deelt op haar kanalen, op odecuisine.be en in het digitale Ode kookboek.</label>
 
-        <div class="vol centraal"><button class="knop knop--vol" type="submit">Stuur mijn recept in</button></div>
+        <div class="vol centraal"><button class="knop knop--vol" type="submit">Deel mijn verhaal</button></div>
       </form>
 
       <aside class="schrift" id="schrift" aria-label="Voorbeeld van je recept in het schriftje">
@@ -292,6 +314,15 @@ const vandaag = new Date().toISOString().slice(0, 10);
 <style is:global>
   .oorsprong .twee { align-items: center; }
   .ode-hero .lijn { padding: .08em 0 .26em; margin-bottom: -.18em; }
+  .polaroid { margin: 0; background: #fff; padding: 16px 16px 64px; box-shadow: 0 24px 50px rgba(42,10,16,.18); position: relative; max-width: 440px; justify-self: center; transition: transform .8s var(--ease); }
+  .polaroid img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 12%; }
+  .polaroid figcaption { position: absolute; left: 0; right: 0; bottom: 16px; text-align: center; font-family: 'Caveat', cursive; font-size: 1.7rem; color: var(--wijn); }
+  .polaroid::before { content: ''; position: absolute; top: -14px; left: 50%; width: 110px; height: 28px; background: rgba(164,185,206,.75); transform: translateX(-50%) rotate(-3deg); }
+  .polaroid--links { transform: rotate(-2.5deg); }
+  .polaroid--rechts { transform: rotate(2.5deg); }
+  .polaroid:hover { transform: rotate(0deg) scale(1.02); }
+  .ode-quote blockquote { margin: 18px 0 0; font-family: var(--serif); font-style: italic; font-size: clamp(1.9rem, 3.6vw, 2.9rem); line-height: 1.25; color: var(--creme); }
+  .ode-quote blockquote em { color: var(--zand); }
   .verhaal-foto { position: relative; transform: rotate(-1.5deg); }
   .foto-noot { z-index: 2; position: absolute; left: 18px; bottom: -22px; font-family: 'Caveat', cursive; font-size: 1.6rem; color: var(--wijn); background: #fbf9f4; padding: 4px 14px; transform: rotate(-3deg); box-shadow: 0 6px 14px rgba(42,10,16,.15); }
   .florry-sign { font-family: 'Caveat', cursive; font-size: 2.2rem; color: var(--wijn); margin-top: 18px; }
