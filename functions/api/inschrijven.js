@@ -65,7 +65,7 @@ function esc(s) {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-function welkom(voornaam) {
+export function welkom(voornaam) {
   const serif = "'Cormorant Garamond', Georgia, serif";
   const sans = "'Jost', 'Helvetica Neue', Arial, sans-serif";
   const aanhef = voornaam ? `Dag ${esc(voornaam)},` : 'Dag lieve lezer,';

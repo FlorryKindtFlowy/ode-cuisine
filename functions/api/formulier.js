@@ -5,6 +5,8 @@
 //   FORMULIER_NAAR   (Text, optioneel; standaard ode@flowyagency.com)
 // Velden die met _ beginnen zijn technisch (_subject, _next, _honey, _bevestiging) en komen niet in de mail.
 // _bevestiging="ode-aan" stuurt de inzender ook een bedankmail (zie BEVESTIGINGEN onderaan).
+// _nieuwsbrief="ja" zet het e-mailadres ook op de lijst van Ode Zondag (RESEND_SEGMENT_ID) en stuurt de welkomstmail.
+import { welkom } from './inschrijven.js';
 
 const SITE = 'https://www.odecuisine.be';
 const AFZENDER = 'Ode Cuisine <info@odecuisine.be>';
@@ -74,6 +76,28 @@ export async function onRequestPost({ request, env }) {
     }).catch((e) => { console.log('bedankmail: fout', e); return null; });
     if (r && !r.ok) console.log('bedankmail: Resend', r.status, await r.text());
   }
+  // Kookboek wachtlijst: ook inschrijven voor Ode Zondag.
+  if (String(veld.get('_nieuwsbrief') || '') === 'ja' && replyTo && env.RESEND_SEGMENT_ID) {
+    try {
+      const kop = { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' };
+      const c = await fetch('https://api.resend.com/contacts', {
+        method: 'POST', headers: kop,
+        body: JSON.stringify({ email: replyTo.toLowerCase(), unsubscribed: false, segments: [{ id: env.RESEND_SEGMENT_ID }] }),
+      });
+      if (c.ok) {
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST', headers: kop,
+          body: JSON.stringify({
+            from: 'Ode Cuisine <zondag@odecuisine.be>', to: [replyTo], reply_to: env.FORMULIER_NAAR || ANTWOORD_NAAR,
+            subject: 'Je plekje aan tafel is gedekt', html: welkom(''),
+          }),
+        });
+      } else if (c.status !== 409) {
+        console.log('nieuwsbrief: Resend', c.status, await c.text());
+      }
+    } catch (e) { console.log('nieuwsbrief: fout', e); }
+  }
+
   return terug(volgende, true);
 }
 
