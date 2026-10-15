@@ -1,0 +1,39 @@
+# Toont hoeveel mensen ingeschreven zijn voor Ode Zondag.
+# Actions › Ode Zondag abonnees › Run workflow. De volledige lijst staat in Resend › Audience › Ode Zondag.
+# E-mailadressen worden half verborgen getoond, omdat logs van een openbare repo voor iedereen zichtbaar zijn.
+name: Ode Zondag abonnees
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  tellen:
+    runs-on: ubuntu-latest
+    env:
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      RESEND_SEGMENT_ID: ${{ secrets.RESEND_SEGMENT_ID }}
+    steps:
+      - name: Abonnees tellen
+        run: |
+          node --input-type=module -e '
+          const kop = { Authorization: `Bearer ${process.env.RESEND_API_KEY}` };
+          let na = "", alle = [];
+          for (;;) {
+            const url = `https://api.resend.com/contacts?limit=100&segment_id=${process.env.RESEND_SEGMENT_ID}` + (na ? `&after=${na}` : "");
+            const res = await fetch(url, { headers: kop });
+            const data = await res.json();
+            if (!res.ok) { console.log("Resend gaf", res.status, JSON.stringify(data)); process.exit(1); }
+            alle = alle.concat(data.data || []);
+            if (!data.has_more || !data.data?.length) break;
+            na = data.data[data.data.length - 1].id;
+          }
+          const actief = alle.filter((c) => !c.unsubscribed);
+          const verberg = (m) => { const [n, d] = m.split("@"); return n.slice(0, 2) + "***@" + d; };
+          const regels = [`# Ode Zondag`, ``, `**${actief.length}** ingeschreven, ${alle.length - actief.length} uitgeschreven.`, ``];
+          for (const c of actief) regels.push(`- ${c.first_name || "zonder naam"} (${verberg(c.email)}), sinds ${String(c.created_at).slice(0, 10)}`);
+          console.log(regels.join("\n"));
+          await import("node:fs").then((fs) => fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, regels.join("\n") + "\n"));
+          '
