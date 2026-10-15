@@ -4,9 +4,9 @@ import { zichtbareRecepten } from '../../lib/recepten';
 
 export async function getStaticPaths() {
   const recepten = await zichtbareRecepten();
-  return recepten.map((r) => ({ params: { slug: r.slug }, props: { recept: r } }));
+  return recepten.map((r) => ({ params: { slug: r.slug }, props: { recept: r, alle: recepten } }));
 }
-const { recept } = Astro.props;
+const { recept, alle } = Astro.props;
 const d = recept.data;
 const { Content } = await recept.render();
 const labels: Record<string, string> = { hedwin: 'van papa hedwin', frank: 'van frank', oma: 'van oma brigitte', gilles: 'van gilles', samen: 'van ons tweeën' };
@@ -28,6 +28,7 @@ const schema = [
     ...(d.foto ? { image: [new URL(d.foto, Astro.site).toString()] } : {}),
     recipeCategory: d.categorie,
     recipeCuisine: 'Belgisch',
+    ...(d.trefwoorden.length ? { keywords: d.trefwoorden.join(', ') } : {}),
     recipeIngredient: d.ingredienten,
     recipeInstructions: stappen.map((s) => ({ '@type': 'HowToStep', text: s })),
   },
@@ -37,9 +38,12 @@ const schema = [
     mainEntity: d.faq.map((f) => ({ '@type': 'Question', name: f.vraag, acceptedAnswer: { '@type': 'Answer', text: f.antwoord } })),
   }] : []),
 ];
+const introAlineas = (d.intro ?? '').split(/\n\s*\n/).map((a) => a.trim()).filter(Boolean);
+const verwant = d.gerelateerd.map((s) => alle.find((r) => r.slug === s)).filter(Boolean);
+const titelTag = d.seoTitel ? `${d.seoTitel} · Ode Cuisine` : `${d.titel.charAt(0).toUpperCase() + d.titel.slice(1)}: recept · Ode Cuisine`;
 const tijd = (m: number) => (m >= 60 ? `${Math.floor(m / 60)} u ${m % 60 ? (m % 60) + ' min' : ''}` : `${m} min`);
 ---
-<Base title={`${d.titel.charAt(0).toUpperCase() + d.titel.slice(1)}: recept`} description={d.beschrijving} schema={schema} image={d.foto}>
+<Base title={titelTag} rawTitle={true} description={d.beschrijving} schema={schema} image={d.foto}>
   <article>
     <header class="recept-kop smal">
       {d.familie && <span class="kicker">{labels[d.familie]}</span>}
@@ -54,7 +58,7 @@ const tijd = (m: number) => (m >= 60 ? `${Math.floor(m / 60)} u ${m % 60 ? (m % 
       </div>
     </header>
 
-    <div class="wrap"><div class="foto foto--breed reveal-foto">{d.foto ? <img src={d.foto} alt={d.titel} /> : <div class="ph"><i class="o-mark"></i><span>foto volgt</span></div>}</div></div>
+    <div class="wrap"><div class="foto foto--breed reveal-foto">{d.foto ? <img src={d.foto} alt={d.fotoAlt ?? d.titel} /> : <div class="ph"><i class="o-mark"></i><span>foto volgt</span></div>}</div></div>
 
     <div class="wrap recept-body">
       <aside class="ingredienten">
@@ -64,8 +68,22 @@ const tijd = (m: number) => (m >= 60 ? `${Math.floor(m / 60)} u ${m % 60 ? (m % 
       <div class="stappen">
         {d.concept && <p class="concept-melding">Concepttekst. Vervang door het echte familierecept voor publicatie.</p>}
         <blockquote class="verhaal-blok">{d.verhaal}</blockquote>
+        {introAlineas.length > 0 && <div class="recept-intro">{introAlineas.map((a) => <p>{a}</p>)}</div>}
         <h2>bereiding</h2>
         <Content />
+
+        {d.tips.length > 0 && (
+          <section class="tips" style="margin-top:48px">
+            <h2>tips van de chef</h2>
+            <ul>{d.tips.map((t) => <li>{t}</li>)}</ul>
+          </section>
+        )}
+        {d.serveertip && (
+          <section style="margin-top:40px">
+            <h2>wat schenk of serveer je erbij</h2>
+            <p>{d.serveertip}</p>
+          </section>
+        )}
 
         {d.faq.length > 0 && (
           <section class="faq" style="margin-top:48px">
@@ -79,6 +97,12 @@ const tijd = (m: number) => (m >= 60 ? `${Math.floor(m / 60)} u ${m % 60 ? (m % 
           <p>Ode komt aan huis koken voor 6 tot 12 gasten in Oost en West-Vlaanderen.</p>
           <a class="knop" href="/aan-tafel/">Vraag je datum aan</a>
         </div>
+        {verwant.length > 0 && (
+          <section style="margin-top:48px">
+            <h2>ook lekker</h2>
+            <ul>{verwant.map((r) => <li><a href={`/recepten/${r.slug}/`}>{r.data.titel}</a></li>)}</ul>
+          </section>
+        )}
         <p style="margin-top:32px;font-style:italic;color:var(--zacht)">Recept van {auteur}, Ode Cuisine. <a href="/kookboek/">Dit recept komt ook in het Ode kookboek.</a></p>
       </div>
     </div>

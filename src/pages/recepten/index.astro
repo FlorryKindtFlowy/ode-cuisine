@@ -2,27 +2,52 @@
 import Base from '../../layouts/Base.astro';
 import ReceptKaart from '../../components/ReceptKaart.astro';
 import { zichtbareRecepten } from '../../lib/recepten';
+import { getCollection } from 'astro:content';
 const recepten = await zichtbareRecepten();
+const nu = new Date();
+const komend = (await getCollection('recepten', (r) => r.data.datum > nu)).sort((a, b) => a.data.datum.valueOf() - b.data.datum.valueOf())[0];
+const komendDatum = komend ? komend.data.datum.toLocaleDateString('nl-BE', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Brussels' }) : '';
 const cats = ['om te delen', 'voorgerechten', 'hoofdgerechten', 'desserts'];
 ---
-<Base title="Recepten" description="Belgische en Vlaamse familierecepten van Ode Cuisine: mosselen in currysaus, vol au vent, tiramisu en meer. Met stappen, tips en het verhaal erachter.">
+<Base title="Recepten" description="Recepten van Ode Cuisine, elk met het verhaal van wie het doorgaf. Elke zondag een nieuw recept, met stappen, tips en het verhaal erachter.">
   <section class="sectie">
     <div class="wrap">
       <div class="centraal" style="margin-bottom:40px">
         <span class="kicker">recepten</span>
-        <h1>Recepten om door te geven</h1>
-        <p class="smal">Belgische klassiekers zoals ze bij ons thuis op tafel kwamen. Elk recept met het verhaal van wie het ons leerde.</p>
+        <h1>Recepten om door te <em>geven</em></h1>
+        <p class="smal">Elk recept is een ode aan iemand. Aan papaatje en zijn mosseltjes, aan oma en haar wafels, aan iedereen die ons leerde koken. Elke zondag schrijf ik er een nieuw in, met het verhaal erachter.</p>
         <span class="zondag">elke zondag een nieuw recept</span>
       </div>
+      {recepten.length > 0 && (
       <div class="filters" role="group" aria-label="Filter op categorie">
         <button aria-pressed="true" data-filter="alle">alle</button>
         {cats.map((c) => <button aria-pressed="false" data-filter={c}>{c}</button>)}
       </div>
+      )}
       <div class="drie" id="lijst" data-stagger>
         {recepten.map((r) => <ReceptKaart recept={r} />)}
       </div>
+      {recepten.length === 0 && komend && (
+        <div class="leeg-schrift centraal">
+          <p class="leeg-hand">het eerste recept komt eraan...</p>
+          <p>Op {komendDatum} verschijnt hier <em>{komend.data.titel}</em>. Tot sebiet.</p>
+        </div>
+      )}
     </div>
   </section>
+  <section class="sectie sectie--wijn">
+    <div class="smal centraal">
+      <span class="kicker">ode aan</span>
+      <h2>Heb jij een recept met een <em>verhaal</em>?</h2>
+      <p>Van je mama, je opa, je buurvrouw. Deel het met mij, en misschien kom ik bij jou thuis om er samen een ode aan te brengen.</p>
+      <a class="knop" href="/ode-aan/">Deel jouw verhaal</a>
+    </div>
+  </section>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap" />
+  <style>
+    .leeg-schrift { padding: 48px 0 16px; }
+    .leeg-hand { font-family: 'Caveat', cursive; font-size: 2.2rem; color: var(--wijn); transform: rotate(-2deg); margin: 0 0 8px; }
+  </style>
   <script>
     const knoppen = document.querySelectorAll<HTMLButtonElement>('.filters button');
     knoppen.forEach((k) => k.addEventListener('click', () => {
