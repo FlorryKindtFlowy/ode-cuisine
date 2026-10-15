@@ -10,8 +10,8 @@ const ANTWOORD_NAAR = 'ode@flowyagency.com';
 
 export async function onRequestPost({ request, env }) {
   const wilJson = (request.headers.get('Accept') || '').includes('application/json');
-  const antwoord = (ok, bericht) => wilJson
-    ? Response.json({ ok, bericht }, { status: ok ? 200 : 400 })
+  const antwoord = (ok, bericht, detail) => wilJson
+    ? Response.json({ ok, bericht, ...(detail ? { detail } : {}) }, { status: ok ? 200 : 400 })
     : Response.redirect(`${SITE}/?zondag=${ok ? 'ingeschreven' : 'mislukt'}#zondagsbrief`, 303);
 
   let veld;
@@ -39,9 +39,10 @@ export async function onRequestPost({ request, env }) {
     unsubscribed: false,
     segments: [{ id: env.RESEND_SEGMENT_ID }],
   });
-  if (!res.ok && res.status !== 409 && res.status !== 422) {
-    console.log('Resend contacts', res.status, await res.text());
-    return antwoord(false, 'Er ging iets mis. Probeer je het straks nog eens?');
+  if (!res.ok && res.status !== 409) {
+    const fout = await res.text();
+    console.log('Resend contacts', res.status, fout);
+    return antwoord(false, 'Er ging iets mis. Probeer je het straks nog eens?', `${res.status} ${fout.slice(0, 300)}`);
   }
   if (res.ok) {
     await resend('/emails', {
