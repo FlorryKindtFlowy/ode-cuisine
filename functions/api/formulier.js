@@ -128,7 +128,7 @@ const TERMIJN = 'binnen de week'; // pas hier aan als je een andere termijn wil 
 
 const BEVESTIGINGEN = {
   'ode-aan': {
-    onderwerp: 'Merci voor je verhaal · Ode Cuisine',
+    onderwerp: 'Je verhaal is thuisgekomen · Ode Cuisine',
     html: bedanktOdeAan,
   },
 };
@@ -136,10 +136,17 @@ const BEVESTIGINGEN = {
 function bedanktOdeAan(g) {
   const serif = "'Cormorant Garamond', Georgia, serif";
   const sans = "'Jost', 'Helvetica Neue', Arial, sans-serif";
-  const p = `margin:0 0 16px;font-family:${sans};font-weight:300;font-size:16px;line-height:1.75;color:#2a0a10;`;
+  const p = `margin:0 0 18px;font-family:${sans};font-weight:300;font-size:16px;line-height:1.8;color:#2a0a10;`;
   const voornaam = String(g.naam || '').split(/\s+/)[0];
   const aanhef = voornaam ? `Dag ${esc(voornaam)},` : 'Dag,';
-  const wat = g.gerecht ? `Je recept voor <em>${esc(g.gerecht)}</em> is goed aangekomen` : 'Je recept is goed aangekomen';
+  const gerecht = g.gerecht ? `<em>${esc(g.gerecht)}</em>` : 'jouw gerecht';
+  const termijn = TERMIJN.charAt(0).toUpperCase() + TERMIJN.slice(1);
+  const stap = (nr, titel, tekst) => `<tr>
+      <td width="56" valign="top" style="padding:0 0 22px;font-family:${serif};font-style:italic;font-size:40px;line-height:1;color:#51121a;">${nr}</td>
+      <td valign="top" style="padding:4px 0 22px;">
+        <div style="font-family:${serif};font-size:22px;line-height:1.2;color:#51121a;">${titel}</div>
+        <div style="margin-top:6px;font-family:${sans};font-weight:300;font-size:15px;line-height:1.7;color:#2a0a10;">${tekst}</div>
+      </td></tr>`;
   return `<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet"></head>
 <body style="margin:0;background:#a4b9ce;">
@@ -148,17 +155,29 @@ function bedanktOdeAan(g) {
   <tr><td align="center" style="background:#51121a;padding:60px 40px 50px;">
     <img src="${SITE}/mail/ode-o-creme.png" width="34" height="39" alt="Ode" style="display:block;margin:0 auto 26px;border:0;">
     <div style="font-family:${sans};font-size:11px;letter-spacing:3.5px;text-transform:uppercase;color:#a4b9ce;">Ode aan</div>
-    <h1 style="margin:18px 0 0;font-family:${serif};font-weight:400;font-size:48px;line-height:1.05;color:#e8eef5;">Merci voor je <em>verhaal</em></h1>
+    <h1 style="margin:18px 0 0;font-family:${serif};font-weight:400;font-size:46px;line-height:1.08;color:#e8eef5;">Je verhaal is <em>thuisgekomen</em></h1>
   </td></tr>
-  <tr><td style="background:#e3ebf3;padding:48px 52px 44px;">
-    <p style="margin:0 0 16px;font-family:${serif};font-style:italic;font-size:24px;color:#51121a;">${aanhef}</p>
-    <p style="${p}">Wat fijn dat je jouw verhaal met mij deelt. ${wat} en zit veilig in de pot.</p>
-    <p style="${p}">Ik lees elk verhaal met heel veel liefde. ${TERMIJN.charAt(0).toUpperCase() + TERMIJN.slice(1)} hoor je van mij. Dan spreken we samen een datum af om bij jou thuis te komen filmen.</p>
-    <p style="margin:0 0 30px;font-family:${sans};font-weight:300;font-size:16px;line-height:1.75;color:#2a0a10;">Wil je intussen nog iets aanvullen, een extra foto sturen of een datum aanpassen? Antwoord gewoon op deze mail.</p>
+  <tr><td style="background:#e3ebf3;padding:48px 52px 20px;">
+    <p style="margin:0 0 18px;font-family:${serif};font-style:italic;font-size:24px;color:#51121a;">${aanhef}</p>
+    <p style="${p}">Er is iets bijzonders aan een recept dat iemand ooit voor je maakte. Het snuifje dat nergens opgeschreven staat. De geur in de gang als je binnenkwam. De stoel waar je altijd zat.</p>
+    <p style="${p}">Ik groeide op tussen de kookpotten van De Barakke, het mosselrestaurant van mijn ouders. Daar leerde ik dat een gerecht nooit alleen over eten gaat. Het gaat over wie het voor je maakte. Daarom bestaat Ode aan.</p>
+    <p style="${p}">En daarom ben ik zo blij dat jij ${gerecht} met mij deelt. Je verhaal is goed aangekomen en ligt nu bij mij.</p>
+  </td></tr>
+  <tr><td style="background:#e3ebf3;padding:10px 52px 18px;">
+    <div style="margin:0 0 22px;font-family:${sans};font-size:11px;letter-spacing:3.5px;text-transform:uppercase;color:#51121a;">Wat er nu gebeurt</div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      ${stap('1', 'Ik lees je <em>verhaal</em>', `Zelf, rustig, met de aandacht die het verdient. ${termijn} hoor je van mij.`)}
+      ${stap('2', 'We prikken een <em>datum</em>', 'Ik kom naar jou. In jouw keuken, aan jouw tafel, want daar hoort dit recept thuis.')}
+      ${stap('3', 'De schort gaat <em>aan</em>', 'We koken jouw gerecht samen, zoals het hoort. Daarna schrijf ik het met de hand in mijn schriftje, naast de recepten van mijn eigen familie.')}
+    </table>
+  </td></tr>
+  <tr><td style="background:#e3ebf3;padding:6px 52px 44px;">
+    <p style="margin:0 0 30px;font-family:${sans};font-weight:300;font-size:16px;line-height:1.8;color:#2a0a10;">Schiet je intussen nog iets te binnen? Een oude foto, een anekdote, een datum die beter past? Antwoord gewoon op deze mail. Alles komt bij mij terecht.</p>
     <table role="presentation" cellpadding="0" cellspacing="0" align="center"><tr><td bgcolor="#51121a">
       <a href="${SITE}/ode-aan/?utm_source=bedankmail&utm_medium=email&utm_campaign=ode-aan" style="display:inline-block;padding:17px 32px;font-family:${sans};font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#e8eef5;text-decoration:none;">Bekijk Ode aan</a>
     </td></tr></table>
-    <p style="margin:34px 0 0;font-family:${serif};font-style:italic;font-size:22px;color:#51121a;">Tot sebiet,<br>Florry</p>
+    <p style="margin:38px 0 0;font-family:${serif};font-style:italic;font-size:22px;line-height:1.4;color:#51121a;">Tot aan tafel,<br>Florry</p>
+    <p style="margin:10px 0 0;font-family:${sans};font-weight:300;font-size:13px;line-height:1.7;color:#4f3d4a;">Ode Cuisine, een ode aan de recepten die ons hebben grootgebracht</p>
   </td></tr>
   <tr><td align="center" style="background:#380b12;padding:30px 40px;font-family:${sans};font-weight:300;font-size:12px;line-height:1.7;color:#a4b9ce;">
     Je krijgt deze mail omdat je een verhaal instuurde voor Ode aan op odecuisine.be.<br>Ode Cuisine, een project van Flowy Agency BV, Tabakvest 87 bus 4896, 2000 Antwerpen

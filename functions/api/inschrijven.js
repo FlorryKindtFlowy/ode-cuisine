@@ -81,12 +81,13 @@ function welkom(voornaam) {
   </td></tr>
   <tr><td style="background:#e3ebf3;padding:48px 52px 44px;">
     <p style="margin:0 0 16px;font-family:${serif};font-style:italic;font-size:24px;color:#51121a;">${aanhef}</p>
-    <p style="margin:0 0 16px;font-family:${sans};font-weight:300;font-size:16px;line-height:1.75;color:#2a0a10;">Fijn dat je aanschuift. Vanaf nu ligt er elke zondagochtend een recept in je mailbox. Elk recept is een ode aan iemand: een papa, een oma, een vriendin. Met het verhaal erbij, en alles wat je nodig hebt om het zelf op tafel te zetten.</p>
+    <p style="margin:0 0 16px;font-family:${sans};font-weight:300;font-size:16px;line-height:1.75;color:#2a0a10;">Op zondag rook het bij ons thuis altijd naar iets dat al uren stond te pruttelen. In De Barakke, het mosselrestaurant van mijn ouders, stond de tafel nooit leeg en had niemand haast om op te staan.</p>
+    <p style="margin:0 0 16px;font-family:${sans};font-weight:300;font-size:16px;line-height:1.75;color:#2a0a10;">Dat gevoel wil ik je elke week meegeven. Vanaf nu ligt er elke zondagochtend een recept in je mailbox. Elk recept is een ode aan iemand: een papa, een oma, een vriendin. Met het verhaal erbij, en alles wat je nodig hebt om het zelf op tafel te zetten.</p>
     <p style="margin:0 0 30px;font-family:${sans};font-weight:300;font-size:16px;line-height:1.75;color:#2a0a10;">Kan je niet wachten tot zondag? Op de site staan de recepten van de vorige weken al klaar.</p>
     <table role="presentation" cellpadding="0" cellspacing="0" align="center"><tr><td bgcolor="#51121a">
       <a href="${SITE}/recepten/?utm_source=nieuwsbrief&utm_medium=email&utm_campaign=welkom" style="display:inline-block;padding:17px 32px;font-family:${sans};font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#e8eef5;text-decoration:none;">Bekijk de recepten</a>
     </td></tr></table>
-    <p style="margin:34px 0 0;font-family:${serif};font-style:italic;font-size:22px;color:#51121a;">Tot sebiet,<br>Florry</p>
+    <p style="margin:34px 0 0;font-family:${serif};font-style:italic;font-size:22px;color:#51121a;">Tot aan tafel,<br>Florry</p>
   </td></tr>
   <tr><td align="center" style="background:#380b12;padding:30px 40px;font-family:${sans};font-weight:300;font-size:12px;line-height:1.7;color:#a4b9ce;">
     Je krijgt deze mail omdat je je inschreef voor Ode Zondag op odecuisine.be.<br>Ode Cuisine, een project van Flowy Agency BV, Tabakvest 87 bus 4896, 2000 Antwerpen
