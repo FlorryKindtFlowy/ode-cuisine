@@ -6,7 +6,7 @@
 // Velden die met _ beginnen zijn technisch (_subject, _next, _honey) en komen niet in de mail.
 
 const SITE = 'https://www.odecuisine.be';
-const AFZENDER = 'Ode Cuisine <formulier@odecuisine.be>';
+const AFZENDER = 'Ode Cuisine <info@odecuisine.be>';
 const STANDAARD_NAAR = 'ode@flowyagency.com';
 const MAX_BIJLAGE = 15 * 1024 * 1024; // 15 MB in totaal
 
