@@ -30,14 +30,20 @@ const vandaag = new Date().toISOString().slice(0, 10);
 
   <section class="sectie sectie--zand oorsprong">
     <div class="wrap twee">
-      <figure class="polaroid polaroid--links">
-        <img src="/fotos/hedwin-oesters.webp" alt="Papaatje Hedwin met oesters op een tuinfeest" loading="lazy" />
-        <figcaption>papaatje, met zijn oesters</figcaption>
-      </figure>
+      <div class="polaroid-stapel">
+        <figure class="polaroid polaroid--links">
+          <img src="/fotos/hedwin-oesters.webp" alt="Papaatje Hedwin met oesters op een tuinfeest" loading="lazy" />
+          <figcaption>papaatje</figcaption>
+        </figure>
+        <figure class="polaroid polaroid--klein">
+          <img src="/fotos/familie-florry-kookpot.webp" alt="Florry als baby in een grote kookpot, met een koksmuts op" loading="lazy" />
+          <figcaption>ik, in de kookpot</figcaption>
+        </figure>
+      </div>
       <div>
         <span class="kicker">waar het begon</span>
         <h2>Een ode aan de recepten die mij hebben <em>grootgebracht</em></h2>
-        <p>Mijn kindertijd rook naar look, boter en zee. Ik ben opgegroeid in De Barakke, het mosselrestaurant van mijn ouders in Zwevegem. Papaatje stond er 45 jaar aan het fornuis. Hij was de chef, het kloppend hart van de zaak, en zot van oesters en van alles wat lekker was.</p>
+        <p>Mijn kindertijd rook naar look, boter en zee. Ik ben opgegroeid in De Barakke, het mosselrestaurant van mijn ouders in Zwevegem. Als baby zat ik letterlijk al in hun kookpotten. Papaatje stond er 45 jaar aan het fornuis. Hij was de chef, het kloppend hart van de zaak, en zot van oesters en van alles wat lekker was.</p>
         <p>Als klein meisje wist ik het zeker: later neem ik de zaak over. Maar het leven liep anders. Papa werd plots ziek, en na zeven maanden was hij er niet meer. De deuren van De Barakke gingen dicht, en ze zijn nooit meer opengegaan.</p>
       </div>
     </div>
@@ -50,14 +56,41 @@ const vandaag = new Date().toISOString().slice(0, 10);
     </div>
   </section>
 
+  <section class="sectie album-sectie">
+    <div class="wrap">
+      <div class="centraal smal" style="margin-bottom:56px">
+        <span class="kicker">aan mijn tafel</span>
+        <h2>Aan wie ik een <em>ode</em> breng</h2>
+        <p>Elk van hen gaf iets door. Een smaak, een gewoonte, een recept dat nergens opgeschreven stond.</p>
+      </div>
+      <div class="album" data-stagger>
+        <article>
+          <figure class="polaroid"><img src="/fotos/familie-mama.webp" alt="Florry als klein meisje op de schoot van haar mama aan zee" loading="lazy" /><figcaption>mama</figcaption></figure>
+          <h3>De hespenrolletjes van <em>mama</em></h3>
+          <p>Niemand maakt ze beter dan zij.</p>
+        </article>
+        <article>
+          <figure class="polaroid"><img src="/fotos/familie-opa.webp" alt="Florry als klein meisje met haar opa aan tafel" loading="lazy" /><figcaption>opa</figcaption></figure>
+          <h3>De paté van <em>opa</em></h3>
+          <p>Een echte beenhouwer, in hart en nieren. Zijn paté was de beste.</p>
+        </article>
+        <article>
+          <figure class="polaroid"><img src="/fotos/familie-oma.webp" alt="Florry als peuter met roze zonnebril naast haar oma" loading="lazy" /><figcaption>oma, mijn beste vriendin</figcaption></figure>
+          <h3>De wafels van <em>oma</em></h3>
+          <p>Mijn oma en mijn beste vriendin. Ze bakte de beste wafels, en at even graag taartjes als ik.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="sectie sectie--zand oorsprong">
     <div class="wrap twee">
       <div>
         <span class="kicker">wat bleef</span>
         <h2>De recepten <em>bleven</em></h2>
-        <p>Zijn mosseltjes met curry, in de zomer. De tiramisu van oma, met haar stoute vingertjes. De zondagen waarop de hele familie aan tafel schoof en niemand haast had om op te staan.</p>
+        <p>De mosseltjes met curry van papa, in de zomer. De hespenrolletjes van mama, de paté van opa, de wafels van oma. En de zondagen waarop de hele familie aan tafel schoof en niemand haast had om op te staan.</p>
         <p>En toen kwam Gilles. Op de hotelschool waren we drie jaar water en vuur, vandaag is hij mijn grootste liefde. Hij bracht de recepten van zijn familie mee, zoals de zelfgemaakte foie gras van zijn papa Frank, elk jaar met kerst. Samen zijn we ze opnieuw beginnen koken.</p>
-        <p>Daar komt de naam vandaan. Ode Cuisine is een ode aan papa, aan oma, aan de tafels van vroeger. Aan alles wat aan tafel werd doorgegeven.</p>
+        <p>Daar komt de naam vandaan. Ode Cuisine is een ode aan papa, aan mama, aan opa en oma, aan de tafels van vroeger. Aan alles wat aan tafel werd doorgegeven.</p>
         <p class="florry-sign">x Florry</p>
       </div>
       <figure class="polaroid polaroid--rechts">
@@ -319,6 +352,27 @@ const vandaag = new Date().toISOString().slice(0, 10);
   .polaroid figcaption { position: absolute; left: 0; right: 0; bottom: 16px; text-align: center; font-family: 'Caveat', cursive; font-size: 1.7rem; color: var(--wijn); }
   .polaroid::before { content: ''; position: absolute; top: -14px; left: 50%; width: 110px; height: 28px; background: rgba(164,185,206,.75); transform: translateX(-50%) rotate(-3deg); }
   .polaroid--links { transform: rotate(-2.5deg); }
+  .polaroid-stapel { position: relative; justify-self: center; width: 100%; max-width: 440px; margin-bottom: 110px; }
+  .polaroid-stapel .polaroid--links { max-width: 380px; }
+  .polaroid-stapel .polaroid--links figcaption { text-align: left; left: 24px; right: auto; }
+  .polaroid--klein { position: absolute; right: -24px; bottom: -120px; width: 46%; padding: 10px 10px 44px; transform: rotate(7deg); z-index: 2; }
+  .polaroid--klein figcaption { font-size: 1.3rem; bottom: 10px; }
+  .polaroid--klein::before { width: 70px; height: 20px; top: -10px; }
+  .album { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px; text-align: center; }
+  .album article { display: flex; flex-direction: column; align-items: center; }
+  .album .polaroid { width: 100%; max-width: 330px; margin-bottom: 30px; }
+  .album article:nth-child(1) .polaroid { transform: rotate(-3deg); }
+  .album article:nth-child(2) .polaroid { transform: rotate(2deg); }
+  .album article:nth-child(3) .polaroid { transform: rotate(-1.5deg); }
+  .album .polaroid:hover { transform: rotate(0) scale(1.03); }
+  .album article:nth-child(2) .polaroid img, .album article:nth-child(3) .polaroid img { aspect-ratio: 1 / 1; object-position: 50% 40%; }
+  .album .polaroid img { aspect-ratio: 4 / 3; }
+  .album article:nth-child(1) .polaroid img { object-position: 50% 68%; }
+  .album article:nth-child(2) .polaroid img { aspect-ratio: 4 / 3; object-position: 50% 80%; }
+  .album article:nth-child(3) .polaroid img { aspect-ratio: 4 / 3; object-position: 50% 50%; }
+  .album h3 { margin: 0 0 8px; font-size: 1.9rem; }
+  .album p { margin: 0; max-width: 30ch; }
+  @media (max-width: 860px) { .album { grid-template-columns: 1fr; gap: 64px; } .polaroid--klein { right: -6px; } }
   .polaroid--rechts { transform: rotate(2.5deg); }
   .polaroid:hover { transform: rotate(0deg) scale(1.02); }
   .ode-quote blockquote { margin: 18px 0 0; font-family: var(--serif); font-style: italic; font-size: clamp(1.9rem, 3.6vw, 2.9rem); line-height: 1.25; color: var(--creme); }
