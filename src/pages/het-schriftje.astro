@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 
 const faq = [
   { vraag: 'Moet ik zelf in beeld komen?', antwoord: 'Het mag, het hoeft niet. Het mooiste is als je er zelf bij bent wanneer we het gerecht proeven, maar een oude foto en jouw verhaal volstaan ook.' },
-  { vraag: 'Waar wordt er gefilmd?', antwoord: 'Het liefst bij jou thuis, aan je eigen tafel. Kan dat niet, dan koken we in onze keuken in Gavere en schuif jij daar aan.' },
+  { vraag: 'Waar wordt er gefilmd?', antwoord: 'Altijd bij jou thuis, in je eigen keuken en aan je eigen tafel. Wij brengen de ingrediënten, de schort en het schriftje mee.' },
   { vraag: 'Moet het recept perfect uitgeschreven zijn?', antwoord: 'Helemaal niet. "Een snuifje" en "tot het goed is" zijn ook prima. Wij testen het recept, schrijven het netjes uit en laten het je nalezen voor het online gaat.' },
   { vraag: 'Wat kost het?', antwoord: 'Niets. Wij koken, jij brengt het verhaal. Je krijgt de video en het uitgeschreven recept als herinnering.' },
   { vraag: 'Wat gebeurt er met mijn recept?', antwoord: 'Het verschijnt in een aflevering van het schriftje op onze kanalen, als blogpost op odecuisine.be en later in het digitale Ode kookboek. Je naam staat er altijd bij.' },
@@ -48,7 +48,7 @@ const vandaag = new Date().toISOString().slice(0, 10);
         </div>
         <div class="formule formule--uit">
           <p class="prijs">04</p><span class="pp">ode schuift aan</span>
-          <p>Het gerecht komt op tafel, het liefst bij jou thuis. De eerste hap, jouw reactie. Dat is het moment.</p>
+          <p>Het gerecht komt op tafel, bij jou thuis. De eerste hap, jouw reactie. Dat is het moment.</p>
         </div>
         <div class="formule">
           <p class="prijs">05</p><span class="pp">tot sebiet</span>
@@ -81,7 +81,7 @@ const vandaag = new Date().toISOString().slice(0, 10);
       <div class="centraal smal" style="margin-bottom:56px">
         <span class="kicker">inzenden</span>
         <h2>Stuur je recept <em>in</em></h2>
-        <p>Vertel ons het recept, het verhaal erachter en wanneer we mogen komen filmen. Kijk mee: terwijl je typt, schrijft je recept zich in het schriftje.</p>
+        <p>Vertel ons het recept, het verhaal erachter en wanneer we bij jou thuis mogen komen filmen. Kijk mee: terwijl je typt, schrijft je recept zich in het schriftje.</p>
       </div>
       <div class="inzend-grid">
       <form id="schriftjeForm" class="formulier" name="schriftje" action="https://formsubmit.co/ode@flowyagency.com" method="POST" enctype="multipart/form-data">
@@ -106,12 +106,8 @@ const vandaag = new Date().toISOString().slice(0, 10);
         <label class="vol">Foto (het recept op papier, een oude foto, het gerecht) <input type="file" name="foto" accept="image/*,.pdf" /></label>
 
         <p class="vol form-kop">Het filmen</p>
-        <fieldset class="vol keuze">
-          <legend>Waar mogen we filmen?</legend>
-          <label class="vink"><input type="radio" name="locatie" value="Bij mij thuis" required /> Bij mij thuis, aan mijn tafel</label>
-          <label class="vink"><input type="radio" name="locatie" value="Bij Ode in Gavere" /> Bij Ode in Gavere</label>
-          <label class="vink"><input type="radio" name="locatie" value="Maakt niet uit" /> Maakt mij niet uit</label>
-        </fieldset>
+        <p class="vol form-uitleg">We filmen altijd bij jou thuis, in jouw keuken en aan jouw tafel. Zo voelt het recept echt van jou.</p>
+        <label class="vol">Adres waar we komen filmen <input name="adres" required autocomplete="street-address" placeholder="straat, nummer, gemeente" /></label>
         <fieldset class="vol keuze">
           <legend>Kom je zelf in beeld?</legend>
           <label class="vink"><input type="radio" name="in_beeld" value="Ja, graag" required /> Ja, graag</label>
@@ -271,6 +267,7 @@ const vandaag = new Date().toISOString().slice(0, 10);
 <style is:global>
   .schriftje-stappen { row-gap: 28px; }
   .form-kop { font-family: var(--serif); font-size: 1.6rem; font-style: italic; color: var(--wijn); margin: 24px 0 0; border-bottom: 1px solid var(--lijn); padding-bottom: 8px; }
+  .form-uitleg { margin: 0; font-size: 1.05rem; color: var(--inkt); }
   .keuze { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px 28px; }
   .keuze legend { font-size: .7rem; letter-spacing: .22em; text-transform: uppercase; color: var(--zacht); margin-bottom: 12px; padding: 0; }
   .formulier .vink { flex-direction: row; align-items: center; gap: 10px; font-size: 1rem; letter-spacing: 0; text-transform: none; color: var(--inkt); cursor: pointer; }
