@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 
 const faq = [
+  { vraag: 'Hoe kies je welke recepten in het schriftje komen?', antwoord: 'Ik lees elk recept zelf. Het gaat niet om het mooiste of moeilijkste gerecht, maar om het verhaal dat erachter zit. Word je gekozen, dan neem ik contact met je op om een datum af te spreken.' },
   { vraag: 'Moet ik zelf in beeld komen?', antwoord: 'Het mag, het hoeft niet. Het mooiste is als je er zelf bij bent wanneer we het gerecht proeven, maar een oude foto en jouw verhaal volstaan ook.' },
   { vraag: 'Waar wordt er gefilmd?', antwoord: 'Altijd bij jou thuis, in je eigen keuken en aan je eigen tafel. Wij brengen de ingrediënten, de schort en het schriftje mee.' },
   { vraag: 'Moet het recept perfect uitgeschreven zijn?', antwoord: 'Helemaal niet. "Een snuifje" en "tot het goed is" zijn ook prima. Wij testen het recept, schrijven het netjes uit en laten het je nalezen voor het online gaat.' },
@@ -20,45 +21,69 @@ const vandaag = new Date().toISOString().slice(0, 10);
 <Base title="Het schriftje, stuur je recept in" description="Heb jij een recept dat in het schriftje moet? Stuur je familierecept in bij Ode Cuisine. Wij koken het, filmen het samen met jou en zetten het in ons kookboek." schema={schema}>
   <section class="sectie sectie--wijn">
     <div class="smal centraal">
-      <span class="kicker">het schriftje</span>
+      <span class="kicker">het schriftje · ode bij je thuis</span>
       <h1><span class="lijn"><span>Heb jij een recept voor het <em>schriftje</em>?</span></span></h1>
-      <p>Elk recept heeft iemand achter zich. Een mama, een opa, een buurvrouw, een vriend die altijd hetzelfde meebrengt. Wij zoeken die recepten, en de mensen die ze doorgeven. Stuur het jouwe in, dan koken we het samen en krijgt het een plaats in het schriftje.</p>
+      <p>Ode Cuisine is een ode aan de recepten die mij hebben grootgebracht. Nu wil ik ook de jouwe horen. Stuur je recept in, en misschien kom ik binnenkort bij jou thuis aan tafel.</p>
       <a class="knop" href="#inzenden">Stuur je recept in</a>
+    </div>
+  </section>
+
+  <section class="sectie sectie--zand oorsprong">
+    <div class="wrap twee">
+      <div class="verhaal-foto">
+        <div class="foto foto--breed reveal-foto"><img src="/fotos/hedwin-oesters.webp" alt="Papaatje Hedwin met oesters op een tuinfeest" loading="lazy" /></div>
+        <span class="foto-noot">papaatje, met zijn oesters</span>
+      </div>
+      <div>
+        <span class="kicker">waar het begon</span>
+        <h2>Een ode aan de recepten die mij hebben <em>grootgebracht</em></h2>
+        <p>Ik ben opgegroeid tussen de potten en pannen van De Barakke, het mosselrestaurant van mijn ouders. Papaatje stond 45 jaar aan het fornuis en was het kloppend hart van de zaak. Zijn mosseltjes met curry, de tiramisu van oma, de zondagen aan tafel: dat zijn de smaken waarmee ik ben grootgebracht.</p>
+        <p>Toen papa er niet meer was, gingen de deuren van De Barakke voor altijd dicht. Maar de recepten bleven. Samen met Gilles, mijn partner, die zijn eigen familieklassiekers meebracht, zoals de zelfgemaakte foie gras van zijn papa Frank, ben ik ze opnieuw beginnen koken.</p>
+        <p>Daar komt de naam vandaan. Ode Cuisine is een ode aan papa, aan oma, en aan iedereen die ooit een recept heeft doorgegeven aan wie hij graag ziet.</p>
+        <p class="florry-sign">x Florry</p>
+      </div>
     </div>
   </section>
 
   <section class="sectie">
     <div class="wrap">
-      <div class="centraal" style="margin-bottom:48px">
-        <span class="kicker">één recept, één persoon, één verhaal</span>
-        <h2>Zo ziet een <em>aflevering</em> eruit</h2>
+      <div class="centraal smal" style="margin-bottom:48px">
+        <span class="kicker">ode bij je thuis</span>
+        <h2>En nu wil ik <em>jouw</em> recept horen</h2>
+        <p>Want elke familie heeft er zo een. Dat ene gerecht dat naar thuis smaakt, naar een mama, een opa of een buurvrouw. Zo gaat het in zijn werk.</p>
       </div>
-      <div class="drie schriftje-stappen" data-stagger>
-        <div class="formule">
-          <p class="prijs">01</p><span class="pp">het schriftje gaat open</span>
-          <p>"Dit recept kreeg ik van jou. Vanaf vandaag staat het in het schriftje." Zo begint elke aflevering.</p>
-        </div>
-        <div class="formule formule--uit">
-          <p class="prijs">02</p><span class="pp">wie ben jij</span>
-          <p>Wie ben je, en waarom is dit gerecht van jou? Een anekdote, een oude foto, of jij zelf in beeld.</p>
-        </div>
-        <div class="formule">
-          <p class="prijs">03</p><span class="pp">schort aan</span>
-          <p>De Ode schort gaat aan, en dat is het startsignaal. Daarna koken we jouw recept, stap voor stap.</p>
-        </div>
-        <div class="formule formule--uit">
-          <p class="prijs">04</p><span class="pp">ode schuift aan</span>
-          <p>Het gerecht komt op tafel, bij jou thuis. De eerste hap, jouw reactie. Dat is het moment.</p>
-        </div>
-        <div class="formule">
-          <p class="prijs">05</p><span class="pp">tot sebiet</span>
-          <p>Het recept wordt met de hand in het schriftje geschreven. Het schriftje gaat dicht. Tot sebiet.</p>
-        </div>
-        <div class="formule formule--uit">
-          <p class="prijs">06</p><span class="pp">voor altijd bewaard</span>
-          <p>Jouw recept staat op odecuisine.be, op al onze kanalen en straks in het digitale Ode kookboek.</p>
-        </div>
-      </div>
+      <ol class="draaiboek" data-stagger>
+        <li>
+          <span class="db-nr">01</span>
+          <div class="db-tekst"><h3>Jij stuurt het <em>in</em></h3><p>Je recept, en vooral het verhaal erachter. Wie maakte het, wanneer kwam het op tafel, en waarom vergeet je die smaak nooit?</p></div>
+          <span class="db-noot">een snuifje mag ook</span>
+        </li>
+        <li>
+          <span class="db-nr">02</span>
+          <div class="db-tekst"><h3>Ik lees en <em>kies</em></h3><p>Ik lees elk recept zelf. Ik kies de recepten met een verhaal dat blijft hangen, niet het mooiste bord. Word je gekozen, dan bel ik je op.</p></div>
+          <span class="db-noot">met een tas koffie</span>
+        </li>
+        <li>
+          <span class="db-nr">03</span>
+          <div class="db-tekst"><h3>Ik kom bij je <em>thuis</em></h3><p>Met de ingrediënten, het schriftje en mijn Ode schort. Als de schort gestrikt is, gaan we van start, in jouw keuken.</p></div>
+          <span class="db-noot">schort aan!</span>
+        </li>
+        <li>
+          <span class="db-nr">04</span>
+          <div class="db-tekst"><h3>We koken en proeven <em>samen</em></h3><p>We maken jouw gerecht zoals het hoort, en de camera loopt mee. Dan komt het op tafel. De eerste hap, jouw reactie.</p></div>
+          <span class="db-noot">de eerste hap</span>
+        </li>
+        <li>
+          <span class="db-nr">05</span>
+          <div class="db-tekst"><h3>Het verhaal van <em>vroeger</em></h3><p>Aan tafel halen we samen het verhaal weer naar boven. De oude foto's, de anekdotes, en waarom dit recept zoveel betekent voor jou.</p></div>
+          <span class="db-noot">oude foto's zijn goud</span>
+        </li>
+        <li>
+          <span class="db-nr">06</span>
+          <div class="db-tekst"><h3>Tot <em>sebiet</em></h3><p>Ik schrijf je recept met de hand in het schriftje en klap het dicht. Vanaf dan staat het erin, voor altijd.</p></div>
+          <span class="db-noot">met jouw naam erbij</span>
+        </li>
+      </ol>
     </div>
   </section>
 
@@ -66,13 +91,13 @@ const vandaag = new Date().toISOString().slice(0, 10);
     <div class="wrap twee">
       <div>
         <span class="kicker">waar je recept terechtkomt</span>
-        <h2>Van jouw keuken naar het <em>kookboek</em></h2>
+        <h2>Van jouw keuken naar het <em>e-boek</em></h2>
         <p>Jouw aflevering verschijnt op Instagram, TikTok, YouTube, Facebook en Pinterest van Ode Cuisine. Het volledige recept komt als blogpost op odecuisine.be, met jouw naam en jouw verhaal erbij.</p>
-        <p>En dan het mooiste: over een jaar is het schriftje vol. Alle recepten bundelen we in het digitale Ode kookboek. Jouw recept, met jouw naam, in een boek vol mensen die smaken doorgeven.</p>
+        <p>En dan het mooiste: over een jaar is het schriftje vol. Dan bundel ik alles in het Ode e-boek. De recepten van papa en oma, die van Gilles zijn familie, en de jouwe. Met de verhalen, de foto's en de schort die er telkens bij was.</p>
         <h3 style="margin-top:32px">Wat je ervan krijgt</h3>
-        <p>De video van jouw aflevering, het netjes uitgeschreven recept, een plaats in het kookboek en een avond aan tafel met Ode.</p>
+        <p>De video van jouw aflevering, je recept netjes uitgeschreven, een plaats in het e-boek, en een namiddag aan tafel met Ode.</p>
       </div>
-      <div class="foto foto--breed reveal-foto"><img src="/fotos/hedwin-oesters.webp" alt="Papa Hedwin met oesters op een tuinfeest" loading="lazy" /></div>
+      <div class="foto foto--breed reveal-foto"><img src="/fotos/kookboek-cover.webp" alt="Het Ode kookboek op tafel" loading="lazy" /></div>
     </div>
   </section>
 
@@ -265,7 +290,26 @@ const vandaag = new Date().toISOString().slice(0, 10);
 </Base>
 
 <style is:global>
-  .schriftje-stappen { row-gap: 28px; }
+  .oorsprong .twee { align-items: center; }
+  .verhaal-foto { position: relative; transform: rotate(-1.5deg); }
+  .foto-noot { z-index: 2; position: absolute; left: 18px; bottom: -22px; font-family: 'Caveat', cursive; font-size: 1.6rem; color: var(--wijn); background: #fbf9f4; padding: 4px 14px; transform: rotate(-3deg); box-shadow: 0 6px 14px rgba(42,10,16,.15); }
+  .florry-sign { font-family: 'Caveat', cursive; font-size: 2.2rem; color: var(--wijn); margin-top: 18px; }
+  .draaiboek { list-style: none; margin: 0 auto; padding: 0; max-width: 1040px; counter-reset: none; }
+  .draaiboek li { display: grid; grid-template-columns: 140px minmax(0, 1fr) 240px; gap: 32px; align-items: center; padding: 40px 0; border-top: 1px solid var(--lijn); }
+  .draaiboek li:last-child { border-bottom: 1px solid var(--lijn); }
+  .db-nr { font-family: var(--serif); font-style: italic; font-size: 5.2rem; line-height: 1; color: var(--wijn); transition: transform .6s var(--ease); }
+  .db-tekst h3 { margin: 0 0 10px; font-size: 2.2rem; }
+  .db-tekst p { margin: 0; max-width: 46ch; }
+  .db-noot { font-family: 'Caveat', cursive; font-size: 1.7rem; line-height: 1.1; color: var(--wijn); transform: rotate(-4deg); justify-self: start; position: relative; padding-left: 34px; transition: transform .6s var(--ease); }
+  .db-noot::before { content: ''; position: absolute; left: 0; top: 50%; width: 26px; height: 14px; border-left: 1.5px solid var(--wijn); border-bottom: 1.5px solid var(--wijn); border-radius: 0 0 0 14px; transform: translateY(-80%); }
+  .draaiboek li:hover .db-nr { transform: translateX(8px); }
+  .draaiboek li:hover .db-noot { transform: rotate(2deg) scale(1.05); }
+  @media (max-width: 860px) {
+    .draaiboek li { grid-template-columns: 64px minmax(0, 1fr); gap: 8px 18px; padding: 30px 0; align-items: start; }
+    .db-nr { font-size: 3rem; }
+    .db-tekst h3 { font-size: 1.7rem; }
+    .db-noot { grid-column: 2; font-size: 1.45rem; margin-top: 6px; }
+  }
   .form-kop { font-family: var(--serif); font-size: 1.6rem; font-style: italic; color: var(--wijn); margin: 24px 0 0; border-bottom: 1px solid var(--lijn); padding-bottom: 8px; }
   .form-uitleg { margin: 0; font-size: 1.05rem; color: var(--inkt); }
   .keuze { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px 28px; }
