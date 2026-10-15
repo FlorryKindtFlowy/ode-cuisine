@@ -1,0 +1,53 @@
+# Verstuurt elke zondag de nieuwsbrief Ode Zondag met het recept van die dag.
+# Draait na "Site live zetten", zodat de receptpagina al online staat als de mail vertrekt.
+# Handmatig starten kan via Actions › Ode Zondag versturen › Run workflow (bv. voor een testmail).
+name: Ode Zondag versturen
+
+on:
+  schedule:
+    - cron: '0 8 * * 0'   # zondag 08:00 UTC = 9u in de winter, 10u in de zomer
+  workflow_dispatch:
+    inputs:
+      modus:
+        description: 'test = één testmail, verstuur = naar alle abonnees'
+        type: choice
+        options: [test, verstuur]
+        default: test
+      adres:
+        description: 'Adres voor de testmail'
+        default: 'florry@flowyagency.com'
+      recept:
+        description: 'Slug van het recept voor de testmail (leeg = eerstvolgende)'
+        default: ''
+
+permissions:
+  contents: read
+
+concurrency:
+  group: zondagsbrief
+  cancel-in-progress: false
+
+jobs:
+  versturen:
+    runs-on: ubuntu-latest
+    env:
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      RESEND_SEGMENT_ID: ${{ secrets.RESEND_SEGMENT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Testmail
+        if: github.event_name == 'workflow_dispatch' && inputs.modus == 'test'
+        run: |
+          if [ -n "${{ inputs.recept }}" ]; then
+            node scripts/zondagsbrief.mjs --test "${{ inputs.adres }}" --recept "${{ inputs.recept }}"
+          else
+            node scripts/zondagsbrief.mjs --test "${{ inputs.adres }}"
+          fi
+      - name: Versturen naar alle abonnees
+        if: github.event_name == 'schedule' || inputs.modus == 'verstuur'
+        run: node scripts/zondagsbrief.mjs --verstuur
