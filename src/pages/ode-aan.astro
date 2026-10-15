@@ -1,0 +1,478 @@
+---
+import Base from '../layouts/Base.astro';
+
+const faq = [
+  { vraag: 'Hoe kies je welke recepten je komt maken?', antwoord: 'Ik lees elk verhaal zelf. Het gaat niet om het mooiste of moeilijkste gerecht, maar om het verhaal dat erachter zit. Word je gekozen, dan neem ik contact met je op om een datum af te spreken.' },
+  { vraag: 'Moet ik zelf in beeld komen?', antwoord: 'Het mag, het hoeft niet. Het mooiste is als je er zelf bij bent wanneer we het gerecht proeven, maar een oude foto en jouw verhaal volstaan ook.' },
+  { vraag: 'Waar wordt er gefilmd?', antwoord: 'Altijd bij jou thuis, in je eigen keuken en aan je eigen tafel. Ik breng de ingrediënten, het schriftje en een Ode schort voor jou mee.' },
+  { vraag: 'Moet het recept perfect uitgeschreven zijn?', antwoord: 'Helemaal niet. "Een snuifje" en "tot het goed is" zijn ook prima. Wij testen het recept, schrijven het netjes uit en laten het je nalezen voor het online gaat.' },
+  { vraag: 'Wat kost het?', antwoord: 'Niets. Wij koken, jij brengt het verhaal. Je krijgt de video en het uitgeschreven recept als herinnering.' },
+  { vraag: 'Wat gebeurt er met mijn recept?', antwoord: 'Het verschijnt in een aflevering van Ode aan op onze kanalen, als blogpost op odecuisine.be en later in het digitale Ode kookboek. Je naam staat er altijd bij.' },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.vraag, acceptedAnswer: { '@type': 'Answer', text: f.antwoord } })),
+};
+
+const vandaag = new Date().toISOString().slice(0, 10);
+---
+<Base title="Ode aan, deel jouw verhaal" description="Aan wie breng jij een ode? Deel het verhaal achter het recept van iemand die je graag ziet. Florry komt bij je thuis, je krijgt de Ode schort aan en samen koken, proeven en vertellen we jouw verhaal." schema={schema}>
+  <section class="sectie sectie--wijn ode-hero">
+    <div class="smal centraal">
+      <span class="kicker">ode aan</span>
+      <h1><span class="lijn"><span>Aan wie breng jij een <em>ode</em>?</span></span></h1>
+      <p>Achter elk recept zit een verhaal. Van een mama, een opa, een buurvrouw. Deel het jouwe met mij, en dan kom ik bij jou thuis. Jij krijgt de Ode schort aan en vertelt over die persoon en dat gerecht. Samen koken en proeven we het, en de camera loopt mee.</p>
+      <a class="knop" href="#inzenden">Deel jouw verhaal</a>
+    </div>
+  </section>
+
+  <section class="sectie sectie--zand oorsprong">
+    <div class="wrap twee">
+      <div class="polaroid-stapel">
+        <figure class="polaroid polaroid--links">
+          <img src="/fotos/hedwin-oesters.webp" alt="Papaatje Hedwin met oesters op een tuinfeest" loading="lazy" />
+          <figcaption>papaatje</figcaption>
+        </figure>
+        <figure class="polaroid polaroid--klein">
+          <img src="/fotos/familie-florry-kookpot.webp" alt="Florry als baby in een grote kookpot, met een koksmuts op" loading="lazy" />
+          <figcaption>ik, in de kookpot</figcaption>
+        </figure>
+      </div>
+      <div>
+        <span class="kicker">waar het begon</span>
+        <h2>Een ode aan de recepten die mij hebben <em>grootgebracht</em></h2>
+        <p>Mijn kindertijd rook naar look, boter en zee. Ik ben opgegroeid in De Barakke, het mosselrestaurant van mijn ouders in Zwevegem. Als baby zat ik letterlijk al in hun kookpotten. Papaatje stond er 45 jaar aan het fornuis. Hij was de chef, het kloppend hart van de zaak, en zot van oesters en van alles wat lekker was.</p>
+        <p>Als klein meisje wist ik het zeker: later neem ik de zaak over. Maar het leven liep anders. Papa werd plots ziek, en na zeven maanden was hij er niet meer. De deuren van De Barakke gingen dicht, en ze zijn nooit meer opengegaan.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie sectie--wijn ode-quote">
+    <div class="smal centraal">
+      <span class="kicker">over papaatje</span>
+      <blockquote>Koken werd mijn manier om hem te missen. Elke keer dat ik zijn mosseltjes maak, staat hij even naast me aan het <em>fornuis</em>.</blockquote>
+    </div>
+  </section>
+
+  <section class="sectie album-sectie">
+    <div class="wrap">
+      <div class="centraal smal" style="margin-bottom:56px">
+        <span class="kicker">aan mijn tafel</span>
+        <h2>Aan wie ik een <em>ode</em> breng</h2>
+        <p>Elk van hen gaf iets door. Een smaak, een gewoonte, een recept dat nergens opgeschreven stond.</p>
+      </div>
+      <div class="album" data-stagger>
+        <article>
+          <figure class="polaroid"><img src="/fotos/familie-mama.webp" alt="Florry als klein meisje op de schoot van haar mama aan zee" loading="lazy" /><figcaption>mama</figcaption></figure>
+          <h3>De hespenrolletjes van <em>mama</em></h3>
+          <p>Niemand maakt ze beter dan zij.</p>
+        </article>
+        <article>
+          <figure class="polaroid"><img src="/fotos/familie-opa.webp" alt="Florry als klein meisje met haar opa aan tafel" loading="lazy" /><figcaption>opa</figcaption></figure>
+          <h3>De paté van <em>opa</em></h3>
+          <p>Een echte beenhouwer, in hart en nieren. Zijn paté was de beste.</p>
+        </article>
+        <article>
+          <figure class="polaroid"><img src="/fotos/familie-oma.webp" alt="Florry als peuter met roze zonnebril naast haar oma" loading="lazy" /><figcaption>oma, mijn beste vriendin</figcaption></figure>
+          <h3>De wafels van <em>oma</em></h3>
+          <p>Mijn oma en mijn beste vriendin. Ze bakte de beste wafels, en at even graag taartjes als ik.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie sectie--zand oorsprong">
+    <div class="wrap twee">
+      <div>
+        <span class="kicker">wat bleef</span>
+        <h2>De recepten <em>bleven</em></h2>
+        <p>De mosseltjes met curry van papa, in de zomer. De hespenrolletjes van mama, de paté van opa, de wafels van oma. En de zondagen waarop de hele familie aan tafel schoof en niemand haast had om op te staan.</p>
+        <p>En toen kwam Gilles. Op de hotelschool waren we drie jaar water en vuur, vandaag is hij mijn grootste liefde. Hij bracht de recepten van zijn familie mee, zoals de zelfgemaakte foie gras van zijn papa Frank, elk jaar met kerst. Samen zijn we ze opnieuw beginnen koken.</p>
+        <p>Daar komt de naam vandaan. Ode Cuisine is een ode aan papa, aan mama, aan opa en oma, aan de tafels van vroeger. Aan alles wat aan tafel werd doorgegeven.</p>
+        <p class="florry-sign">x Florry</p>
+      </div>
+      <figure class="polaroid polaroid--rechts">
+        <img src="/fotos/florry-en-gilles.webp" alt="Florry en Gilles" loading="lazy" />
+        <figcaption>Gilles en ik</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="sectie">
+    <div class="wrap">
+      <div class="centraal smal" style="margin-bottom:48px">
+        <span class="kicker">ode aan</span>
+        <h2>En nu wil ik <em>jouw</em> verhaal horen</h2>
+        <p>Want ik weet dat ik niet de enige ben. Iedereen heeft zo een gerecht. Dat ene bord dat naar thuis smaakt, naar iemand die je mist of iemand die je graag ziet. Daarom kom ik naar jou, om dat verhaal samen weer naar boven te halen.</p>
+      </div>
+      <ol class="draaiboek" data-stagger>
+        <li>
+          <span class="db-nr">01</span>
+          <div class="db-tekst"><h3>Jij deelt je <em>verhaal</em></h3><p>Vertel me over die persoon en dat gerecht. Wie maakte het, wanneer kwam het op tafel, en waarom vergeet je die smaak nooit? Het recept zelf mag erbij.</p></div>
+          <span class="db-noot">een snuifje mag ook</span>
+        </li>
+        <li>
+          <span class="db-nr">02</span>
+          <div class="db-tekst"><h3>Ik lees en <em>kies</em></h3><p>Ik lees elk verhaal zelf. Ik kies de verhalen die blijven hangen, niet het mooiste bord. Word je gekozen, dan neem ik contact met je op.</p></div>
+          <span class="db-noot">met een tas koffie</span>
+        </li>
+        <li>
+          <span class="db-nr">03</span>
+          <div class="db-tekst"><h3>Het staat in mijn <em>schriftje</em></h3><p>Ik schrijf jouw recept met de hand bovenaan een nieuwe pagina. Zo begint elke video: het schriftje gaat open, en ik vertel aan wie we vandaag een ode brengen. Ode aan oma Maria, ode aan papa.</p></div>
+          <span class="db-noot">zo begint elke video</span>
+        </li>
+        <li>
+          <span class="db-nr">04</span>
+          <div class="db-tekst"><h3>Ik kom bij je <em>thuis</em></h3><p>Met de ingrediënten en een Ode schort, voor jou. Jij strikt de schort, en dan gaan we van start in jouw keuken.</p></div>
+          <span class="db-noot">jij krijgt de schort!</span>
+        </li>
+        <li>
+          <span class="db-nr">05</span>
+          <div class="db-tekst"><h3>Jij <em>vertelt</em></h3><p>Over die persoon, over het gerecht, over vroeger. De oude foto's, de anekdotes, en waarom dit recept zoveel voor jou betekent.</p></div>
+          <span class="db-noot">oude foto's zijn goud</span>
+        </li>
+        <li>
+          <span class="db-nr">06</span>
+          <div class="db-tekst"><h3>We proeven <em>samen</em></h3><p>We koken jouw gerecht zoals het hoort en zetten het op tafel. De eerste hap, jouw reactie. Tot sebiet.</p></div>
+          <span class="db-noot">de eerste hap</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sectie sectie--zand">
+    <div class="wrap twee">
+      <div>
+        <span class="kicker">waar je verhaal terechtkomt</span>
+        <h2>Van jouw keuken naar het <em>e-boek</em></h2>
+        <p>Jouw aflevering verschijnt op Instagram, TikTok, YouTube, Facebook en Pinterest van Ode Cuisine. Het volledige recept komt als blogpost op odecuisine.be, met jouw naam en jouw verhaal erbij.</p>
+        <p>En dan het mooiste: over een jaar is het schriftje vol. Dan bundel ik alles in het Ode e-boek. De recepten van papa, mama, opa en oma, die van de familie van Gilles, en de jouwe. Met de verhalen, de foto's en de schort die er telkens bij was.</p>
+        <h3 style="margin-top:32px">Wat je ervan krijgt</h3>
+        <p>De video van jouw aflevering, je recept netjes uitgeschreven, een plaats in het e-boek, en een namiddag aan tafel met Ode.</p>
+      </div>
+      <div class="foto foto--boog reveal-foto ebook-boog"><img src="/fotos/kookboek-cover.webp" srcset="/fotos/kookboek-cover-klein.webp 800w, /fotos/kookboek-cover.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Het Ode kookboek, smaken die je nooit vergeet, door Florry Kindt" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <section class="sectie" id="inzenden">
+    <div class="wrap">
+      <div class="centraal smal" style="margin-bottom:56px">
+        <span class="kicker">jouw verhaal</span>
+        <h2>Deel jouw <em>verhaal</em></h2>
+        <p>Vertel me over die persoon, over het gerecht, en wanneer ik bij jou thuis mag komen. Kijk mee: terwijl je typt, schrijft het zich in mijn schriftje.</p>
+      </div>
+      <div class="inzend-grid">
+      <form id="schriftjeForm" class="formulier" name="schriftje" action="https://formsubmit.co/ode@flowyagency.com" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_subject" value="Nieuw verhaal voor Ode aan · Ode Cuisine" />
+        <input type="hidden" name="_next" value="https://www.odecuisine.be/bedankt/?schriftje" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+
+        <p class="vol form-kop">Over jou</p>
+        <label>Naam <input name="naam" required autocomplete="name" /></label>
+        <label>E-mail <input type="email" name="email" required autocomplete="email" /></label>
+        <label>Telefoon <input type="tel" name="telefoon" required autocomplete="tel" /></label>
+        <label>Gemeente <input name="gemeente" required /></label>
+        <label class="vol">Instagram (als je wil dat we je taggen) <input name="instagram" placeholder="@jouwnaam" /></label>
+
+        <p class="vol form-kop">Jouw verhaal</p>
+        <label>Aan wie breng je een ode? <input name="recept_van" required placeholder="mijn oma Maria, mijn papa…" /></label>
+        <label>Welk gerecht? <input name="gerecht" required placeholder="de appeltaart van oma" /></label>
+        <label class="vol">Het verhaal erachter <textarea name="verhaal" rows="4" required placeholder="Wanneer werd het gemaakt, wat betekent het voor jou, welke herinnering hoort erbij?"></textarea></label>
+        <label class="vol">Ingrediënten <textarea name="ingredienten" rows="5" required placeholder="Een snuifje mag ook."></textarea></label>
+        <label class="vol">Bereiding <textarea name="bereiding" rows="6" required></textarea></label>
+        <label class="vol">Foto (het recept op papier, een oude foto, het gerecht) <input type="file" name="foto" accept="image/*,.pdf" /></label>
+
+        <p class="vol form-kop">Het filmen</p>
+        <p class="vol form-uitleg">We filmen altijd bij jou thuis, in jouw keuken en aan jouw tafel. Zo voelt het recept echt van jou.</p>
+        <label class="vol">Adres waar we komen filmen <input name="adres" required autocomplete="street-address" placeholder="straat, nummer, gemeente" /></label>
+        <fieldset class="vol keuze">
+          <legend>Kom je zelf in beeld?</legend>
+          <label class="vink"><input type="radio" name="in_beeld" value="Ja, graag" required /> Ja, graag</label>
+          <label class="vink"><input type="radio" name="in_beeld" value="Liever enkel mijn stem of een foto" /> Liever enkel mijn stem of een foto</label>
+          <label class="vink"><input type="radio" name="in_beeld" value="Liever niet" /> Liever niet</label>
+        </fieldset>
+        <label>Voorkeursdatum 1 <input type="date" name="datum_1" min={vandaag} required /></label>
+        <label>Voorkeursdatum 2 <input type="date" name="datum_2" min={vandaag} /></label>
+        <label>Voorkeursdatum 3 <input type="date" name="datum_3" min={vandaag} /></label>
+        <label>Moment van de dag
+          <select name="moment">
+            <option value="Maakt niet uit">Maakt niet uit</option>
+            <option value="Voormiddag">Voormiddag</option>
+            <option value="Namiddag">Namiddag</option>
+            <option value="Avond">Avond</option>
+          </select>
+        </label>
+        <label class="vol">Nog iets dat we moeten weten? <textarea name="opmerkingen" rows="3"></textarea></label>
+
+        <label class="vol vink akkoord"><input type="checkbox" name="akkoord" value="Ja" required /> Ik ga akkoord dat Ode Cuisine mijn recept, naam, verhaal en de beelden deelt op haar kanalen, op odecuisine.be en in het digitale Ode kookboek.</label>
+
+        <div class="vol centraal"><button class="knop knop--vol" type="submit">Deel mijn verhaal</button></div>
+      </form>
+
+      <aside class="schrift" id="schrift" aria-label="Voorbeeld van je recept in het schriftje">
+        <button type="button" class="schrift-sluit" id="schriftSluit" aria-label="Sluit het schriftje">sluiten</button>
+        <div class="schrift-boek" id="schriftBoek">
+          <div class="schrift-blad" id="schriftBlad">
+            <div class="schrift-top">
+              <span class="schrift-nr">ode cuisine</span>
+              <span class="schrift-datum" id="schriftDatum"></span>
+            </div>
+            <h3 class="schrift-titel"><span data-veld="gerecht" data-leeg="de appeltaart van oma"></span></h3>
+            <p class="schrift-van">een ode aan <span data-veld="recept_van" data-leeg="iemand die je graag ziet"></span></p>
+
+            <figure class="schrift-foto" id="schriftFoto" hidden><img alt="" id="schriftFotoImg" /></figure>
+
+            <p class="schrift-kop">wat je nodig hebt</p>
+            <ul class="schrift-lijst" data-lijst="ingredienten" data-leeg="250 g bloem|3 eieren|een snuifje liefde"></ul>
+
+            <p class="schrift-kop">zo maak je het</p>
+            <ol class="schrift-stappen" data-lijst="bereiding" data-leeg="Zet de oven op 180 graden.|Meng alles tot het goed is.|Proeven, en nog eens proeven."></ol>
+
+            <div class="schrift-noot">
+              <span class="schrift-tape" aria-hidden="true"></span>
+              <span data-veld="verhaal" data-leeg="Hier komt het verhaal achter je recept…"></span>
+            </div>
+
+            <p class="schrift-sign">x <span data-veld="naam" data-leeg="jouw naam"></span><span class="schrift-gemeente" data-veld="gemeente" data-leeg=""></span></p>
+          </div>
+          <div class="schrift-kaft" aria-hidden="true">
+            <span class="o-mark"></span>
+            <span class="schrift-kaft-titel">ode cuisine</span>
+            <span class="schrift-kaft-sub">tot sebiet</span>
+          </div>
+          <span class="schrift-elastiek" aria-hidden="true"></span>
+        </div>
+      </aside>
+      </div>
+
+      <button type="button" class="schrift-knop" id="schriftKnop">bekijk je schriftje</button>
+    </div>
+  </section>
+
+  <section class="sectie sectie--zand">
+    <div class="smal faq">
+      <h2 class="centraal" style="margin-bottom:32px">Veelgestelde vragen</h2>
+      {faq.map((f) => (
+        <details><summary>{f.vraag}</summary><p>{f.antwoord}</p></details>
+      ))}
+    </div>
+  </section>
+
+  <section class="sectie sectie--wijn">
+    <div class="smal centraal">
+      <p style="font-family:var(--serif);font-size:1.8rem;font-style:italic;margin:0">Smaken die je nooit echt vergeet.</p>
+      <p style="margin-top:16px">Tot sebiet.</p>
+    </div>
+  </section>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap" />
+  <script>
+    const form = document.getElementById('schriftjeForm') as HTMLFormElement | null;
+    const blad = document.getElementById('schriftBlad');
+    const boek = document.getElementById('schriftBoek');
+    const schrift = document.getElementById('schrift');
+    const knop = document.getElementById('schriftKnop');
+    const sluit = document.getElementById('schriftSluit');
+    const datum = document.getElementById('schriftDatum');
+    if (datum) datum.textContent = new Date().toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    const lijn = (t: string) => t.split(/\n+/).map((r) => r.trim()).filter(Boolean);
+    const zet = (el: HTMLElement, items: string[], leeg: boolean) => {
+      el.innerHTML = '';
+      items.forEach((t) => { const li = document.createElement('li'); li.textContent = t; el.appendChild(li); });
+      el.classList.toggle('is-leeg', leeg);
+    };
+
+    const tekenAlles = (actief?: string) => {
+      if (!form) return;
+      document.querySelectorAll<HTMLElement>('[data-veld]').forEach((el) => {
+        const v = (form.elements.namedItem(el.dataset.veld!) as HTMLInputElement | null)?.value.trim() || '';
+        el.textContent = v || el.dataset.leeg || '';
+        el.classList.toggle('is-leeg', !v);
+        el.classList.toggle('schrijft', el.dataset.veld === actief);
+      });
+      document.querySelectorAll<HTMLElement>('[data-lijst]').forEach((el) => {
+        const v = (form.elements.namedItem(el.dataset.lijst!) as HTMLTextAreaElement | null)?.value || '';
+        const items = lijn(v);
+        zet(el, items.length ? items : (el.dataset.leeg || '').split('|'), !items.length);
+        el.classList.toggle('schrijft', el.dataset.lijst === actief);
+      });
+    };
+
+    form?.addEventListener('input', (e) => {
+      const t = e.target as HTMLInputElement;
+      tekenAlles(t.name);
+      if (t.name === 'bereiding' && blad) blad.scrollTop = blad.scrollHeight;
+    });
+    form?.addEventListener('focusout', () => tekenAlles());
+    tekenAlles();
+
+    // foto als polaroid op het blad
+    const foto = form?.elements.namedItem('foto') as HTMLInputElement | null;
+    foto?.addEventListener('change', () => {
+      const f = foto.files?.[0];
+      const fig = document.getElementById('schriftFoto');
+      const img = document.getElementById('schriftFotoImg') as HTMLImageElement | null;
+      if (!fig || !img) return;
+      if (f && f.type.startsWith('image/')) { img.src = URL.createObjectURL(f); fig.hidden = false; }
+      else fig.hidden = true;
+    });
+
+    // mobiel: schriftje openen als overlay
+    const open = () => { schrift?.classList.add('open'); document.documentElement.style.overflow = 'hidden'; };
+    const dicht = () => { schrift?.classList.remove('open'); document.documentElement.style.overflow = ''; };
+    knop?.addEventListener('click', open);
+    sluit?.addEventListener('click', dicht);
+    const sectie = document.getElementById('inzenden');
+    if (sectie && knop) {
+      new IntersectionObserver(([i]) => knop.classList.toggle('zichtbaar', i.isIntersecting), { rootMargin: '-30% 0px -30% 0px' }).observe(sectie);
+    }
+
+    // bij versturen klapt het schriftje dicht
+    let klaar = false;
+    form?.addEventListener('submit', (e) => {
+      if (klaar) return;
+      e.preventDefault();
+      klaar = true;
+      if (window.matchMedia('(max-width: 980px)').matches) open();
+      boek?.classList.add('dicht');
+      setTimeout(() => form.submit(), 1500);
+    });
+  </script>
+</Base>
+
+<style is:global>
+  .oorsprong .twee { align-items: center; }
+  .ode-hero .lijn { padding: .08em 0 .26em; margin-bottom: -.18em; }
+  .polaroid { margin: 0; background: #fff; padding: 16px 16px 64px; box-shadow: 0 24px 50px rgba(42,10,16,.18); position: relative; max-width: 440px; justify-self: center; transition: transform .8s var(--ease); }
+  .polaroid img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 12%; }
+  .polaroid figcaption { position: absolute; left: 0; right: 0; bottom: 16px; text-align: center; font-family: 'Caveat', cursive; font-size: 1.7rem; color: var(--wijn); }
+  .polaroid::before { content: ''; position: absolute; top: -14px; left: 50%; width: 110px; height: 28px; background: rgba(164,185,206,.75); transform: translateX(-50%) rotate(-3deg); }
+  .polaroid--links { transform: rotate(-2.5deg); }
+  .polaroid-stapel { position: relative; justify-self: center; width: 100%; max-width: 440px; margin-bottom: 110px; }
+  .polaroid-stapel .polaroid--links { max-width: 380px; }
+  .polaroid-stapel .polaroid--links figcaption { text-align: left; left: 24px; right: auto; }
+  .polaroid--klein { position: absolute; right: -24px; bottom: -120px; width: 46%; padding: 10px 10px 44px; transform: rotate(7deg); z-index: 2; }
+  .polaroid--klein figcaption { font-size: 1.3rem; bottom: 10px; }
+  .polaroid--klein::before { width: 70px; height: 20px; top: -10px; }
+  .ebook-boog { max-width: 480px; width: 100%; justify-self: center; }
+  .album { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px; text-align: center; }
+  .album article { display: flex; flex-direction: column; align-items: center; }
+  .album .polaroid { width: 100%; max-width: 330px; margin-bottom: 30px; }
+  .album article:nth-child(1) .polaroid { transform: rotate(-3deg); }
+  .album article:nth-child(2) .polaroid { transform: rotate(2deg); }
+  .album article:nth-child(3) .polaroid { transform: rotate(-1.5deg); }
+  .album .polaroid:hover { transform: rotate(0) scale(1.03); }
+  .album article:nth-child(2) .polaroid img, .album article:nth-child(3) .polaroid img { aspect-ratio: 1 / 1; object-position: 50% 40%; }
+  .album .polaroid img { aspect-ratio: 4 / 3; }
+  .album article:nth-child(1) .polaroid img { object-position: 50% 68%; }
+  .album article:nth-child(2) .polaroid img { aspect-ratio: 4 / 3; object-position: 50% 80%; }
+  .album article:nth-child(3) .polaroid img { aspect-ratio: 4 / 3; object-position: 50% 50%; }
+  .album h3 { margin: 0 0 8px; font-size: 1.9rem; }
+  .album p { margin: 0; max-width: 30ch; }
+  @media (max-width: 860px) { .album { grid-template-columns: 1fr; gap: 64px; } .polaroid--klein { right: -6px; } }
+  .polaroid--rechts { transform: rotate(2.5deg); }
+  .polaroid:hover { transform: rotate(0deg) scale(1.02); }
+  .ode-quote blockquote { margin: 18px 0 0; font-family: var(--serif); font-style: italic; font-size: clamp(1.9rem, 3.6vw, 2.9rem); line-height: 1.25; color: var(--creme); }
+  .ode-quote blockquote em { color: var(--zand); }
+  .verhaal-foto { position: relative; transform: rotate(-1.5deg); }
+  .foto-noot { z-index: 2; position: absolute; left: 18px; bottom: -22px; font-family: 'Caveat', cursive; font-size: 1.6rem; color: var(--wijn); background: #fbf9f4; padding: 4px 14px; transform: rotate(-3deg); box-shadow: 0 6px 14px rgba(42,10,16,.15); }
+  .florry-sign { font-family: 'Caveat', cursive; font-size: 2.2rem; color: var(--wijn); margin-top: 18px; }
+  .draaiboek { list-style: none; margin: 0 auto; padding: 0; max-width: 1040px; counter-reset: none; }
+  .draaiboek li { display: grid; grid-template-columns: 140px minmax(0, 1fr) 240px; gap: 32px; align-items: center; padding: 40px 0; border-top: 1px solid var(--lijn); }
+  .draaiboek li:last-child { border-bottom: 1px solid var(--lijn); }
+  .db-nr { font-family: var(--serif); font-style: italic; font-size: 5.2rem; line-height: 1; color: var(--wijn); transition: transform .6s var(--ease); }
+  .db-tekst h3 { margin: 0 0 10px; font-size: 2.2rem; }
+  .db-tekst p { margin: 0; max-width: 46ch; }
+  .db-noot { font-family: 'Caveat', cursive; font-size: 1.7rem; line-height: 1.1; color: var(--wijn); transform: rotate(-4deg); justify-self: start; position: relative; padding-left: 34px; transition: transform .6s var(--ease); }
+  .db-noot::before { content: ''; position: absolute; left: 0; top: 50%; width: 26px; height: 14px; border-left: 1.5px solid var(--wijn); border-bottom: 1.5px solid var(--wijn); border-radius: 0 0 0 14px; transform: translateY(-80%); }
+  .draaiboek li:hover .db-nr { transform: translateX(8px); }
+  .draaiboek li:hover .db-noot { transform: rotate(2deg) scale(1.05); }
+  @media (max-width: 860px) {
+    .draaiboek li { grid-template-columns: 64px minmax(0, 1fr); gap: 8px 18px; padding: 30px 0; align-items: start; }
+    .db-nr { font-size: 3rem; }
+    .db-tekst h3 { font-size: 1.7rem; }
+    .db-noot { grid-column: 2; font-size: 1.45rem; margin-top: 6px; }
+  }
+  .form-kop { font-family: var(--serif); font-size: 1.6rem; font-style: italic; color: var(--wijn); margin: 24px 0 0; border-bottom: 1px solid var(--lijn); padding-bottom: 8px; }
+  .form-uitleg { margin: 0; font-size: 1.05rem; color: var(--inkt); }
+  .keuze { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px 28px; }
+  .keuze legend { font-size: .7rem; letter-spacing: .22em; text-transform: uppercase; color: var(--zacht); margin-bottom: 12px; padding: 0; }
+  .formulier .vink { flex-direction: row; align-items: center; gap: 10px; font-size: 1rem; letter-spacing: 0; text-transform: none; color: var(--inkt); cursor: pointer; }
+  .formulier .vink input { width: 18px; height: 18px; padding: 0; margin: 0; accent-color: var(--wijn); flex: none; }
+  .formulier .akkoord { align-items: flex-start; font-size: .95rem; line-height: 1.5; margin-top: 12px; }
+  .formulier .akkoord input { margin-top: 3px; }
+  .formulier input[type="file"] { border-bottom: 1px dashed var(--wijn); font-size: .95rem; }
+  /* ---------- het schriftje: live voorbeeld ---------- */
+  .inzend-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 72px; align-items: start; }
+  .schrift { position: sticky; top: 110px; --pen: #24315e; --lijnh: 34px; }
+  .schrift-sluit, .schrift-knop { display: none; }
+  .schrift-boek { position: relative; perspective: 1800px; transform: rotate(1.5deg); transition: transform .8s var(--ease); }
+  .schrift-boek:hover { transform: rotate(0deg) translateY(-4px); }
+  .schrift-boek::before { content: ''; position: absolute; inset: 10px -10px -10px 10px; background: var(--wijn); border-radius: 4px 14px 14px 4px; box-shadow: 0 30px 60px rgba(42,10,16,.28); }
+  .schrift-blad {
+    position: relative; z-index: 1; height: min(76vh, 720px); overflow-y: auto; scrollbar-width: none;
+    padding: 34px 58px 40px 78px; border-radius: 3px 10px 10px 3px;
+    font-family: 'Caveat', cursive; font-size: 1.45rem; line-height: var(--lijnh); color: var(--pen);
+    background:
+      linear-gradient(90deg, transparent 58px, rgba(81,18,26,.55) 58px, rgba(81,18,26,.55) 60px, transparent 60px),
+      repeating-linear-gradient(180deg, transparent 0 calc(var(--lijnh) - 1px), rgba(164,185,206,.75) calc(var(--lijnh) - 1px) var(--lijnh)),
+      #fbf9f4;
+    background-attachment: local;
+    box-shadow: inset 14px 0 18px -14px rgba(42,10,16,.35);
+  }
+  .schrift-blad::-webkit-scrollbar { display: none; }
+  .schrift-blad::before { content: ''; position: absolute; left: 22px; top: 24px; bottom: 24px; width: 8px; background: radial-gradient(circle, rgba(42,10,16,.28) 3px, transparent 4px) 0 0 / 8px 34px repeat-y; }
+  .schrift-top { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--sans); font-size: .62rem; letter-spacing: .24em; text-transform: uppercase; color: var(--wijn); height: var(--lijnh); }
+  .schrift-datum { font-family: 'Caveat', cursive; font-size: 1.25rem; letter-spacing: 0; text-transform: none; color: var(--pen); }
+  .schrift-titel { font-family: 'Caveat', cursive; font-weight: 600; font-size: 2.6rem; line-height: calc(var(--lijnh) * 2); color: var(--wijn); margin: 0; font-style: normal; }
+  .schrift-van { margin: 0; line-height: var(--lijnh); }
+  .schrift-kop { margin: var(--lijnh) 0 0; line-height: var(--lijnh); font-weight: 600; color: var(--wijn); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+  .schrift-lijst, .schrift-stappen { margin: 0; padding: 0 0 0 1.2em; line-height: var(--lijnh); }
+  .schrift-lijst { list-style: '○  '; }
+  .schrift-stappen li::marker { color: var(--wijn); font-weight: 600; }
+  .schrift-noot { position: relative; margin: calc(var(--lijnh) * 1.2) 8px var(--lijnh) 0; padding: 22px 22px 18px; background: #f3e7c9; transform: rotate(-2deg); line-height: 1.3; font-size: 1.3rem; box-shadow: 0 8px 18px rgba(42,10,16,.15); white-space: pre-line; }
+  .schrift-tape { position: absolute; top: -12px; left: 50%; width: 90px; height: 24px; transform: translateX(-50%) rotate(3deg); background: rgba(164,185,206,.7); }
+  .schrift-sign { text-align: right; margin: 0; font-size: 1.7rem; color: var(--wijn); }
+  .schrift-gemeente:not(:empty)::before { content: ', '; }
+  .schrift-foto { margin: calc(var(--lijnh) / 2) 0 0 auto; width: 46%; padding: 8px 8px 26px; background: #fff; transform: rotate(4deg); box-shadow: 0 10px 22px rgba(42,10,16,.2); float: right; position: relative; }
+  .schrift-foto img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+  .schrift-foto::before { content: ''; position: absolute; top: -10px; left: 30%; width: 70px; height: 20px; background: rgba(164,185,206,.7); transform: rotate(-6deg); }
+  .is-leeg, .is-leeg li { color: rgba(36,49,94,.32) !important; }
+  .schrijft:not(.is-leeg)::after, .schrijft:not(.is-leeg) li:last-child::after { content: '|'; margin-left: 2px; font-family: var(--sans); font-weight: 300; animation: knipper 1s steps(1) infinite; color: var(--wijn); }
+  ul.schrijft::after, ol.schrijft::after { content: none !important; }
+  @keyframes knipper { 50% { opacity: 0; } }
+  .schrift-elastiek { position: absolute; z-index: 3; top: -6px; bottom: -6px; right: 22px; width: 11px; background: var(--wijn); border-radius: 3px; box-shadow: 0 2px 6px rgba(42,10,16,.35); }
+  .schrift-kaft {
+    position: absolute; z-index: 2; inset: 0; border-radius: 3px 12px 12px 3px; background: var(--wijn); color: var(--creme);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+    transform-origin: left center; transform: rotateY(-178deg); opacity: 0; backface-visibility: hidden;
+    transition: transform 1.2s var(--ease), opacity .2s linear .05s;
+  }
+  .schrift-kaft .o-mark { width: 48px; color: var(--creme); }
+  .schrift-kaft-titel { font-family: var(--serif); font-style: italic; font-size: 2.6rem; }
+  .schrift-kaft-sub { font-family: 'Caveat', cursive; font-size: 1.6rem; color: var(--zand); }
+  .dicht .schrift-kaft { transform: rotateY(0); opacity: 1; }
+  .dicht { transform: rotate(0deg) !important; }
+
+  @media (max-width: 980px) {
+    .inzend-grid { grid-template-columns: 1fr; gap: 0; }
+    .schrift { position: fixed; inset: 0; z-index: 10000; top: 0; display: grid; place-items: center; padding: 64px 18px 24px; background: rgba(42,10,16,.82); backdrop-filter: blur(4px); opacity: 0; visibility: hidden; transition: opacity .4s, visibility .4s; }
+    .schrift.open { opacity: 1; visibility: visible; }
+    .schrift-boek { width: 100%; max-width: 480px; }
+    .schrift-blad { height: 78vh; padding: 26px 40px 30px 60px; font-size: 1.3rem; background:
+      linear-gradient(90deg, transparent 46px, rgba(81,18,26,.55) 46px, rgba(81,18,26,.55) 48px, transparent 48px),
+      repeating-linear-gradient(180deg, transparent 0 calc(var(--lijnh) - 1px), rgba(164,185,206,.75) calc(var(--lijnh) - 1px) var(--lijnh)), #fbf9f4; background-attachment: local; }
+    .schrift-blad::before { left: 16px; }
+    .schrift-elastiek { right: 14px; width: 9px; }
+    .schrift-titel { font-size: 2.1rem; line-height: calc(var(--lijnh) * 1.25); margin: 6px 0 10px; }
+    .schrift-sluit { display: block; position: absolute; top: 18px; right: 18px; background: none; border: 1px solid var(--creme); color: var(--creme); font: inherit; font-size: .7rem; letter-spacing: .22em; text-transform: uppercase; padding: 8px 14px; cursor: pointer; }
+    .schrift-knop { display: flex; align-items: center; gap: 10px; position: fixed; z-index: 9000; right: 16px; bottom: 16px; padding: 14px 20px; border: 0; border-radius: 999px; background: var(--wijn); color: var(--creme); font-family: 'Caveat', cursive; font-size: 1.35rem; box-shadow: 0 12px 28px rgba(42,10,16,.35); transform: translateY(140%); transition: transform .5s var(--ease); cursor: pointer; }
+    .schrift-knop::before { content: ''; width: 18px; height: 22px; border: 1.5px solid var(--creme); border-radius: 2px 4px 4px 2px; background: linear-gradient(90deg, transparent 12px, var(--creme) 12px 14px, transparent 14px); }
+    .schrift-knop.zichtbaar { transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .schrift-boek, .schrift-kaft { transition: none; } .schrijft::after { animation: none; } }
+</style>
