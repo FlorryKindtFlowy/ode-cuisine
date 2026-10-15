@@ -54,7 +54,7 @@
 <script>
   // Het blok verschijnt pas als de inschrijving openstaat (Resend ingesteld in Cloudflare).
   const blok = document.getElementById('zondagsbrief');
-  fetch('/api/inschrijven?status').then((r) => r.json()).then((d) => { if (d.open && blok) blok.hidden = false; }).catch(() => {});
+  fetch('/api/inschrijven?status').then((r) => r.json()).then((d) => { if (d.open && blok) { blok.hidden = false; if (location.hash === '#zondagsbrief') setTimeout(() => blok.scrollIntoView({ block: 'start' }), 300); } }).catch(() => {});
 
   const form = document.querySelector<HTMLFormElement>('[data-zondagsbrief]');
   const tafel = document.querySelector<HTMLElement>('.zb-tafel');
