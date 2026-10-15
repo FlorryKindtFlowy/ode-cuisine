@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Zondagsbrief from '../components/Zondagsbrief.astro';
 
 interface Props {
   title: string;
@@ -97,6 +98,8 @@ const huidig = (p: string) => (pad.startsWith(p) ? 'page' : undefined);
     </nav>
 
     <main><slot /></main>
+
+    <Zondagsbrief />
 
     <footer class="voet">
       <div class="voet-o" aria-hidden="true"><span class="o-mark"></span></div>
