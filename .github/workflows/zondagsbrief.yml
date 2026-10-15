@@ -15,7 +15,7 @@ on:
         default: test
       adres:
         description: 'Adres voor de testmail'
-        default: 'florry@flowyagency.com'
+        default: 'ode@flowyagency.com'
       recept:
         description: 'Slug van het recept voor de testmail (leeg = eerstvolgende)'
         default: ''
