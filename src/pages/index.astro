@@ -182,17 +182,12 @@ const kaart = [
   <section class="sectie sectie--wijn spread" id="kookboek" data-kleur="wijn">
     <div class="wrap raster">
       <div class="kol-12 spread-kop reveal"><span class="groot-nr">{nr(4)}</span><h2>Het <em>kookboek</em></h2></div>
-      <div class="kol-6 reveal"><p class="lead">Alle familierecepten, met de verhalen en de foto's, gebundeld in één digitaal kookboek. Wie op de wachtlijst staat, hoort het als eerste.</p></div>
+      <div class="kol-6 reveal"><p class="lead">Alle familierecepten, met de verhalen en de foto's, gebundeld in één digitaal kookboek. Wie op Ode Zondag staat, hoort het als eerste.</p></div>
       <div class="kol-1"></div>
-      <form class="kol-5 inschrijf reveal" name="wachtlijst" action="/api/formulier" method="POST">
-        <input type="hidden" name="_subject" value="Nieuwe inschrijving kookboek wachtlijst · Ode Cuisine" />
-        <input type="hidden" name="_next" value="https://www.odecuisine.be/bedankt/?wachtlijst" />
-        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
-        <input type="hidden" name="_nieuwsbrief" value="ja" />
-        <label>Jouw e-mail <input type="email" name="email" required autocomplete="email" placeholder="naam@voorbeeld.be" /></label>
-        <button class="knop knop--vol" type="submit">Zet me op de lijst <span class="pijl">→</span></button>
-        <p style="margin:0;font-size:.85rem;line-height:1.6;color:var(--zand)">Je krijgt dan ook elke zondag Ode Zondag: één familierecept in je mailbox. Uitschrijven kan altijd, met één klik.</p>
-      </form>
+      <div class="kol-5 reveal" style="display:flex;flex-direction:column;gap:22px;align-items:flex-start">
+        <a class="knop knop--vol" href="#zondagsbrief">Schuif aan op zondag <span class="pijl">→</span></a>
+        <a class="knop" href="/kookboek/">Meer over het kookboek</a>
+      </div>
     </div>
   </section>
   <script>
