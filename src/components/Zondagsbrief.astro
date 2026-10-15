@@ -98,6 +98,7 @@
         const data = await res.json();
         if (data.ok) {
           (window as any).gtag?.('event', 'sign_up', { method: 'ode_zondag' });
+          try { localStorage.setItem('ode-zondag', 'ja'); } catch {}
           dek(String(new FormData(form).get('voornaam') || '').trim());
           return;
         }

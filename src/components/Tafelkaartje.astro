@@ -1,0 +1,173 @@
+---
+// Klein kaartje rechtsonder om in te schrijven voor Ode Zondag.
+// Verschijnt pas na halverwege scrollen of 25 seconden, nooit samen met de cookiemelding.
+// Weggeklikt: 14 dagen niet meer. Ingeschreven: nooit meer.
+// Niet op pagina's met een eigen formulier (zie VERBORGEN in het script).
+---
+<aside class="tk" id="tafelkaartje" aria-label="Inschrijven voor Ode Zondag" hidden>
+  <button type="button" class="tk-sluit" aria-label="Sluiten">×</button>
+  <div class="tk-inhoud">
+    <span class="tk-kicker">Ode Zondag</span>
+    <p class="tk-titel">Een plekje <em>aan tafel?</em></p>
+    <p class="tk-tekst">Elke zondag een familierecept in je mailbox, met het verhaal erachter.</p>
+    <form class="tk-form" action="/api/inschrijven" method="post" novalidate>
+      <label class="tk-label" for="tk-email">Jouw e-mail</label>
+      <input id="tk-email" type="email" name="email" required autocomplete="email" placeholder="jouw e-mail" />
+      <input class="tk-val" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <button type="submit" class="tk-knop">Dek een plekje</button>
+    </form>
+    <p class="tk-klein">Uitschrijven kan altijd, met één klik.</p>
+    <p class="tk-fout" role="alert"></p>
+  </div>
+  <div class="tk-klaar" hidden>
+    <p class="tk-titel">Je plekje is <em>gedekt</em>.</p>
+    <p class="tk-tekst">Kijk even in je mailbox. Tot zondag.</p>
+  </div>
+</aside>
+
+<script>
+  const VERBORGEN = ['/ode-aan', '/kookboek', '/bedankt', '/aan-tafel', '/het-schriftje'];
+  const DAGEN_WEG = 14;
+  const lees = (k: string) => { try { return localStorage.getItem(k); } catch { return null; } };
+  const schrijf = (k: string, v: string) => { try { localStorage.setItem(k, v); } catch {} };
+
+  // Wie zich elders inschreef (nieuwsbrief of wachtlijst), krijgt het kaartje niet meer.
+  if (/zondag=ingeschreven|wachtlijst/.test(location.search)) schrijf('ode-zondag', 'ja');
+
+  const kaart = document.getElementById('tafelkaartje');
+  const pad = location.pathname;
+  const weg = Number(lees('ode-kaartje-weg') || 0);
+  const magTonen = kaart
+    && lees('ode-zondag') !== 'ja'
+    && !VERBORGEN.some((p) => pad.startsWith(p))
+    && Date.now() - weg > DAGEN_WEG * 864e5;
+
+  if (kaart && magTonen) {
+    let getoond = false;
+    const blok = document.getElementById('zondagsbrief');
+    const blokInBeeld = () => {
+      if (!blok || blok.hidden) return false;
+      const r = blok.getBoundingClientRect();
+      return r.top < window.innerHeight && r.bottom > 0;
+    };
+    const cookiesKlaar = () => {
+      const b = document.getElementById('cookie-banner');
+      return lees('ode-cookies') !== null || !b || b.hidden;
+    };
+    const toon = () => {
+      if (getoond || !cookiesKlaar() || blokInBeeld()) return;
+      getoond = true;
+      kaart.hidden = false;
+      requestAnimationFrame(() => requestAnimationFrame(() => kaart.classList.add('tk-in')));
+      (window as any).gtag?.('event', 'view_promotion', { promotion_name: 'tafelkaartje' });
+      window.removeEventListener('scroll', opScroll);
+    };
+    const sluit = () => {
+      kaart.classList.remove('tk-in');
+      setTimeout(() => { kaart.hidden = true; }, 450);
+    };
+    const opScroll = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      if (h > 0 && window.scrollY / h > 0.5) toon();
+    };
+    // Eerst checken of de inschrijving openstaat (Resend ingesteld).
+    fetch('/api/inschrijven?status').then((r) => r.json()).then((d) => {
+      if (!d.open) return;
+      window.addEventListener('scroll', opScroll, { passive: true });
+      setTimeout(toon, 25000);
+    }).catch(() => {});
+
+    // Verberg het kaartje zolang het grote inschrijfblok in beeld is.
+    window.addEventListener('scroll', () => { if (getoond && !kaart.hidden && blokInBeeld()) sluit(); }, { passive: true });
+
+    kaart.querySelector('.tk-sluit')?.addEventListener('click', () => {
+      schrijf('ode-kaartje-weg', String(Date.now()));
+      sluit();
+    });
+
+    const form = kaart.querySelector<HTMLFormElement>('.tk-form');
+    const fout = kaart.querySelector<HTMLElement>('.tk-fout');
+    const knop = kaart.querySelector<HTMLButtonElement>('.tk-knop');
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!fout || !knop) return;
+      const email = (form.elements.namedItem('email') as HTMLInputElement).value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { fout.textContent = 'Dat e-mailadres klopt niet helemaal.'; return; }
+      fout.textContent = '';
+      knop.disabled = true;
+      knop.textContent = 'Even dekken…';
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        const data = await res.json();
+        if (data.ok) {
+          schrijf('ode-zondag', 'ja');
+          (window as any).gtag?.('event', 'sign_up', { method: 'tafelkaartje' });
+          (kaart.querySelector('.tk-inhoud') as HTMLElement).hidden = true;
+          (kaart.querySelector('.tk-klaar') as HTMLElement).hidden = false;
+          setTimeout(sluit, 5000);
+          return;
+        }
+        fout.textContent = data.bericht || 'Er ging iets mis. Probeer je het straks nog eens?';
+      } catch {
+        fout.textContent = 'Er ging iets mis. Probeer je het straks nog eens?';
+      }
+      knop.disabled = false;
+      knop.textContent = 'Dek een plekje';
+    });
+  }
+</script>
+
+<style>
+  .tk {
+    position: fixed; right: 20px; bottom: 20px; z-index: 9000;
+    width: min(340px, calc(100vw - 32px));
+    background: var(--wijn); color: var(--creme);
+    padding: 26px 26px 20px; box-shadow: 0 18px 40px rgba(42, 10, 16, .35);
+    opacity: 0; transform: translateY(24px);
+    transition: opacity .45s var(--ease), transform .45s var(--ease);
+  }
+  .tk[hidden] { display: none; }
+  .tk.tk-in { opacity: 1; transform: none; }
+  .tk-sluit {
+    position: absolute; top: 8px; right: 10px; width: 32px; height: 32px;
+    background: none; border: 0; color: var(--zand); font-size: 22px; line-height: 1; cursor: pointer;
+  }
+  .tk-sluit:hover { color: var(--creme); }
+  .tk-kicker { display: block; font-family: var(--sans); font-size: .66rem; letter-spacing: .28em; text-transform: uppercase; color: var(--zand); }
+  .tk-titel { margin: 10px 0 8px; font-family: var(--serif); font-size: 1.75rem; line-height: 1.1; color: var(--creme); }
+  .tk-titel em { color: var(--zand-licht); }
+  .tk-tekst { margin: 0 0 16px; font-family: var(--sans); font-weight: 300; font-size: .92rem; line-height: 1.6; color: var(--creme); opacity: .9; }
+  .tk-form { display: flex; flex-direction: column; gap: 12px; }
+  .tk-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .tk-form input[type=email] {
+    font: inherit; font-family: var(--serif); font-size: 1.15rem; color: var(--creme);
+    background: transparent; border: 0; border-bottom: 1px solid var(--zand); padding: 8px 0; border-radius: 0;
+  }
+  .tk-form input[type=email]::placeholder { color: rgba(232, 238, 245, .55); }
+  .tk-form input[type=email]:focus { outline: none; border-bottom-color: var(--creme); }
+  .tk-val { position: absolute; left: -9999px; }
+  .tk-knop {
+    align-self: flex-start; cursor: pointer;
+    background: var(--creme); color: var(--wijn); border: 0;
+    padding: 12px 20px; font-family: var(--sans); font-size: .7rem; letter-spacing: .24em; text-transform: uppercase;
+    transition: background .3s;
+  }
+  .tk-knop:hover { background: var(--zand-licht); }
+  .tk-knop:disabled { opacity: .6; cursor: default; }
+  .tk-klein { margin: 12px 0 0; font-family: var(--sans); font-weight: 300; font-size: .75rem; color: var(--zand); }
+  .tk-fout { margin: 6px 0 0; font-family: var(--sans); font-size: .8rem; color: #f3c9c9; }
+  .tk-fout:empty { display: none; }
+
+  @media (max-width: 600px) {
+    .tk { right: 12px; left: 12px; bottom: 12px; width: auto; padding: 18px 18px 14px; }
+    .tk-tekst, .tk-klein { display: none; }
+    .tk-titel { font-size: 1.4rem; margin: 6px 0 10px; padding-right: 28px; }
+    .tk-form { flex-direction: row; align-items: flex-end; gap: 10px; }
+    .tk-form input[type=email] { flex: 1; min-width: 0; font-size: 1.05rem; }
+    .tk-knop { padding: 11px 14px; letter-spacing: .16em; }
+    .tk-klaar .tk-tekst { display: block; margin-bottom: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tk { transition: none; }
+  }
+</style>
