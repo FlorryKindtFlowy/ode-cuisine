@@ -79,10 +79,9 @@ const schema = [
         <h2>Vraag je datum aan</h2>
         <p>Je krijgt binnen 48 uur een persoonlijk voorstel met menu en prijs.</p>
       </div>
-      <form class="formulier" name="aanvraag" action="https://formsubmit.co/odecuisine@flowyagency.com" method="POST">
+      <form class="formulier" name="aanvraag" action="/api/formulier" method="POST">
         <input type="hidden" name="_subject" value="Nieuwe aanvraag private dining · Ode Cuisine" />
         <input type="hidden" name="_next" value="https://www.odecuisine.be/bedankt/?aanvraag" />
-        <input type="hidden" name="_template" value="table" />
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
         <label>Naam <input name="naam" required autocomplete="name" /></label>
         <label>E-mail <input type="email" name="email" required autocomplete="email" /></label>
