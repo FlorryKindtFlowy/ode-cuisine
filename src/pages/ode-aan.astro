@@ -167,6 +167,7 @@ const vandaag = new Date().toISOString().slice(0, 10);
       <form id="schriftjeForm" class="formulier" name="schriftje" action="/api/formulier" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_subject" value="Nieuw verhaal voor Ode aan · Ode Cuisine" />
         <input type="hidden" name="_next" value="https://www.odecuisine.be/bedankt/?schriftje" />
+        <input type="hidden" name="_bevestiging" value="ode-aan" />
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
 
         <p class="vol form-kop">Over jou</p>
