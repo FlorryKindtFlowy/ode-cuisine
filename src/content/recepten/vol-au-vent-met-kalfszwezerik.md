@@ -3,7 +3,6 @@ titel: vol au vent met kalfszwezerik
 slash: kalfszwezerik / champignon / room
 beschrijving: "Klassieke Belgische vol au vent met hoevekip, balletjes, champignons en kalfszwezerik. Een saus die uren mag staan, voor 6 personen."
 categorie: hoofdgerechten
-familie: gilles
 porties: 6
 voorbereiding: 40
 bereiding: 150
@@ -19,7 +18,7 @@ ingredienten:
   - sap van een halve citroen
   - nootmuskaat, peper, zout
   - 6 bladerdeegkorstjes
-verhaal: "Wie een goede vol au vent kan zetten, kan koken. Het is het gerecht waarmee Gilles ons concept in één bord vat: een klassieker op het niveau dat hij verdient."
+verhaal: "Wie een goede vol au vent kan zetten, kan koken. Het is het gerecht dat ons concept in één bord vat: een klassieker op het niveau dat hij verdient."
 faq:
   - vraag: Hoe lang moet de kip trekken voor vol au vent?
     antwoord: Ongeveer anderhalf uur zacht trekken in water met soepgroenten. Zo krijg je malse kip én een bouillon met diepte voor de saus.
