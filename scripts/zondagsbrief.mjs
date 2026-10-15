@@ -248,7 +248,7 @@ export function maakMail(r, nummer) {
     <!-- voet -->
     <tr><td class="pad" align="center" style="background:${KLEUR.wijnDiep};padding:44px 44px 40px;">
       <p style="margin:0 0 6px;font-family:${SERIF};font-size:26px;line-height:1.2;color:${KLEUR.creme};">Smaken die je <em>nooit</em> echt vergeet.</p>
-      <p style="margin:0 0 28px;font-family:${SERIF};font-style:italic;font-size:19px;color:${KLEUR.zand};">Tot sebiet.</p>
+      <p style="margin:0 0 28px;font-family:${SERIF};font-style:italic;font-size:19px;color:${KLEUR.zand};">Tot aan tafel.</p>
       <p style="margin:0;font-family:${SANS};font-weight:300;font-size:12px;line-height:1.7;color:${KLEUR.zand};">
         Je krijgt deze mail omdat je je inschreef voor Ode Zondag op odecuisine.be.<br>
         Antwoorden mag altijd, we lezen alles. <a href="{{{RESEND_UNSUBSCRIBE_URL}}}" style="color:${KLEUR.creme};">Uitschrijven</a> kan ook, met één klik.<br>
