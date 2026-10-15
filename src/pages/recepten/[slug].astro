@@ -10,7 +10,7 @@ const { recept, alle } = Astro.props;
 const d = recept.data;
 const { Content } = await recept.render();
 const labels: Record<string, string> = { hedwin: 'van papa hedwin', frank: 'van frank', oma: 'van oma brigitte', gilles: 'van gilles', samen: 'van ons tweeën' };
-const auteur = d.familie === 'gilles' ? 'Gilles' : 'Florry Kindt';
+const auteur = 'Florry Kindt';
 const stappen = recept.body.split('\n').filter((l) => /^\d+\./.test(l.trim())).map((l) => l.replace(/^\d+\.\s*/, '').trim());
 
 const schema = [
