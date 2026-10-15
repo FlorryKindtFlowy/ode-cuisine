@@ -2,6 +2,10 @@
 import Base from '../layouts/Base.astro';
 import { zichtbareRecepten } from '../lib/recepten';
 
+// Private dining tijdelijk van de homepage. Zet op true om de sectie "Aan tafel" terug te tonen.
+const toonAanTafel = false;
+const nr = (n: number) => String(toonAanTafel ? n : n - 1).padStart(2, '0');
+
 const recepten = (await zichtbareRecepten()).slice(0, 3);
 const [hoofd, ...rest] = recepten;
 const labels: Record<string, string> = { hedwin: 'van papa hedwin', frank: 'van frank', oma: 'van oma brigitte', gilles: 'van gilles', samen: 'van ons tweeën' };
@@ -29,7 +33,7 @@ const kaart = [
   { gang: 'om af te ronden', items: [['tiramisu van oma', 'mascarpone / espresso / lange vingers', 'aan tafel opgeschept'], ['crêpe suzette', 'sinaasappel / grand marnier / boter']] },
 ];
 ---
-<Base title="Ode Cuisine" description="Ode Cuisine is private dining aan huis in Oost en West-Vlaanderen. Klassieke Belgische familierecepten, verfijnd naar vandaag. Elke zondag een nieuw recept.">
+<Base title="Ode Cuisine" description={toonAanTafel ? "Ode Cuisine is private dining aan huis in Oost en West-Vlaanderen. Klassieke Belgische familierecepten, verfijnd naar vandaag. Elke zondag een nieuw recept." : "Ode Cuisine deelt klassieke Belgische familierecepten, verfijnd naar vandaag. Elke zondag een nieuw recept, met het verhaal erachter."}>
 
   <!-- GALERIJ: één beeld dat wisselt terwijl je scrolt -->
   <section class="galerij" data-kleur="wijn" style={`--n:${galerij.length}`} aria-label="Gerechten van Ode">
@@ -61,13 +65,21 @@ const kaart = [
   <section class="sectie intro-lucien" data-kleur="zand">
     <div class="wrap raster">
       <div class="kol-6 reveal">
-        <span class="label">Private dining aan huis · Recepten</span>
+        <span class="label">{toonAanTafel ? 'Private dining aan huis · Recepten' : 'Familierecepten · Elke zondag'}</span>
         <h2>Aan tafel bij <em>Ode</em></h2>
       </div>
       <div class="kol-1"></div>
       <div class="kol-5 reveal">
-        <p class="lead">Wij komen bij jou thuis koken, en delen elke zondag een familierecept om zelf te maken.</p>
-        <div class="knoppen"><a class="knop knop--vol" href="/aan-tafel/">Vraag je datum aan <span class="pijl">→</span></a><a class="knop" href="/recepten/">Recepten</a></div>
+        {toonAanTafel ? (
+          <p class="lead">Wij komen bij jou thuis koken, en delen elke zondag een familierecept om zelf te maken.</p>
+        ) : (
+          <p class="lead">Elke zondag delen we een familierecept om zelf te maken, met het verhaal van de persoon erachter.</p>
+        )}
+        {toonAanTafel ? (
+          <div class="knoppen"><a class="knop knop--vol" href="/aan-tafel/">Vraag je datum aan <span class="pijl">→</span></a><a class="knop" href="/recepten/">Recepten</a></div>
+        ) : (
+          <div class="knoppen"><a class="knop knop--vol" href="/recepten/">Naar de recepten <span class="pijl">→</span></a><a class="knop" href="#kookboek">Het kookboek</a></div>
+        )}
       </div>
     </div>
   </section>
@@ -95,7 +107,8 @@ const kaart = [
     </div>
   </section>
 
-  <!-- 02 AAN TAFEL -->
+  <!-- 02 AAN TAFEL (tijdelijk verborgen, zie toonAanTafel bovenaan) -->
+  {toonAanTafel && (
   <section class="sectie sectie--wijn spread" id="tafel" data-kleur="wijn">
     <div class="wrap raster">
       <div class="kol-12 spread-kop reveal"><span class="groot-nr">02</span><h2>Aan <em>tafel</em></h2></div>
@@ -126,12 +139,13 @@ const kaart = [
       </div>
     </div>
   </section>
+  )}
 
   <!-- 03 RECEPTEN -->
   <section class="sectie spread" id="recepten" data-kleur="room">
     <div class="wrap raster">
       <div class="kol-12 spread-kop reveal">
-        <span class="groot-nr">03</span><h2>Recepten om <em>door te geven</em></h2>
+        <span class="groot-nr">{nr(3)}</span><h2>Recepten om <em>door te geven</em></h2>
         <a class="knop" href="/recepten/">Alle recepten <span class="pijl">→</span></a>
       </div>
       {hoofd && (
@@ -165,7 +179,7 @@ const kaart = [
   <!-- 04 KOOKBOEK -->
   <section class="sectie sectie--wijn spread" id="kookboek" data-kleur="wijn">
     <div class="wrap raster">
-      <div class="kol-12 spread-kop reveal"><span class="groot-nr">04</span><h2>Het <em>kookboek</em></h2></div>
+      <div class="kol-12 spread-kop reveal"><span class="groot-nr">{nr(4)}</span><h2>Het <em>kookboek</em></h2></div>
       <div class="kol-6 reveal"><p class="lead">Alle familierecepten, met de verhalen en de foto's, gebundeld in één digitaal kookboek. Wie op de wachtlijst staat, hoort het als eerste.</p></div>
       <div class="kol-1"></div>
       <form class="kol-5 inschrijf reveal" name="wachtlijst" action="/api/formulier" method="POST">
