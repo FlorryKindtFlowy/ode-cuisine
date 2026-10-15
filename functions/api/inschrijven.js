@@ -49,6 +49,14 @@ export async function onRequestPost({ request, env }) {
       from: AFZENDER, to: [email], reply_to: ANTWOORD_NAAR,
       subject: 'Je plekje aan tafel is gedekt', html: welkom(voornaam),
     }).catch(() => {});
+    // Melding naar de mailbox van Ode bij elke nieuwe inschrijving.
+    const bron = { kaartje: 'het kaartje rechtsonder', blok: 'het blok Schuif aan op zondag' }[String(veld.get('bron') || '')] || 'de site';
+    await resend('/emails', {
+      from: 'Ode Cuisine <info@odecuisine.be>', to: [env.FORMULIER_NAAR || ANTWOORD_NAAR], reply_to: email,
+      subject: `Nieuwe inschrijving Ode Zondag: ${voornaam || email}`,
+      html: `<p style="font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#2a0a10">Er schreef zich iemand in voor Ode Zondag.</p>
+<p style="font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#2a0a10"><b>Naam:</b> ${esc(voornaam || 'niet ingevuld')}<br><b>E-mail:</b> ${esc(email)}<br><b>Via:</b> ${bron}</p>`,
+    }).catch(() => {});
   }
   return antwoord(true, 'ok');
 }
