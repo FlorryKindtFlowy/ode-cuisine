@@ -4,6 +4,8 @@ import { zichtbareRecepten } from '../lib/recepten';
 
 // Private dining tijdelijk van de homepage. Zet op true om de sectie "Aan tafel" terug te tonen.
 const toonAanTafel = false;
+// Kookboekblok van de homepage gehaald. Zet op true om het terug te tonen.
+const toonKookboek = false;
 const nr = (n: number) => String(toonAanTafel ? n : n - 1).padStart(2, '0');
 
 const recepten = (await zichtbareRecepten()).slice(0, 3);
@@ -78,7 +80,7 @@ const kaart = [
         {toonAanTafel ? (
           <div class="knoppen"><a class="knop knop--vol" href="/aan-tafel/">Vraag je datum aan <span class="pijl">→</span></a><a class="knop" href="/recepten/">Recepten</a></div>
         ) : (
-          <div class="knoppen"><a class="knop knop--vol" href="/recepten/">Naar de recepten <span class="pijl">→</span></a><a class="knop" href="#kookboek">Het kookboek</a></div>
+          <div class="knoppen"><a class="knop knop--vol" href="/recepten/">Naar de recepten <span class="pijl">→</span></a><a class="knop" href="/kookboek/">Het kookboek</a></div>
         )}
       </div>
     </div>
@@ -178,7 +180,8 @@ const kaart = [
     </div>
   </section>
 
-  <!-- 04 KOOKBOEK -->
+  <!-- 04 KOOKBOEK (verborgen, zie toonKookboek bovenaan) -->
+  {toonKookboek && (
   <section class="sectie sectie--wijn spread" id="kookboek" data-kleur="wijn">
     <div class="wrap raster">
       <div class="kol-12 spread-kop reveal"><span class="groot-nr">{nr(4)}</span><h2>Het <em>kookboek</em></h2></div>
@@ -190,6 +193,7 @@ const kaart = [
       </div>
     </div>
   </section>
+  )}
   <script>
     // galerij: wissel het beeld volgens de scrollpositie
     const gal = document.querySelector<HTMLElement>('.galerij');
