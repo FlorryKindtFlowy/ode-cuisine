@@ -1,6 +1,6 @@
 # De site draait op Cloudflare Pages. Cloudflare bouwt zelf bij elke wijziging op main.
-# Deze workflow laat Cloudflare elke zondagochtend opnieuw bouwen, zodat het recept van die dag verschijnt.
-# Nodig: secret CF_DEPLOY_HOOK (Cloudflare › ode-cuisine › Settings › Builds › Deploy hooks).
+# Elke zondagochtend zet deze workflow een lege commit op main, zodat Cloudflare opnieuw bouwt
+# en het recept van die dag verschijnt.
 name: Site live zetten
 
 on:
@@ -8,9 +8,17 @@ on:
     - cron: '0 6 * * 0'   # zondag 06:00 UTC = 7u of 8u in België
   workflow_dispatch: {}
 
+permissions:
+  contents: write
+
 jobs:
   bouwen:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Cloudflare opnieuw laten bouwen
-        run: curl -fsS -X POST "${{ secrets.CF_DEPLOY_HOOK }}"
+        run: |
+          git config user.name "Ode Zondag"
+          git config user.email "ode@flowyagency.com"
+          git commit --allow-empty -m "Zondag: nieuw recept live"
+          git push
