@@ -2,12 +2,12 @@
 import Base from '../layouts/Base.astro';
 
 const faq = [
-  { vraag: 'Hoe kies je welke recepten in het schriftje komen?', antwoord: 'Ik lees elk recept zelf. Het gaat niet om het mooiste of moeilijkste gerecht, maar om het verhaal dat erachter zit. Word je gekozen, dan neem ik contact met je op om een datum af te spreken.' },
+  { vraag: 'Hoe kies je welke recepten je komt maken?', antwoord: 'Ik lees elk recept zelf. Het gaat niet om het mooiste of moeilijkste gerecht, maar om het verhaal dat erachter zit. Word je gekozen, dan neem ik contact met je op om een datum af te spreken.' },
   { vraag: 'Moet ik zelf in beeld komen?', antwoord: 'Het mag, het hoeft niet. Het mooiste is als je er zelf bij bent wanneer we het gerecht proeven, maar een oude foto en jouw verhaal volstaan ook.' },
-  { vraag: 'Waar wordt er gefilmd?', antwoord: 'Altijd bij jou thuis, in je eigen keuken en aan je eigen tafel. Wij brengen de ingrediënten, de schort en het schriftje mee.' },
+  { vraag: 'Waar wordt er gefilmd?', antwoord: 'Altijd bij jou thuis, in je eigen keuken en aan je eigen tafel. Ik breng de ingrediënten, het schriftje en een Ode schort voor jou mee.' },
   { vraag: 'Moet het recept perfect uitgeschreven zijn?', antwoord: 'Helemaal niet. "Een snuifje" en "tot het goed is" zijn ook prima. Wij testen het recept, schrijven het netjes uit en laten het je nalezen voor het online gaat.' },
   { vraag: 'Wat kost het?', antwoord: 'Niets. Wij koken, jij brengt het verhaal. Je krijgt de video en het uitgeschreven recept als herinnering.' },
-  { vraag: 'Wat gebeurt er met mijn recept?', antwoord: 'Het verschijnt in een aflevering van het schriftje op onze kanalen, als blogpost op odecuisine.be en later in het digitale Ode kookboek. Je naam staat er altijd bij.' },
+  { vraag: 'Wat gebeurt er met mijn recept?', antwoord: 'Het verschijnt in een aflevering van Ode bij je thuis op onze kanalen, als blogpost op odecuisine.be en later in het digitale Ode kookboek. Je naam staat er altijd bij.' },
 ];
 
 const schema = {
@@ -18,13 +18,13 @@ const schema = {
 
 const vandaag = new Date().toISOString().slice(0, 10);
 ---
-<Base title="Het schriftje, stuur je recept in" description="Heb jij een recept dat in het schriftje moet? Stuur je familierecept in bij Ode Cuisine. Wij koken het, filmen het samen met jou en zetten het in ons kookboek." schema={schema}>
-  <section class="sectie sectie--wijn">
+<Base title="Ode bij je thuis, stuur je recept in" description="Aan wie breng jij een ode? Stuur het recept van iemand die je graag ziet in bij Ode Cuisine. Florry komt bij je thuis, je krijgt de Ode schort aan en samen koken, proeven en filmen we jouw verhaal." schema={schema}>
+  <section class="sectie sectie--wijn ode-hero">
     <div class="smal centraal">
-      <span class="kicker">het schriftje · ode bij je thuis</span>
-      <h1><span class="lijn"><span>Heb jij een recept voor het <em>schriftje</em>?</span></span></h1>
-      <p>Ode Cuisine is een ode aan de recepten die mij hebben grootgebracht. Nu wil ik ook de jouwe horen. Stuur je recept in, en misschien kom ik binnenkort bij jou thuis aan tafel.</p>
-      <a class="knop" href="#inzenden">Stuur je recept in</a>
+      <span class="kicker">ode bij je thuis</span>
+      <h1><span class="lijn"><span>Aan wie breng jij een <em>ode</em>?</span></span></h1>
+      <p>Elk recept heeft iemand achter zich. Een mama, een opa, een buurvrouw. Stuur me het recept van iemand die je graag ziet, en dan kom ik bij jou thuis. Jij krijgt de Ode schort aan en vertelt over die persoon en dat gerecht. Samen koken en proeven we het, en de camera loopt mee.</p>
+      <a class="knop" href="#inzenden">Breng jouw ode</a>
     </div>
   </section>
 
@@ -50,38 +50,38 @@ const vandaag = new Date().toISOString().slice(0, 10);
       <div class="centraal smal" style="margin-bottom:48px">
         <span class="kicker">ode bij je thuis</span>
         <h2>En nu wil ik <em>jouw</em> recept horen</h2>
-        <p>Want elke familie heeft er zo een. Dat ene gerecht dat naar thuis smaakt, naar een mama, een opa of een buurvrouw. Zo gaat het in zijn werk.</p>
+        <p>Want elke familie heeft er zo een. Dat ene gerecht dat naar thuis smaakt. Zo gaat het in zijn werk, en zo begint elke video.</p>
       </div>
       <ol class="draaiboek" data-stagger>
         <li>
           <span class="db-nr">01</span>
-          <div class="db-tekst"><h3>Jij stuurt het <em>in</em></h3><p>Je recept, en vooral het verhaal erachter. Wie maakte het, wanneer kwam het op tafel, en waarom vergeet je die smaak nooit?</p></div>
+          <div class="db-tekst"><h3>Jij stuurt het <em>in</em></h3><p>Het recept, en aan wie je er een ode mee brengt. Wie maakte het, wanneer kwam het op tafel, en waarom vergeet je die smaak nooit?</p></div>
           <span class="db-noot">een snuifje mag ook</span>
         </li>
         <li>
           <span class="db-nr">02</span>
-          <div class="db-tekst"><h3>Ik lees en <em>kies</em></h3><p>Ik lees elk recept zelf. Ik kies de recepten met een verhaal dat blijft hangen, niet het mooiste bord. Word je gekozen, dan bel ik je op.</p></div>
+          <div class="db-tekst"><h3>Ik lees en <em>kies</em></h3><p>Ik lees elk recept zelf. Ik kies de recepten met een verhaal dat blijft hangen, niet het mooiste bord. Word je gekozen, dan neem ik contact met je op.</p></div>
           <span class="db-noot">met een tas koffie</span>
         </li>
         <li>
           <span class="db-nr">03</span>
-          <div class="db-tekst"><h3>Ik kom bij je <em>thuis</em></h3><p>Met de ingrediënten, het schriftje en mijn Ode schort. Als de schort gestrikt is, gaan we van start, in jouw keuken.</p></div>
-          <span class="db-noot">schort aan!</span>
+          <div class="db-tekst"><h3>Het staat in mijn <em>schriftje</em></h3><p>Ik schrijf jouw recept met de hand bovenaan een nieuwe pagina. Zo begint elke video: het schriftje gaat open, en ik vertel aan wie we vandaag een ode brengen.</p></div>
+          <span class="db-noot">zo begint elke video</span>
         </li>
         <li>
           <span class="db-nr">04</span>
-          <div class="db-tekst"><h3>We koken en proeven <em>samen</em></h3><p>We maken jouw gerecht zoals het hoort, en de camera loopt mee. Dan komt het op tafel. De eerste hap, jouw reactie.</p></div>
-          <span class="db-noot">de eerste hap</span>
+          <div class="db-tekst"><h3>Ik kom bij je <em>thuis</em></h3><p>Met de ingrediënten en een Ode schort, voor jou. Jij strikt de schort, en dan gaan we van start in jouw keuken.</p></div>
+          <span class="db-noot">jij krijgt de schort!</span>
         </li>
         <li>
           <span class="db-nr">05</span>
-          <div class="db-tekst"><h3>Het verhaal van <em>vroeger</em></h3><p>Aan tafel halen we samen het verhaal weer naar boven. De oude foto's, de anekdotes, en waarom dit recept zoveel betekent voor jou.</p></div>
+          <div class="db-tekst"><h3>Jij <em>vertelt</em></h3><p>Over die persoon, over het gerecht, over vroeger. De oude foto's, de anekdotes, en waarom dit recept zoveel voor jou betekent.</p></div>
           <span class="db-noot">oude foto's zijn goud</span>
         </li>
         <li>
           <span class="db-nr">06</span>
-          <div class="db-tekst"><h3>Tot <em>sebiet</em></h3><p>Ik schrijf je recept met de hand in het schriftje en klap het dicht. Vanaf dan staat het erin, voor altijd.</p></div>
-          <span class="db-noot">met jouw naam erbij</span>
+          <div class="db-tekst"><h3>We proeven <em>samen</em></h3><p>We koken jouw gerecht zoals het hoort en zetten het op tafel. De eerste hap, jouw reactie. Tot sebiet.</p></div>
+          <span class="db-noot">de eerste hap</span>
         </li>
       </ol>
     </div>
@@ -106,11 +106,11 @@ const vandaag = new Date().toISOString().slice(0, 10);
       <div class="centraal smal" style="margin-bottom:56px">
         <span class="kicker">inzenden</span>
         <h2>Stuur je recept <em>in</em></h2>
-        <p>Vertel ons het recept, het verhaal erachter en wanneer we bij jou thuis mogen komen filmen. Kijk mee: terwijl je typt, schrijft je recept zich in het schriftje.</p>
+        <p>Vertel ons het recept, het verhaal erachter en wanneer we bij jou thuis mogen komen filmen. Kijk mee: terwijl je typt, schrijft je recept zich in mijn schriftje.</p>
       </div>
       <div class="inzend-grid">
       <form id="schriftjeForm" class="formulier" name="schriftje" action="https://formsubmit.co/ode@flowyagency.com" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="_subject" value="Nieuw recept voor het schriftje · Ode Cuisine" />
+        <input type="hidden" name="_subject" value="Nieuw recept voor Ode bij je thuis · Ode Cuisine" />
         <input type="hidden" name="_next" value="https://www.odecuisine.be/bedankt/?schriftje" />
         <input type="hidden" name="_template" value="table" />
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
@@ -124,7 +124,7 @@ const vandaag = new Date().toISOString().slice(0, 10);
 
         <p class="vol form-kop">Het recept</p>
         <label>Naam van het gerecht <input name="gerecht" required placeholder="de appeltaart van oma" /></label>
-        <label>Van wie komt het? <input name="recept_van" required placeholder="mijn oma Maria, ikzelf, mijn papa…" /></label>
+        <label>Aan wie breng je een ode? <input name="recept_van" required placeholder="mijn oma Maria, mijn papa…" /></label>
         <label class="vol">Het verhaal erachter <textarea name="verhaal" rows="4" required placeholder="Wanneer werd het gemaakt, wat betekent het voor jou, welke herinnering hoort erbij?"></textarea></label>
         <label class="vol">Ingrediënten <textarea name="ingredienten" rows="5" required placeholder="Een snuifje mag ook."></textarea></label>
         <label class="vol">Bereiding <textarea name="bereiding" rows="6" required></textarea></label>
@@ -162,11 +162,11 @@ const vandaag = new Date().toISOString().slice(0, 10);
         <div class="schrift-boek" id="schriftBoek">
           <div class="schrift-blad" id="schriftBlad">
             <div class="schrift-top">
-              <span class="schrift-nr">het schriftje</span>
+              <span class="schrift-nr">ode cuisine</span>
               <span class="schrift-datum" id="schriftDatum"></span>
             </div>
             <h3 class="schrift-titel"><span data-veld="gerecht" data-leeg="de appeltaart van oma"></span></h3>
-            <p class="schrift-van">van <span data-veld="recept_van" data-leeg="iemand die je graag ziet"></span></p>
+            <p class="schrift-van">een ode aan <span data-veld="recept_van" data-leeg="iemand die je graag ziet"></span></p>
 
             <figure class="schrift-foto" id="schriftFoto" hidden><img alt="" id="schriftFotoImg" /></figure>
 
@@ -185,7 +185,7 @@ const vandaag = new Date().toISOString().slice(0, 10);
           </div>
           <div class="schrift-kaft" aria-hidden="true">
             <span class="o-mark"></span>
-            <span class="schrift-kaft-titel">het schriftje</span>
+            <span class="schrift-kaft-titel">ode cuisine</span>
             <span class="schrift-kaft-sub">tot sebiet</span>
           </div>
           <span class="schrift-elastiek" aria-hidden="true"></span>
@@ -291,6 +291,7 @@ const vandaag = new Date().toISOString().slice(0, 10);
 
 <style is:global>
   .oorsprong .twee { align-items: center; }
+  .ode-hero .lijn { padding: .08em 0 .26em; margin-bottom: -.18em; }
   .verhaal-foto { position: relative; transform: rotate(-1.5deg); }
   .foto-noot { z-index: 2; position: absolute; left: 18px; bottom: -22px; font-family: 'Caveat', cursive; font-size: 1.6rem; color: var(--wijn); background: #fbf9f4; padding: 4px 14px; transform: rotate(-3deg); box-shadow: 0 6px 14px rgba(42,10,16,.15); }
   .florry-sign { font-family: 'Caveat', cursive; font-size: 2.2rem; color: var(--wijn); margin-top: 18px; }
