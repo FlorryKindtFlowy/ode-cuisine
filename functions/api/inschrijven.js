@@ -52,7 +52,11 @@ export async function onRequestPost({ request, env }) {
   return antwoord(true, 'ok');
 }
 
-export function onRequestGet() {
+export function onRequestGet({ request, env }) {
+  // ?status vertelt de site of de inschrijving al openstaat (Resend ingesteld).
+  if (new URL(request.url).searchParams.has('status')) {
+    return Response.json({ open: Boolean(env.RESEND_API_KEY && env.RESEND_SEGMENT_ID) });
+  }
   return Response.redirect(`${SITE}/#zondagsbrief`, 302);
 }
 
