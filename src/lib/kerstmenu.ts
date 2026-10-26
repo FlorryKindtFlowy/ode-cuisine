@@ -90,8 +90,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'garnaalkroketje-a-la-frank', titel: 'garnaalkroketje à la frank', slash: 'noordzeegarnaal / peterselie / citroen', gang: 'hapjes',
-    zichtbaar: false, concept: true, foto: '/fotos/kerst/garnaalkroketje.webp',
-    fotoAlt: 'Goudbruine garnaalkroketjes met gefrituurde peterselie, grof zout en partjes citroen op een crèmekleurig bord in zonlicht',
+    zichtbaar: false, concept: true, foto: '/fotos/kerst/garnaalkroketje-v2.webp',
+    fotoAlt: 'Goudbruine garnaalkroketjes, eentje opengebroken met garnalen vanbinnen, met gefrituurde peterselie en partjes citroen op een donkergroene schaal op een oude houten plank',
     porties: 8, voorbereiding: 60, bereiding: 15,
     ingredienten: ["300 g gepelde grijze Noordzeegarnalen", "80 g boter", "100 g bloem", "4 dl volle melk", "1 dl visfumet of garnalenbouillon", "2 eidooiers", "1 eetlepel fijngehakte peterselie", "sap van ½ citroen", "nootmuskaat, peper en zout", "om te paneren: bloem, 2 eieren, fijn paneermeel", "frituurolie, gefrituurde peterselie en partjes citroen"],
     stappen: [
