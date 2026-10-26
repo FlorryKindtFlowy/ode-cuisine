@@ -270,7 +270,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'mosseltje-a-la-hedwin', titel: 'mosseltje à la hedwin in de schelp', slash: 'mossel / curry / bieslook', gang: 'hapjes',
-    zichtbaar: false, concept: true, familie: 'van papa hedwin',
+    zichtbaar: false, concept: true, familie: 'van papa hedwin', foto: '/fotos/kerst/mosseltjes-a-la-hedwin.webp',
+    fotoAlt: 'Mosselen in een romige currysaus met groentjes en peterselie in een groene schaal, met sneetjes brood in zonlicht',
     verhaal: "Papaatje zijn mosseltjes met curry, maar dan koud en in één hapje. Zo kan je ze rondgeven bij de bubbels.",
     porties: 8, voorbereiding: 30, bereiding: 10,
     ingredienten: ["1 kg mosselen", "1 sjalot", "1 dl droge witte wijn", "4 eetlepels mayonaise", "1 theelepel milde currypoeder", "1 eetlepel fijngesneden bieslook", "1 eetlepel fijne brunoise van rode paprika"],
