@@ -22,7 +22,7 @@ faq:
   - vraag: Kan tiramisu zonder alcohol?
     antwoord: Zeker. Laat de amaretto weg of vervang hem door een paar druppels amandelextract.
 concept: true
-datum: 2027-01-03
+datum: 2026-12-13
 ---
 
 1. Klop de eidooiers met de suiker tot een luchtig, bleek mengsel.
