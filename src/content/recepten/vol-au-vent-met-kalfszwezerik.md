@@ -27,7 +27,7 @@ faq:
   - vraag: Kan ik vol au vent invriezen?
     antwoord: Ja, de vulling zonder korstjes kan perfect in de diepvries. Laat ze in de koelkast ontdooien en warm zachtjes op.
 concept: true
-datum: 2026-12-27
+datum: 2026-12-06
 ---
 
 1. Zet de kip in een grote pot onder koud water met de soepgroenten, kruiden, peper en zout. Breng aan de kook en laat 1,5 uur zacht trekken. Schuim af waar nodig.
