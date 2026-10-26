@@ -1,0 +1,267 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { zichtbareRecepten } from '../lib/recepten';
+import { kerstGangen, kerstExtra } from '../lib/kerst';
+
+// Kerst met Ode: kerstmenu om op voorhand te maken.
+// Recepten die nog niet live staan, tonen "verschijnt zondag ..." zonder link.
+const alle = await getCollection('recepten');
+const live = new Set((await zichtbareRecepten()).map((r) => r.slug));
+const vind = (slug: string) => alle.find((r) => r.slug === slug)!;
+const dag = (d: Date) => d.toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', timeZone: 'Europe/Brussels' });
+
+const gangen = kerstGangen.map((g) => ({ gang: g.gang, recepten: g.slugs.map(vind).filter(Boolean) }));
+const extra = kerstExtra.map(vind).filter(Boolean);
+
+const draaiboek = [
+  { wanneer: 'drie dagen ervoor', wat: [
+    'Haal de zalm voor de gravad lax bij een visboer die je vertrouwt en zeg dat je hem rauw gaat eten. Is het geen zalm van sushikwaliteit, vries hem dan minstens 24 uur in op min 20 °C en laat hem traag ontdooien in de koelkast.',
+    'Koop je avocado\'s. Geven ze nog niet mee, leg ze dan in een papieren zak naast een appel of banaan.',
+  ] },
+  { wanneer: 'twee dagen ervoor', wat: [
+    'Leg de zalm in de marinade van zout, suiker, dille en gember. Hij heeft 48 uur nodig in de koelkast. Draai hem om de 12 uur om en giet het vocht weg.',
+  ] },
+  { wanneer: 'de dag ervoor', wat: [
+    'Stoof het konijn met pruimen. Het smaakt de dag nadien nog beter. Hou de verse pruimen apart tot het opwarmen.',
+    'Bak de bodem van de citroentaart en maak de citroencrème.',
+    'Blancheer de broccolini, koel ze af in ijswater, droog ze goed en zet ze in de koelkast.',
+    'Haal de oesters op. Kies oesters die zwaar aanvoelen en stevig gesloten zijn.',
+  ] },
+  { wanneer: 'de ochtend zelf', wat: [
+    'Klop de meringue op en zet ze op de taart, een paar uur voor het dessert.',
+    'Schraap de marinade van de zalm en dep hem droog.',
+  ] },
+  { wanneer: 'het uur voor de gasten', wat: [
+    'Maak de vinaigrette voor de oesters en laat ze 20 minuten trekken.',
+    'Snij ui, tomaat, peper en koriander voor de guacamole.',
+    'Leg de zalm 20 minuten in de diepvriezer en snij hem dan flinterdun.',
+  ] },
+  { wanneer: 'als de bel gaat', wat: [
+    'Stamp de avocado en meng alles. Open de oesters en rasp de gember pas vlak voor het serveren.',
+    'Tussen de gangen warm je het konijn zachtjes op en maak je de bruine boter, waarin je de broccolini opwarmt.',
+  ] },
+];
+
+const drank = [
+  { gang: 'bij de bubbels', tekst: 'Een droge cava of een koude champagne. Bij de oesters past ook een Muscadet sur lie of een Chablis.' },
+  { gang: 'voorgerecht', tekst: 'Een droge riesling uit de Elzas of een champagne brut. De frisheid snijdt mooi door de zalm en de gember.' },
+  { gang: 'hoofdgerecht', tekst: 'Hetzelfde bruine abdijbier waarmee je stoofde, of een soepele rode wijn zoals een Beaujolais.' },
+  { gang: 'dessert', tekst: 'Een koele moscato d\'Asti of een Sauternes. Zonder alcohol: een kop verse muntthee.' },
+];
+
+const faq = [
+  { vraag: 'Wat kan je op voorhand maken voor een kerstmenu?', antwoord: 'Bijna alles. Gravad lax start je twee dagen op voorhand, konijn met pruimen stoof je de dag ervoor en smaakt dan nog beter, en de bodem en crème van de citroentaart maak je ook de dag ervoor. Broccolini blancheer je op voorhand. Op de dag zelf open je enkel de oesters, stamp je de guacamole en zet je de meringue op de taart.' },
+  { vraag: 'Hoeveel oesters reken je per persoon op kerstavond?', antwoord: 'Als aperitief reken je 4 tot 6 oesters per persoon. Zijn de oesters het voorgerecht of het hoofdmoment, dan mag dat 6 tot 12 per persoon zijn.' },
+  { vraag: 'Wanneer begin je aan gravad lax voor Kerst?', antwoord: 'Gravad lax marineert 48 uur. Eet je op kerstavond, leg de zalm dan op 22 december in de marinade. Eet je op Kerstdag, dan start je op 23 december. Goed ingepakt blijft hij daarna tot 5 dagen goed in de koelkast.' },
+  { vraag: 'Welke wijn schenk je bij een klassiek kerstmenu?', antwoord: 'Start met een droge cava of champagne bij de oesters, schenk een droge riesling bij de gravad lax, een bruin abdijbier of een Beaujolais bij het konijn met pruimen en een moscato d\'Asti of Sauternes bij de citroentaart.' },
+  { vraag: 'Welk hoofdgerecht kan je volledig op voorhand maken voor Kerst?', antwoord: 'Een stoofgerecht zoals konijn met pruimen in bruin bier. Je stooft het de dag ervoor, het blijft 2 tot 3 dagen goed in de koelkast en wordt bij het zachtjes opwarmen alleen maar lekkerder.' },
+  { vraag: 'Voor hoeveel personen is dit kerstmenu?', antwoord: 'De gravad lax en de citroentaart zijn voor 8 personen. Het konijn, de broccolini en de oesters staan voor 4 personen: verdubbel ze voor een tafel van 8. De guacamole is voor 6 personen om te delen.' },
+];
+
+const metLink = (slug: string) => live.has(slug);
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Kerst met Ode: een Belgisch kerstmenu om op voorhand te maken',
+    description: 'Een klassiek Belgisch kerstmenu van Ode Cuisine met oesters, gravad lax, konijn met pruimen en citroentaart, met een draaiboek om alles op voorhand te maken.',
+    url: 'https://www.odecuisine.be/kerst/',
+    inLanguage: 'nl-BE',
+    author: { '@type': 'Person', name: 'Florry Kindt' },
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: gangen.flatMap((g) => g.recepten).filter((r) => metLink(r.slug)).map((r, i) => ({
+        '@type': 'ListItem', position: i + 1, name: r.data.titel, url: `https://www.odecuisine.be/recepten/${r.slug}/`,
+      })),
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.vraag, acceptedAnswer: { '@type': 'Answer', text: f.antwoord } })),
+  },
+];
+---
+<Base
+  title="Kerstmenu om op voorhand te maken: klassiek en Belgisch · Kerst met Ode"
+  rawTitle={true}
+  description="Een klassiek Belgisch kerstmenu dat je grotendeels op voorhand maakt: oesters met gember, gravad lax, konijn met pruimen en citroentaart. Met draaiboek en wijntips."
+  schema={schema}
+  image="/fotos/oesters-met-gember.webp"
+>
+  <!-- HERO -->
+  <section class="sectie kerst-hero" data-kleur="zand">
+    <div class="wrap twee">
+      <div>
+        <span class="kicker">Kerst met Ode · een menu om op voorhand te maken</span>
+        <h1><span class="lijn"><span>Kerst met <em>Ode</em></span></span></h1>
+        <p class="lead">Een klassiek Belgisch kerstmenu dat je grotendeels op voorhand maakt. Zodat jij op kerstavond aan tafel zit, en niet in de keuken staat.</p>
+        <p>Kerst is de avond waarop je het gemis het felst voelt. Er blijft een stoel leeg, of je zet er net eentje bij. En toch zitten we die avond het dichtst bij elkaar, rond gerechten die iemand ons ooit leerde.</p>
+        <p>Daarom stelde ik een kerstmenu samen uit de recepten van Ode. Van nu tot Kerst verschijnt elke zondag een gerecht uit dit menu.</p>
+        <div class="knoppen" style="margin-top:28px">
+          <a class="knop knop--vol" href="#menu">Naar het menu <span class="pijl">→</span></a>
+          <a class="knop" href="#draaiboek">Het draaiboek</a>
+        </div>
+      </div>
+      <figure class="kerst-foto">
+        <div class="foto foto--boog reveal-foto"><img src="/fotos/hedwin-oesters.webp" alt="Archieffoto van papa Hedwin op een tuinfeest, met verse oesters en een glas bubbels" loading="eager" style="object-position:50% 25%" /></div>
+        <figcaption class="bijschrift">Papa Hedwin, met oesters en een glas bubbels.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="sectie sectie--wijn" id="menu" data-kleur="wijn">
+    <div class="wrap raster">
+      <div class="kol-4 reveal">
+        <span class="kicker">het menu</span>
+        <h2>Een avond <em>aan tafel</em></h2>
+        <p>Vier gangen, gekozen omdat ze op voorhand kunnen. Klik op een gerecht voor het volledige recept, met het verhaal, de tips en de vragen die je erbij hebt.</p>
+        <p style="font-size:.92rem;opacity:.85">Staat er nog geen link bij? Dan verschijnt het recept op die zondag. Schuif aan op zondag en je krijgt het als eerste in je mailbox.</p>
+        <a class="knop" href="#zondagsbrief">Schuif aan op zondag <span class="pijl">→</span></a>
+      </div>
+      <div class="kol-1"></div>
+      <div class="kol-7 menukaart reveal">
+        <p class="menukaart-kop"><i class="o-mark"></i><span>kerst met ode</span></p>
+        {gangen.map((g) => (
+          <div class="mk-gang">
+            <span class="mk-label">{g.gang}</span>
+            {g.recepten.map((r) => (
+              <div class="mk-item">
+                {metLink(r.slug)
+                  ? <a class="mk-t mk-link" href={`/recepten/${r.slug}/`}>{r.data.titel}</a>
+                  : <p class="mk-t">{r.data.titel}</p>}
+                <p class="mk-s">{r.data.slash}</p>
+                {!metLink(r.slug) && <span class="mk-noot">verschijnt zondag {dag(r.data.datum)}</span>}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- DE GERECHTEN -->
+  <section class="sectie" data-kleur="zand">
+    <div class="wrap">
+      <div class="centraal" style="margin-bottom:48px">
+        <span class="kicker">de gerechten</span>
+        <h2>Wat er op tafel <em>komt</em></h2>
+      </div>
+      <div class="drie kerst-kaarten" data-stagger>
+        {gangen.flatMap((g) => g.recepten.map((r) => ({ r, gang: g.gang }))).map(({ r, gang }) => {
+          const inhoud = (
+            <>
+              <div class="foto">{r.data.foto ? <img src={r.data.foto} srcset={`${r.data.foto.replace('.webp', '-klein.webp')} 900w, ${r.data.foto} 1200w`} sizes="(max-width: 900px) 100vw, 33vw" alt={r.data.fotoAlt ?? r.data.titel} loading="lazy" /> : <div class="ph"><i class="o-mark"></i><span>foto volgt</span></div>}
+                {!metLink(r.slug) && <span class="kerst-binnenkort">zondag {dag(r.data.datum)}</span>}
+              </div>
+              <span class="wie">{gang}</span>
+              <h3>{r.data.titel}</h3>
+              <span class="slash">{r.data.slash}</span>
+            </>
+          );
+          return metLink(r.slug)
+            ? <a class="kaart" href={`/recepten/${r.slug}/`}>{inhoud}</a>
+            : <div class="kaart kaart--binnenkort">{inhoud}</div>;
+        })}
+      </div>
+      {extra.length > 0 && (
+        <p class="centraal kerst-extra">
+          Liever een warm voorgerecht of een extra gang? Ook {extra.map((r, i) => (
+            <>
+              {i > 0 && ' of '}
+              {metLink(r.slug) ? <a href={`/recepten/${r.slug}/`}>{r.data.titel}</a> : <em>{r.data.titel}</em>}
+              {!metLink(r.slug) && ` (zondag ${dag(r.data.datum)})`}
+            </>
+          ))} passen op dit menu.
+        </p>
+      )}
+    </div>
+  </section>
+
+  <!-- DRAAIBOEK -->
+  <section class="sectie sectie--zand" id="draaiboek" data-kleur="room">
+    <div class="smal">
+      <span class="kicker">het draaiboek</span>
+      <h2>Wat maak je <em>wanneer</em>?</h2>
+      <p>Uitgeschreven voor kerstavond op 24 december. Eet je op Kerstdag, schuif dan alles een dag op.</p>
+      <ol class="draaiboek">
+        {draaiboek.map((s) => (
+          <li class="reveal">
+            <span class="db-wanneer">{s.wanneer}</span>
+            <ul>{s.wat.map((w) => <li>{w}</li>)}</ul>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- DRANK -->
+  <section class="sectie" data-kleur="zand">
+    <div class="smal">
+      <span class="kicker">wat schenk je erbij</span>
+      <h2>Een glas bij <em>elke gang</em></h2>
+      <dl class="drank">
+        {drank.map((d) => (
+          <div class="reveal">
+            <dt>{d.gang}</dt>
+            <dd>{d.tekst}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="sectie sectie--room" data-kleur="room">
+    <div class="smal">
+      <span class="kicker">vragen over kerst</span>
+      <h2>Wat je je misschien <em>afvraagt</em></h2>
+      <div class="faq">
+        {faq.map((f) => <details><summary>{f.vraag}</summary><p>{f.antwoord}</p></details>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ODE AAN -->
+  <section class="sectie sectie--wijn" data-kleur="wijn">
+    <div class="smal centraal">
+      <span class="kicker">ode aan</span>
+      <h2>Welk gerecht hoort bij <em>jouw</em> Kerst?</h2>
+      <p>De kalkoen van je meter, het dessert dat je opa elk jaar maakte, de hapjes van je mama. Deel het recept en het verhaal erachter, dan brengen we er samen een ode aan.</p>
+      <a class="knop" href="/ode-aan/#inzenden">Deel jouw kerstrecept</a>
+    </div>
+  </section>
+
+  <style>
+    .kerst-hero h1 { font-size: clamp(3rem, 7vw, 6rem); }
+    .kerst-foto { margin: 0; }
+    .kerst-foto .bijschrift { margin-top: 12px; }
+    .mk-link { display: block; text-decoration: none; transition: color .3s; }
+    .mk-link:hover { color: var(--wijn); font-style: italic; }
+    .mk-link::after { content: ' →'; font-size: .8em; color: var(--wijn); }
+    .kaart--binnenkort .foto img { filter: saturate(.75); opacity: .85; }
+    .kerst-binnenkort { position: absolute; left: 16px; bottom: 14px; background: var(--wijn); color: var(--creme) !important; font-family: var(--sans) !important; font-style: normal !important; font-size: .66rem !important; letter-spacing: .22em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; }
+    .kerst-extra { margin-top: 48px; font-family: var(--serif); font-size: 1.3rem; }
+    .kerst-extra a { color: var(--wijn); }
+    .draaiboek { list-style: none; padding: 0; margin: 40px 0 0; border-top: 1px solid var(--wijn); }
+    .draaiboek > li { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 26px 0; border-bottom: 1px solid var(--lijn); }
+    .db-wanneer { font-family: var(--serif); font-style: italic; font-size: 1.5rem; color: var(--wijn); line-height: 1.2; }
+    .draaiboek ul { list-style: none; padding: 0; margin: 0; }
+    .draaiboek ul li { position: relative; padding-left: 22px; margin-bottom: 10px; }
+    .draaiboek ul li::before { content: '·'; position: absolute; left: 4px; top: -4px; font-family: var(--serif); font-size: 1.8rem; color: var(--wijn); }
+    .drank { margin: 32px 0 0; border-top: 1px solid var(--wijn); }
+    .drank > div { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--lijn); }
+    .drank dt { font-size: .7rem; letter-spacing: .26em; text-transform: uppercase; color: var(--zacht); padding-top: 6px; }
+    .drank dd { margin: 0; font-family: var(--serif); font-size: 1.3rem; line-height: 1.4; }
+    @media (max-width: 900px) {
+      .kerst-hero .twee { grid-template-columns: 1fr; }
+      .kerst-kaarten { grid-template-columns: 1fr 1fr; }
+      .draaiboek > li, .drank > div { grid-template-columns: 1fr; gap: 8px; }
+    }
+    @media (max-width: 560px) {
+      .kerst-kaarten { grid-template-columns: 1fr; }
+    }
+  </style>
+</Base>
