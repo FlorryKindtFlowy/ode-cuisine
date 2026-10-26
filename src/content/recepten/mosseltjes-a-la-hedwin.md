@@ -27,7 +27,7 @@ faq:
   - vraag: Waarom appel in de currysaus?
     antwoord: De zure appel geeft frisheid en een lichte zoetheid die de curry in balans brengt. Zo deed Hedwin het in De Barakke.
 concept: true
-datum: 2026-12-20
+datum: 2026-12-13
 ---
 
 1. Spoel de mosselen nog eens goed onder koud water. Gooi de exemplaren weg die open blijven als je erop tikt.
