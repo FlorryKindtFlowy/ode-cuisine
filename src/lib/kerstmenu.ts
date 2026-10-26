@@ -55,7 +55,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'hespenrolletjes', titel: 'hespenrolletjes', slash: 'beenham / asperge / mayonaise', gang: 'hapjes',
-    zichtbaar: false,
+    zichtbaar: false, foto: '/fotos/kerst/hespenrolletjes.webp',
+    fotoAlt: 'Hespenrolletjes met witte asperge, een toefje mayonaise en bieslook op een donkergroene schaal in zonlicht met palmschaduw',
     porties: 6, voorbereiding: 20, bereiding: 0,
     ingredienten: ["12 sneden beenham, niet te dun gesneden", "12 witte asperges uit een bokaal of vers gekookt", "4 eetlepels mayonaise", "1 theelepel mosterd", "1 eetlepel fijngesneden bieslook", "peper"],
     stappen: [
@@ -70,7 +71,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'pate-van-opa', titel: 'paté van opa op toast', slash: 'varken / cognac / uienconfituur', gang: 'hapjes',
-    zichtbaar: false, concept: true, familie: 'van opa',
+    zichtbaar: false, concept: true, familie: 'van opa', foto: '/fotos/kerst/pate-van-opa.webp',
+    fotoAlt: 'Geroosterde toastjes met paté, rode uienconfituur en tijm op een donkergroene schaal, met een glas bubbels erachter',
     verhaal: "Opa was beenhouwer in hart en nieren. Zijn paté stond op elke feesttafel, met een goed stuk brood en niets anders erbij.",
     porties: 10, voorbereiding: 30, bereiding: 90,
     ingredienten: ["500 g varkensgehakt (half mager, half doorregen)", "250 g kippenlevers, schoongemaakt", "150 g gerookt spek in blokjes", "1 ui, fijngesnipperd", "1 teentje look", "1 ei", "4 cl cognac", "1 theelepel gedroogde tijm", "1 laurierblad", "12 g zout en versgemalen peper", "voor erbij: toastjes, uienconfituur en augurken"],
