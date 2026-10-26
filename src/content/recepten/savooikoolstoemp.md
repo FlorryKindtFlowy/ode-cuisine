@@ -57,6 +57,7 @@ gerelateerd:
 foto: /fotos/savooikoolstoemp.webp
 fotoAlt: "Volle savooikool met gekrulde, geplooide bladeren op een oude houten plank, zijlicht dat de nerven doet oplichten tegen een donkere achtergrond"
 datum: 2026-11-01
+mail: false
 ---
 
 1. Snijd de aardappelen in gelijke stukken en zet ze op met koud gezouten water. Breng aan de kook en laat ongeveer 20 minuten zachtjes koken tot een mes er zonder weerstand in glijdt.
