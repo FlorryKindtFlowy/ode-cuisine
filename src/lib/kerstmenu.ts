@@ -401,7 +401,8 @@ export const kerstmenu: KerstGerecht[] = [
   // ---------- HOOFDGERECHTEN ----------
   {
     slug: 'vol-au-vent-met-kalfszwezerik', titel: 'vol au vent met kalfszwezerik', slash: 'kalfszwezerik / champignon / room', gang: 'hoofdgerechten',
-    zichtbaar: false, recept: 'vol-au-vent-met-kalfszwezerik',
+    zichtbaar: false, recept: 'vol-au-vent-met-kalfszwezerik', foto: '/fotos/kerst/vol-au-vent-met-kalfszwezerik.webp',
+    fotoAlt: 'Vol au vent met kip, champignons en roomsaus naast krokant gebakken kalfszwezerik, met frietjes, mayonaise en salades aan een gedekte kersttafel',
   },
   {
     slug: 'konijn-met-pruimen', titel: 'konijn met pruimen', slash: 'konijn / pruim / donker bier', gang: 'hoofdgerechten',
