@@ -56,7 +56,7 @@ gerelateerd:
   - "oesters-met-gember"
 foto: /fotos/scampi-diabolique.webp
 fotoAlt: "Felrode verse rode pepers op een warm bruin getextureerd doek in schuin zonlicht, naast een gemberwortel en een tak venkelbloem"
-datum: 2026-11-22
+datum: 2026-11-15
 ---
 
 1. Pel de scampi en laat het staartje eraan als je wil. Snij met een klein mes ondiep over de rug en verwijder het darmkanaal. Dep ze grondig droog met keukenpapier.
