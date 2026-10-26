@@ -107,8 +107,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'mini-vol-au-vent', titel: 'mini vol au vent', slash: 'kip / champignon / room', gang: 'hapjes',
-    zichtbaar: false, foto: '/fotos/kerst/mini-vol-au-vent.webp',
-    fotoAlt: 'Mini bladerdeeggebakjes gevuld met kip en champignons in roomsaus, bestrooid met peterselie, op een crèmekleurig bord met een glas witte wijn',
+    zichtbaar: false, foto: '/fotos/kerst/mini-vol-au-vent-v3.webp',
+    fotoAlt: 'Bladerdeeggebakjes gevuld met kip en champignons, met roomsaus die over de rand loopt en verse tijm, in zonlicht met schaduwen',
     porties: 8, voorbereiding: 30, bereiding: 45,
     ingredienten: ["24 mini bladerdeeggebakjes (bouchées)", "1 kippenfilet", "5 dl kippenbouillon", "150 g kleine champignons", "40 g boter", "40 g bloem", "1 dl room", "1 eidooier", "sap van ½ citroen", "nootmuskaat, peper en zout", "fijngehakte peterselie"],
     stappen: [
