@@ -9,8 +9,9 @@ interface Props {
   schema?: object | object[];
   image?: string;
   rawTitle?: boolean;
+  noindex?: boolean;
 }
-const { title, description, schema, image, rawTitle } = Astro.props;
+const { title, description, schema, image, rawTitle, noindex } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const fullTitle = rawTitle ? title : title === 'Ode Cuisine' ? 'Ode Cuisine · Een ode aan de recepten die ons hebben grootgebracht' : `${title} · Ode Cuisine`;
 
@@ -37,6 +38,7 @@ const huidig = (p: string) => (pad.startsWith(p) ? 'page' : undefined);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
