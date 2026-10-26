@@ -467,7 +467,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'citroentaart', titel: 'citroentaart met meringue', slash: 'citroen / boter / meringue', gang: 'desserts',
-    zichtbaar: true, recept: 'citroentaart',
+    zichtbaar: true, recept: 'citroentaart', foto: '/fotos/kerst/citroentaart.webp',
+    fotoAlt: 'Citroentaart met afgebrande meringuetoefjes op een taartplateau, met een punt op een bordje met vork in zonlicht',
   },
   {
     slug: 'crepe-suzette', titel: 'crêpe suzette', slash: 'sinaasappel / grand marnier / boter', gang: 'desserts',
