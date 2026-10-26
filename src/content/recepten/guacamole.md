@@ -52,7 +52,7 @@ gerelateerd:
   - "gravad-lax"
 foto: /fotos/guacamole.webp
 fotoAlt: "Drie limoenen op een oude houten plank, waarvan één gehalveerd met glanzend groen vruchtvlees, tegen een donkere moody achtergrond in warm zijlicht"
-datum: 2026-11-22
+datum: 2026-11-15
 ---
 
 1. Snipper de rode ui heel fijn. Spoel hem 1 minuut onder koud water in een zeef en dep hem droog met keukenpapier, zo verliest hij zijn felste scherpte.
