@@ -62,6 +62,7 @@ gerelateerd:
 foto: /fotos/gravad-lax.webp
 fotoAlt: "Gemberwortel rechtop als een kleine vaas met een tak gele venkelbloem die eruit groeit, op warm bruin getextureerd doek met strepen zonlicht"
 datum: 2026-11-29
+mail: false
 ---
 
 1. Controleer de zalm op graatjes door met je vingers over de filet te strijken en trek ze eruit met een pincet. Dep de vis droog met keukenpapier.
