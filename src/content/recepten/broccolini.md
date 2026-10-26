@@ -52,6 +52,7 @@ gerelateerd:
 foto: /fotos/broccolini.webp
 fotoAlt: "Een bosje rauwe broccolini met lange fijne stelen op een witte gekalkte ondergrond met zachte schaduwen van bladeren"
 datum: 2026-11-08
+mail: false
 ---
 
 1. Snij de onderste centimeter van de stelen af. Halveer stelen die dikker zijn dan een potlood in de lengte, zodat alles even snel gaar wordt.
