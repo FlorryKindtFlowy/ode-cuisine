@@ -1,80 +1,47 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
-import { zichtbareRecepten } from '../lib/recepten';
-import { kerstGangen, kerstExtra } from '../lib/kerst';
+import { kerstmenu, gangen } from '../lib/kerstmenu';
 
-// Kerst met Ode: kerstmenu om op voorhand te maken.
-// Recepten die nog niet live staan, tonen "verschijnt zondag ..." zonder link.
-const alle = await getCollection('recepten');
-const live = new Set((await zichtbareRecepten()).map((r) => r.slug));
-const vind = (slug: string) => alle.find((r) => r.slug === slug)!;
-const dag = (d: Date) => d.toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', timeZone: 'Europe/Brussels' });
+// Kerst met Ode: bezoekers stellen zelf hun kerstmenu samen en downloaden een menukaartje (PDF).
+// De gerechten en recepten staan in src/lib/kerstmenu.ts.
+const recepten = await getCollection('recepten');
+const nu = new Date();
+const toonAlles = import.meta.env.DEV || import.meta.env.PUBLIC_TOON_ALLES === 'true';
 
-const gangen = kerstGangen.map((g) => ({ gang: g.gang, recepten: g.slugs.map(vind).filter(Boolean) }));
-const extra = kerstExtra.map(vind).filter(Boolean);
+// Link naar het recept, enkel als het voor klanten zichtbaar mag zijn.
+const linkVoor = (g: (typeof kerstmenu)[number]): string | null => {
+  if (!g.zichtbaar && !toonAlles) return null;
+  if (g.recept) {
+    const r = recepten.find((x) => x.slug === g.recept);
+    return r && (toonAlles || r.data.datum <= nu) ? `/recepten/${g.recept}/` : null;
+  }
+  return g.stappen ? `/kerst/recept/${g.slug}/` : null;
+};
 
-const draaiboek = [
-  { wanneer: 'drie dagen ervoor', wat: [
-    'Haal de zalm voor de gravad lax bij een visboer die je vertrouwt en zeg dat je hem rauw gaat eten. Is het geen zalm van sushikwaliteit, vries hem dan minstens 24 uur in op min 20 °C en laat hem traag ontdooien in de koelkast.',
-    'Koop je avocado\'s. Geven ze nog niet mee, leg ze dan in een papieren zak naast een appel of banaan.',
-  ] },
-  { wanneer: 'twee dagen ervoor', wat: [
-    'Leg de zalm in de marinade van zout, suiker, dille en gember. Hij heeft 48 uur nodig in de koelkast. Draai hem om de 12 uur om en giet het vocht weg.',
-  ] },
-  { wanneer: 'de dag ervoor', wat: [
-    'Stoof het konijn met pruimen. Het smaakt de dag nadien nog beter. Hou de verse pruimen apart tot het opwarmen.',
-    'Bak de bodem van de citroentaart en maak de citroencrème.',
-    'Blancheer de broccolini, koel ze af in ijswater, droog ze goed en zet ze in de koelkast.',
-    'Haal de oesters op. Kies oesters die zwaar aanvoelen en stevig gesloten zijn.',
-  ] },
-  { wanneer: 'de ochtend zelf', wat: [
-    'Klop de meringue op en zet ze op de taart, een paar uur voor het dessert.',
-    'Schraap de marinade van de zalm en dep hem droog.',
-  ] },
-  { wanneer: 'het uur voor de gasten', wat: [
-    'Maak de vinaigrette voor de oesters en laat ze 20 minuten trekken.',
-    'Snij ui, tomaat, peper en koriander voor de guacamole.',
-    'Leg de zalm 20 minuten in de diepvriezer en snij hem dan flinterdun.',
-  ] },
-  { wanneer: 'als de bel gaat', wat: [
-    'Stamp de avocado en meng alles. Open de oesters en rasp de gember pas vlak voor het serveren.',
-    'Tussen de gangen warm je het konijn zachtjes op en maak je de bruine boter, waarin je de broccolini opwarmt.',
-  ] },
-];
-
-const drank = [
-  { gang: 'bij de bubbels', tekst: 'Een droge cava of een koude champagne. Bij de oesters past ook een Muscadet sur lie of een Chablis.' },
-  { gang: 'voorgerecht', tekst: 'Een droge riesling uit de Elzas of een champagne brut. De frisheid snijdt mooi door de zalm en de gember.' },
-  { gang: 'hoofdgerecht', tekst: 'Hetzelfde bruine abdijbier waarmee je stoofde, of een soepele rode wijn zoals een Beaujolais.' },
-  { gang: 'dessert', tekst: 'Een koele moscato d\'Asti of een Sauternes. Zonder alcohol: een kop verse muntthee.' },
-];
+const perGang = gangen.map((x) => ({ ...x, items: kerstmenu.filter((g) => g.gang === x.gang).map((g) => ({ ...g, link: linkVoor(g) })) }));
+const kaartData = {
+  gangen: gangen.map((x) => x.gang),
+  items: kerstmenu.map((g) => ({ slug: g.slug, titel: g.titel, slash: g.slash, gang: g.gang })),
+};
 
 const faq = [
-  { vraag: 'Wat kan je op voorhand maken voor een kerstmenu?', antwoord: 'Bijna alles. Gravad lax start je twee dagen op voorhand, konijn met pruimen stoof je de dag ervoor en smaakt dan nog beter, en de bodem en crème van de citroentaart maak je ook de dag ervoor. Broccolini blancheer je op voorhand. Op de dag zelf open je enkel de oesters, stamp je de guacamole en zet je de meringue op de taart.' },
-  { vraag: 'Hoeveel oesters reken je per persoon op kerstavond?', antwoord: 'Als aperitief reken je 4 tot 6 oesters per persoon. Zijn de oesters het voorgerecht of het hoofdmoment, dan mag dat 6 tot 12 per persoon zijn.' },
-  { vraag: 'Wanneer begin je aan gravad lax voor Kerst?', antwoord: 'Gravad lax marineert 48 uur. Eet je op kerstavond, leg de zalm dan op 22 december in de marinade. Eet je op Kerstdag, dan start je op 23 december. Goed ingepakt blijft hij daarna tot 5 dagen goed in de koelkast.' },
-  { vraag: 'Welke wijn schenk je bij een klassiek kerstmenu?', antwoord: 'Start met een droge cava of champagne bij de oesters, schenk een droge riesling bij de gravad lax, een bruin abdijbier of een Beaujolais bij het konijn met pruimen en een moscato d\'Asti of Sauternes bij de citroentaart.' },
-  { vraag: 'Welk hoofdgerecht kan je volledig op voorhand maken voor Kerst?', antwoord: 'Een stoofgerecht zoals konijn met pruimen in bruin bier. Je stooft het de dag ervoor, het blijft 2 tot 3 dagen goed in de koelkast en wordt bij het zachtjes opwarmen alleen maar lekkerder.' },
-  { vraag: 'Voor hoeveel personen is dit kerstmenu?', antwoord: 'De gravad lax en de citroentaart zijn voor 8 personen. Het konijn, de broccolini en de oesters staan voor 4 personen: verdubbel ze voor een tafel van 8. De guacamole is voor 6 personen om te delen.' },
+  { vraag: 'Hoe werkt Kerst met Ode?', antwoord: 'Je klikt op de kerstkaart de gerechten aan die je wil maken: hapjes, voorgerechten, hoofdgerechten, desserts en iets bij de koffie. Je keuze verschijnt meteen op een menukaartje. Geef het een titel, zoals kerstavond bij jou thuis, en download het als PDF om af te drukken voor op tafel.' },
+  { vraag: 'Hoeveel hapjes reken je per persoon?', antwoord: 'Als aperitief voor een diner reken je vier tot zes hapjes per persoon. Wordt de apero de hele avond, dan mag dat tien tot twaalf zijn. Kies dan liever minder soorten en maak er meer van.' },
+  { vraag: 'Wat kan je op voorhand maken voor een kerstmenu?', antwoord: 'Meer dan je denkt. Stoofgerechten zoals konijn met pruimen, hertenstoverij of varkenswangetjes maak je een of twee dagen op voorhand en ze worden er alleen maar beter van. Kroketjes en gougères kunnen in de diepvriezer, desserts zoals tiramisu en kerststronk maak je de dag ervoor. Bij elk recept staat wat je op voorhand kan doen.' },
+  { vraag: 'Hoe druk ik het menukaartje af?', antwoord: 'Het menukaartje is een PDF op A5, de helft van een gewoon A4 blad. Druk af op stevig papier van 250 tot 300 gram, met de instelling werkelijke grootte. Op A4 drukken kan ook, dan zet je het kaartje in een fotolijstje of op een standaardje.' },
+  { vraag: 'Krijg ik de recepten ook in mijn mailbox?', antwoord: 'Binnenkort wel. Dan krijg je bij het downloaden van je menukaartje ook alle recepten van je gekozen gerechten in je mailbox. Wil je nu al elke zondag een recept ontvangen, schrijf je dan in voor Ode Zondag.' },
 ];
 
-const metLink = (slug: string) => live.has(slug);
 const schema = [
   {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'Kerst met Ode: een Belgisch kerstmenu om op voorhand te maken',
-    description: 'Een klassiek Belgisch kerstmenu van Ode Cuisine met oesters, gravad lax, konijn met pruimen en citroentaart, met een draaiboek om alles op voorhand te maken.',
+    name: 'Kerst met Ode: stel je eigen kerstmenu samen',
+    description: 'Kies uit 20 hapjes, 5 voorgerechten, 5 hoofdgerechten, 5 desserts en 3 versnaperingen bij de koffie, en download je eigen menukaartje voor op tafel.',
     url: 'https://www.odecuisine.be/kerst/',
     inLanguage: 'nl-BE',
     author: { '@type': 'Person', name: 'Florry Kindt' },
-    mainEntity: {
-      '@type': 'ItemList',
-      itemListElement: gangen.flatMap((g) => g.recepten).filter((r) => metLink(r.slug)).map((r, i) => ({
-        '@type': 'ListItem', position: i + 1, name: r.data.titel, url: `https://www.odecuisine.be/recepten/${r.slug}/`,
-      })),
-    },
   },
   {
     '@context': 'https://schema.org',
@@ -84,24 +51,23 @@ const schema = [
 ];
 ---
 <Base
-  title="Kerstmenu om op voorhand te maken: klassiek en Belgisch · Kerst met Ode"
+  title="Stel je eigen kerstmenu samen · Kerst met Ode"
   rawTitle={true}
-  description="Een klassiek Belgisch kerstmenu dat je grotendeels op voorhand maakt: oesters met gember, gravad lax, konijn met pruimen en citroentaart. Met draaiboek en wijntips."
+  description="Kies je kerstmenu uit 20 hapjes, 5 voorgerechten, 5 hoofdgerechten, 5 desserts en iets bij de koffie. Download je eigen menukaartje en druk het af voor op tafel."
   schema={schema}
-  image="/fotos/oesters-met-gember.webp"
+  image="/fotos/kerst/guacamole-krokantje.webp"
 >
   <!-- HERO -->
   <section class="sectie kerst-hero" data-kleur="zand">
     <div class="wrap twee">
       <div>
-        <span class="kicker">Kerst met Ode · een menu om op voorhand te maken</span>
+        <span class="kicker">Kerst met Ode · stel je eigen menu samen</span>
         <h1><span class="lijn"><span>Kerst met <em>Ode</em></span></span></h1>
-        <p class="lead">Een klassiek Belgisch kerstmenu dat je grotendeels op voorhand maakt. Zodat jij op kerstavond aan tafel zit, en niet in de keuken staat.</p>
+        <p class="lead">Geen vast menu, maar een kaart vol klassiekers. Jij kiest wat er op jouw tafel komt, en je krijgt er een menukaartje bij om af te drukken.</p>
         <p>Kerst is de avond waarop je het gemis het felst voelt. Er blijft een stoel leeg, of je zet er net eentje bij. En toch zitten we die avond het dichtst bij elkaar, rond gerechten die iemand ons ooit leerde.</p>
-        <p>Daarom stelde ik een kerstmenu samen uit de recepten van Ode. Van nu tot Kerst verschijnt elke zondag een gerecht uit dit menu.</p>
+        <p>Daarom zette ik twintig hapjes, vijf voorgerechten, vijf hoofdgerechten, vijf desserts en drie versnaperingen bij de koffie op een kaart. Kies, combineer en maak er jouw avond van.</p>
         <div class="knoppen" style="margin-top:28px">
-          <a class="knop knop--vol" href="#menu">Naar het menu <span class="pijl">→</span></a>
-          <a class="knop" href="#draaiboek">Het draaiboek</a>
+          <a class="knop knop--vol" href="#kaart">Kies je gerechten <span class="pijl">→</span></a>
         </div>
       </div>
       <figure class="kerst-foto">
@@ -111,105 +77,86 @@ const schema = [
     </div>
   </section>
 
-  <!-- MENU -->
-  <section class="sectie sectie--wijn" id="menu" data-kleur="wijn">
-    <div class="wrap raster">
-      <div class="kol-4 reveal">
-        <span class="kicker">het menu</span>
-        <h2>Een avond <em>aan tafel</em></h2>
-        <p>Vier gangen, gekozen omdat ze op voorhand kunnen. Klik op een gerecht voor het volledige recept, met het verhaal, de tips en de vragen die je erbij hebt.</p>
-        <p style="font-size:.92rem;opacity:.85">Staat er nog geen link bij? Dan verschijnt het recept op die zondag. Schuif aan op zondag en je krijgt het als eerste in je mailbox.</p>
-        <a class="knop" href="#zondagsbrief">Schuif aan op zondag <span class="pijl">→</span></a>
-      </div>
-      <div class="kol-1"></div>
-      <div class="kol-7 menukaart reveal">
-        <p class="menukaart-kop"><i class="o-mark"></i><span>kerst met ode</span></p>
-        {gangen.map((g) => (
-          <div class="mk-gang">
-            <span class="mk-label">{g.gang}</span>
-            {g.recepten.map((r) => (
-              <div class="mk-item">
-                {metLink(r.slug)
-                  ? <a class="mk-t mk-link" href={`/recepten/${r.slug}/`}>{r.data.titel}</a>
-                  : <p class="mk-t">{r.data.titel}</p>}
-                <p class="mk-s">{r.data.slash}</p>
-                {!metLink(r.slug) && <span class="mk-noot">verschijnt zondag {dag(r.data.datum)}</span>}
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- DE GERECHTEN -->
-  <section class="sectie" data-kleur="zand">
+  <!-- DE KAART -->
+  <section class="sectie sectie--zand kk" id="kaart" data-kleur="room">
     <div class="wrap">
-      <div class="centraal" style="margin-bottom:48px">
-        <span class="kicker">de gerechten</span>
-        <h2>Wat er op tafel <em>komt</em></h2>
+      <div class="kk-intro">
+        <span class="kicker">de kerstkaart</span>
+        <h2>Wat komt er op <em>jouw</em> tafel?</h2>
+        <p>Klik de gerechten aan die je wil maken. Ze verschijnen meteen op je menukaartje. Geef het een titel en download het om af te drukken.</p>
       </div>
-      <div class="drie kerst-kaarten" data-stagger>
-        {gangen.flatMap((g) => g.recepten.map((r) => ({ r, gang: g.gang }))).map(({ r, gang }) => {
-          const inhoud = (
-            <>
-              <div class="foto">{r.data.foto ? <img src={r.data.foto} srcset={`${r.data.foto.replace('.webp', '-klein.webp')} 900w, ${r.data.foto} 1200w`} sizes="(max-width: 900px) 100vw, 33vw" alt={r.data.fotoAlt ?? r.data.titel} loading="lazy" /> : <div class="ph"><i class="o-mark"></i><span>foto volgt</span></div>}
-                {!metLink(r.slug) && <span class="kerst-binnenkort">zondag {dag(r.data.datum)}</span>}
+
+      <div class="kk-raam">
+        <div class="kk-keuze">
+          {perGang.map((x) => (
+            <div class="kk-gang" data-gang={x.gang}>
+              <header class="kk-gang-kop">
+                <h3>{x.label}</h3>
+                <p>{x.uitleg}</p>
+                <span class="kk-aantal" data-aantal={x.gang}></span>
+              </header>
+              <div class="kk-raster">
+                {x.items.map((g) => (
+                  <div class="kk-item">
+                    <label class="kk-kies">
+                      <input type="checkbox" value={g.slug} />
+                      <span class="kk-foto">
+                        {g.foto
+                          ? <img src={g.foto} alt={g.fotoAlt ?? g.titel} loading="lazy" />
+                          : <span class="ph"><i class="o-mark"></i></span>}
+                        <span class="kk-vink" aria-hidden="true"></span>
+                      </span>
+                      <span class="kk-t">{g.titel}</span>
+                      <span class="kk-s">{g.slash}</span>
+                    </label>
+                    {g.link ? <a class="kk-recept" href={g.link}>recept <span aria-hidden="true">→</span></a> : <span class="kk-volgt">recept volgt</span>}
+                  </div>
+                ))}
               </div>
-              <span class="wie">{gang}</span>
-              <h3>{r.data.titel}</h3>
-              <span class="slash">{r.data.slash}</span>
-            </>
-          );
-          return metLink(r.slug)
-            ? <a class="kaart" href={`/recepten/${r.slug}/`}>{inhoud}</a>
-            : <div class="kaart kaart--binnenkort">{inhoud}</div>;
-        })}
+            </div>
+          ))}
+        </div>
+
+        <aside class="kk-zij" id="kaartje">
+          <div class="kk-kaartje" aria-live="polite">
+            <i class="o-mark kk-o"></i>
+            <span class="kk-kicker">kerst met ode</span>
+            <p class="kk-titel" id="kk-titel">ons kerstmenu</p>
+            <p class="kk-datum" id="kk-datum"></p>
+            <span class="kk-streep"></span>
+            <div id="kk-lijst" class="kk-lijst">
+              <p class="kk-leeg">Klik gerechten aan op de kaart. Ze verschijnen hier.</p>
+            </div>
+            <p class="kk-voet">ode cuisine · odecuisine.be</p>
+          </div>
+          <div class="kk-velden">
+            <label for="kk-naam">Titel op je kaartje</label>
+            <input id="kk-naam" type="text" maxlength="40" placeholder="kerstavond bij Lien" autocomplete="off" />
+            <label for="kk-dag">Datum (mag leeg)</label>
+            <input id="kk-dag" type="text" maxlength="30" placeholder="24 december 2026" autocomplete="off" />
+          </div>
+          <button type="button" class="knop knop--vol kk-download" id="kk-download" disabled>Download je menukaartje <span class="pijl">→</span></button>
+          <p class="kk-klein">PDF op A5, klaar om af te drukken. Binnenkort krijg je er ook alle recepten bij in je mailbox.</p>
+          <button type="button" class="kk-wis" id="kk-wis">alles wissen</button>
+        </aside>
       </div>
-      {extra.length > 0 && (
-        <p class="centraal kerst-extra">
-          Liever een warm voorgerecht of een extra gang? Ook {extra.map((r, i) => (
-            <>
-              {i > 0 && ' of '}
-              {metLink(r.slug) ? <a href={`/recepten/${r.slug}/`}>{r.data.titel}</a> : <em>{r.data.titel}</em>}
-              {!metLink(r.slug) && ` (zondag ${dag(r.data.datum)})`}
-            </>
-          ))} passen op dit menu.
-        </p>
-      )}
     </div>
+    <a class="kk-balk" href="#kaartje" hidden><span id="kk-teller">0 gerechten</span><span>bekijk je kaartje →</span></a>
+    <script type="application/json" id="kk-data" set:html={JSON.stringify(kaartData)} />
   </section>
 
-  <!-- DRAAIBOEK -->
-  <section class="sectie sectie--zand" id="draaiboek" data-kleur="room">
-    <div class="smal">
-      <span class="kicker">het draaiboek</span>
-      <h2>Wat maak je <em>wanneer</em>?</h2>
-      <p>Uitgeschreven voor kerstavond op 24 december. Eet je op Kerstdag, schuif dan alles een dag op.</p>
-      <ol class="draaiboek">
-        {draaiboek.map((s) => (
-          <li class="reveal">
-            <span class="db-wanneer">{s.wanneer}</span>
-            <ul>{s.wat.map((w) => <li>{w}</li>)}</ul>
-          </li>
-        ))}
-      </ol>
-    </div>
-  </section>
-
-  <!-- DRANK -->
+  <!-- OP VOORHAND -->
   <section class="sectie" data-kleur="zand">
     <div class="smal">
-      <span class="kicker">wat schenk je erbij</span>
-      <h2>Een glas bij <em>elke gang</em></h2>
-      <dl class="drank">
-        {drank.map((d) => (
-          <div class="reveal">
-            <dt>{d.gang}</dt>
-            <dd>{d.tekst}</dd>
-          </div>
-        ))}
-      </dl>
+      <span class="kicker">op voorhand</span>
+      <h2>Zodat jij aan tafel <em>zit</em></h2>
+      <p>Kerst is geen avond om in de keuken te staan. Een paar vuistregels voor je kiest:</p>
+      <ul class="kk-regels">
+        <li>Kies één stoofgerecht. Konijn met pruimen, hertenstoverij en varkenswangetjes maak je een of twee dagen op voorhand, en ze worden er alleen maar beter van.</li>
+        <li>Mix koude en warme hapjes. Hespenrolletjes, witloofbootjes en carpaccio rolletjes staan klaar in de koelkast, zodat je maar een paar dingen moet bakken of frituren.</li>
+        <li>Kroketjes, gougères en bitterballen kunnen weken op voorhand in de diepvriezer.</li>
+        <li>Kies een dessert dat de dag ervoor kan, zoals tiramisu van oma of de kerststronk. Sabayon en crêpe suzette zijn voor wie graag een moment aan tafel maakt.</li>
+      </ul>
     </div>
   </section>
 
@@ -238,30 +185,282 @@ const schema = [
     .kerst-hero h1 { font-size: clamp(3rem, 7vw, 6rem); }
     .kerst-foto { margin: 0; }
     .kerst-foto .bijschrift { margin-top: 12px; }
-    .mk-link { display: block; text-decoration: none; transition: color .3s; }
-    .mk-link:hover { color: var(--wijn); font-style: italic; }
-    .mk-link::after { content: ' →'; font-size: .8em; color: var(--wijn); }
-    .kaart--binnenkort .foto img { filter: saturate(.75); opacity: .85; }
-    .kerst-binnenkort { position: absolute; left: 16px; bottom: 14px; background: var(--wijn); color: var(--creme) !important; font-family: var(--sans) !important; font-style: normal !important; font-size: .66rem !important; letter-spacing: .22em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; }
-    .kerst-extra { margin-top: 48px; font-family: var(--serif); font-size: 1.3rem; }
-    .kerst-extra a { color: var(--wijn); }
-    .draaiboek { list-style: none; padding: 0; margin: 40px 0 0; border-top: 1px solid var(--wijn); }
-    .draaiboek > li { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 26px 0; border-bottom: 1px solid var(--lijn); }
-    .db-wanneer { font-family: var(--serif); font-style: italic; font-size: 1.5rem; color: var(--wijn); line-height: 1.2; }
-    .draaiboek ul { list-style: none; padding: 0; margin: 0; }
-    .draaiboek ul li { position: relative; padding-left: 22px; margin-bottom: 10px; }
-    .draaiboek ul li::before { content: '·'; position: absolute; left: 4px; top: -4px; font-family: var(--serif); font-size: 1.8rem; color: var(--wijn); }
-    .drank { margin: 32px 0 0; border-top: 1px solid var(--wijn); }
-    .drank > div { display: grid; grid-template-columns: 180px 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--lijn); }
-    .drank dt { font-size: .7rem; letter-spacing: .26em; text-transform: uppercase; color: var(--zacht); padding-top: 6px; }
-    .drank dd { margin: 0; font-family: var(--serif); font-size: 1.3rem; line-height: 1.4; }
+
+    .kk-intro { max-width: 640px; margin-bottom: 56px; }
+    .kk-raam { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 56px; align-items: start; }
+    .kk-gang + .kk-gang { margin-top: 64px; }
+    .kk-gang-kop { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 4px 16px; border-bottom: 1px solid var(--wijn); padding-bottom: 14px; margin-bottom: 26px; }
+    .kk-gang-kop h3 { margin: 0; font-size: clamp(1.8rem, 3vw, 2.4rem); }
+    .kk-gang-kop p { grid-column: 1; margin: 0; font-family: var(--serif); font-style: italic; color: var(--zacht); font-size: 1.1rem; }
+    .kk-aantal { grid-column: 2; grid-row: 1 / span 2; align-self: center; font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--wijn); }
+    .kk-raster { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 20px; }
+    .kk-item { display: flex; flex-direction: column; }
+    .kk-kies { cursor: pointer; display: flex; flex-direction: column; }
+    .kk-kies input { position: absolute; opacity: 0; pointer-events: none; }
+    .kk-foto { position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; background: var(--creme); margin-bottom: 14px; outline: 1px solid transparent; outline-offset: 4px; transition: outline-color .3s; }
+    .kk-foto img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+    .kk-foto .ph { background: var(--room); }
+    .kk-kies:hover .kk-foto img { transform: scale(1.05); }
+    .kk-vink { position: absolute; top: 12px; right: 12px; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--wijn); background: rgba(232, 238, 245, .85); transition: background .3s; }
+    .kk-vink::after { content: ''; position: absolute; left: 10px; top: 6px; width: 7px; height: 12px; border: solid var(--creme); border-width: 0 2px 2px 0; transform: rotate(45deg); opacity: 0; }
+    .kk-kies input:checked + .kk-foto { outline-color: var(--wijn); }
+    .kk-kies input:checked + .kk-foto .kk-vink { background: var(--wijn); }
+    .kk-kies input:checked + .kk-foto .kk-vink::after { opacity: 1; }
+    .kk-kies input:focus-visible + .kk-foto { outline: 2px solid var(--wijn); }
+    .kk-t { font-family: var(--serif); font-size: 1.35rem; line-height: 1.15; color: var(--inkt); transition: color .3s; }
+    .kk-kies input:checked ~ .kk-t { color: var(--wijn); font-style: italic; }
+    .kk-s { font-family: var(--serif); font-style: italic; color: var(--zacht); font-size: 1rem; margin-top: 2px; }
+    .kk-recept, .kk-volgt { margin-top: 8px; font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; }
+    .kk-recept { color: var(--wijn); text-decoration: none; }
+    .kk-recept:hover { text-decoration: underline; }
+    .kk-volgt { color: var(--zacht); opacity: .7; }
+
+    .kk-zij { position: sticky; top: 100px; }
+    .kk-kaartje { background: #fff; color: var(--wijn); padding: 40px 34px 30px; text-align: center; box-shadow: 0 30px 60px -30px rgba(42, 10, 16, .35); position: relative; min-height: 420px; display: flex; flex-direction: column; align-items: center; }
+    .kk-kaartje::before { content: ''; position: absolute; inset: 10px; border: 1px solid var(--lijn); pointer-events: none; }
+    .kk-o { width: 30px; }
+    .kk-kicker { margin-top: 14px; font-size: .6rem; letter-spacing: .32em; text-transform: uppercase; }
+    .kk-titel { margin: 10px 0 0; font-family: var(--serif); font-style: italic; font-size: 1.9rem; line-height: 1.1; }
+    .kk-datum { margin: 6px 0 0; font-size: .62rem; letter-spacing: .24em; text-transform: uppercase; color: var(--zacht); min-height: 1em; }
+    .kk-streep { display: block; width: 40px; height: 1px; background: var(--wijn); margin: 18px 0 8px; opacity: .5; }
+    .kk-lijst { flex: 1; width: 100%; max-height: 52vh; overflow: auto; }
+    .kk-lijst :global(.kk-g) { margin-top: 16px; }
+    .kk-lijst :global(.kk-gl) { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: var(--zacht); margin: 0 0 6px; }
+    .kk-lijst :global(.kk-gt) { font-family: var(--serif); font-size: 1.2rem; line-height: 1.15; margin: 6px 0 0; }
+    .kk-lijst :global(.kk-gs) { font-family: var(--serif); font-style: italic; font-size: .92rem; color: var(--zacht); margin: 0; }
+    .kk-lijst :global(.kk-leeg) { font-family: var(--serif); font-style: italic; color: var(--zacht); margin-top: 28px; }
+    .kk-voet { margin: 22px 0 0; font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: var(--zacht); }
+    .kk-velden { margin-top: 26px; display: grid; gap: 6px; }
+    .kk-velden label { font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: var(--zacht); margin-top: 8px; }
+    .kk-velden input { font: inherit; font-family: var(--serif); font-size: 1.15rem; padding: 10px 12px; border: 1px solid var(--lijn); background: #fff; color: var(--inkt); }
+    .kk-velden input:focus { outline: 1px solid var(--wijn); }
+    .kk-download { width: 100%; justify-content: center; margin-top: 22px; }
+    .kk-download[disabled] { opacity: .45; cursor: not-allowed; }
+    .kk-klein { font-size: .85rem; color: var(--zacht); margin: 12px 0 0; }
+    .kk-wis { background: none; border: 0; padding: 0; margin-top: 10px; font: inherit; font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: var(--zacht); cursor: pointer; text-decoration: underline; }
+    .kk-balk { display: none; }
+
+    .kk-regels { margin: 24px 0 0; padding-left: 20px; }
+    .kk-regels li { margin-bottom: 12px; }
+
+    @media (max-width: 1100px) {
+      .kk-raam { grid-template-columns: minmax(0, 1fr) 320px; gap: 36px; }
+      .kk-raster { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
     @media (max-width: 900px) {
       .kerst-hero .twee { grid-template-columns: 1fr; }
-      .kerst-kaarten { grid-template-columns: 1fr 1fr; }
-      .draaiboek > li, .drank > div { grid-template-columns: 1fr; gap: 8px; }
+      .kk-raam { grid-template-columns: 1fr; }
+      .kk-zij { position: static; }
+      .kk-lijst { max-height: none; }
+      .kk-balk:not([hidden]) { display: flex; position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 50; justify-content: space-between; gap: 12px; padding: 14px 20px; background: var(--wijn); color: var(--creme); text-decoration: none; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; border-radius: 999px; box-shadow: 0 12px 30px -10px rgba(42, 10, 16, .5); }
     }
-    @media (max-width: 560px) {
-      .kerst-kaarten { grid-template-columns: 1fr; }
+    @media (max-width: 480px) {
+      .kk-raster { gap: 22px 14px; }
+      .kk-t { font-size: 1.15rem; }
     }
   </style>
+
+  <script>
+    type Item = { slug: string; titel: string; slash: string; gang: string };
+    const data = JSON.parse(document.getElementById('kk-data')!.textContent || '{}') as { gangen: string[]; items: Item[] };
+    const SLEUTEL = 'ode-kerstkaart';
+    const lees = () => { try { return JSON.parse(localStorage.getItem(SLEUTEL) || '{}'); } catch { return {}; } };
+    const bewaar = (v: object) => { try { localStorage.setItem(SLEUTEL, JSON.stringify(v)); } catch {} };
+
+    const vakjes = Array.from(document.querySelectorAll<HTMLInputElement>('.kk-kies input'));
+    const naam = document.getElementById('kk-naam') as HTMLInputElement;
+    const dag = document.getElementById('kk-dag') as HTMLInputElement;
+    const lijst = document.getElementById('kk-lijst')!;
+    const titel = document.getElementById('kk-titel')!;
+    const datum = document.getElementById('kk-datum')!;
+    const knop = document.getElementById('kk-download') as HTMLButtonElement;
+    const balk = document.querySelector<HTMLAnchorElement>('.kk-balk')!;
+    const teller = document.getElementById('kk-teller')!;
+
+    const opgeslagen = lees();
+    if (Array.isArray(opgeslagen.keuze)) vakjes.forEach((v) => { v.checked = opgeslagen.keuze.includes(v.value); });
+    if (typeof opgeslagen.naam === 'string') naam.value = opgeslagen.naam;
+    if (typeof opgeslagen.dag === 'string') dag.value = opgeslagen.dag;
+
+    const gekozen = (): Item[] => {
+      const set = new Set(vakjes.filter((v) => v.checked).map((v) => v.value));
+      return data.items.filter((i) => set.has(i.slug));
+    };
+    const titelTekst = () => naam.value.trim() || 'ons kerstmenu';
+
+    const el = (tag: string, cls: string, tekst: string) => { const e = document.createElement(tag); e.className = cls; e.textContent = tekst; return e; };
+
+    function teken() {
+      const keuze = gekozen();
+      titel.textContent = titelTekst();
+      datum.textContent = dag.value.trim();
+      lijst.replaceChildren();
+      if (!keuze.length) {
+        lijst.append(el('p', 'kk-leeg', 'Klik gerechten aan op de kaart. Ze verschijnen hier.'));
+      } else {
+        data.gangen.forEach((g) => {
+          const items = keuze.filter((i) => i.gang === g);
+          if (!items.length) return;
+          const blok = el('div', 'kk-g', '');
+          blok.append(el('p', 'kk-gl', g));
+          items.forEach((i) => { blok.append(el('p', 'kk-gt', i.titel), el('p', 'kk-gs', i.slash)); });
+          lijst.append(blok);
+        });
+      }
+      data.gangen.forEach((g) => {
+        const n = keuze.filter((i) => i.gang === g).length;
+        const t = document.querySelector(`[data-aantal="${g}"]`);
+        if (t) t.textContent = n ? `${n} gekozen` : '';
+      });
+      knop.disabled = !keuze.length;
+      teller.textContent = `${keuze.length} ${keuze.length === 1 ? 'gerecht' : 'gerechten'}`;
+      balk.hidden = !keuze.length;
+      bewaar({ keuze: keuze.map((i) => i.slug), naam: naam.value, dag: dag.value });
+    }
+
+    vakjes.forEach((v) => v.addEventListener('change', teken));
+    naam.addEventListener('input', teken);
+    dag.addEventListener('input', teken);
+    document.getElementById('kk-wis')!.addEventListener('click', () => { vakjes.forEach((v) => { v.checked = false; }); teken(); });
+    teken();
+
+    // Verberg de balk onderaan zodra het kaartje zelf in beeld is.
+    const zij = document.getElementById('kaartje');
+    if (zij && 'IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => { balk.style.visibility = e.isIntersecting ? 'hidden' : ''; }).observe(zij);
+    }
+
+    // ---------- PDF ----------
+    const WIJN = '#51121a';
+    const ZACHT = '#6b5560';
+    const W = 1748, H = 2480; // A5 op 300 dpi
+
+    function laadBeeld(src: string): Promise<HTMLImageElement | null> {
+      return new Promise((ok) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => ok(null); i.src = src; });
+    }
+
+    function gespreid(ctx: CanvasRenderingContext2D, tekst: string, x: number, y: number, ruimte: number) {
+      const tekens = Array.from(tekst);
+      const breedte = tekens.reduce((s, t) => s + ctx.measureText(t).width, 0) + ruimte * (tekens.length - 1);
+      let cx = x - breedte / 2;
+      const oud = ctx.textAlign; ctx.textAlign = 'left';
+      tekens.forEach((t) => { ctx.fillText(t, cx, y); cx += ctx.measureText(t).width + ruimte; });
+      ctx.textAlign = oud;
+    }
+
+    function pasIn(ctx: CanvasRenderingContext2D, tekst: string, font: (px: number) => string, px: number, max: number) {
+      ctx.font = font(px);
+      let w = ctx.measureText(tekst).width;
+      while (w > max && px > 10) { px -= 2; ctx.font = font(px); w = ctx.measureText(tekst).width; }
+    }
+
+    async function tekenKaart(): Promise<HTMLCanvasElement> {
+      await Promise.all([
+        document.fonts.load('400 60px "Cormorant Garamond"'),
+        document.fonts.load('italic 400 60px "Cormorant Garamond"'),
+        document.fonts.load('italic 500 60px "Cormorant Garamond"'),
+        document.fonts.load('300 30px "Jost"'),
+      ]).catch(() => {});
+      const c = document.createElement('canvas'); c.width = W; c.height = H;
+      const ctx = c.getContext('2d')!;
+      ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H);
+      ctx.strokeStyle = 'rgba(81,18,26,0.35)'; ctx.lineWidth = 3; ctx.strokeRect(70, 70, W - 140, H - 140);
+      ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+
+      const logo = await laadBeeld('/logo/ode-o.png');
+      if (logo) {
+        const lh = 150, lw = lh * (logo.naturalWidth / logo.naturalHeight);
+        const o = document.createElement('canvas'); o.width = Math.ceil(lw); o.height = lh;
+        const octx = o.getContext('2d')!;
+        octx.drawImage(logo, 0, 0, lw, lh);
+        octx.globalCompositeOperation = 'source-in'; octx.fillStyle = WIJN; octx.fillRect(0, 0, o.width, o.height);
+        ctx.drawImage(o, (W - lw) / 2, 190);
+      }
+      const SERIF = '"Cormorant Garamond", Georgia, serif';
+      const SANS = '"Jost", "Helvetica Neue", Arial, sans-serif';
+      const MAXB = W - 360;
+
+      ctx.fillStyle = WIJN; ctx.font = `300 30px ${SANS}`;
+      gespreid(ctx, 'KERST MET ODE', W / 2, 420, 10);
+      pasIn(ctx, titelTekst(), (px) => `italic 500 ${px}px ${SERIF}`, 110, MAXB);
+      ctx.fillText(titelTekst(), W / 2, 545);
+      const d = dag.value.trim();
+      if (d) { ctx.fillStyle = ZACHT; ctx.font = `300 28px ${SANS}`; gespreid(ctx, d.toUpperCase(), W / 2, 615, 7); }
+      ctx.fillStyle = WIJN; ctx.globalAlpha = .5; ctx.fillRect(W / 2 - 50, 670, 100, 2); ctx.globalAlpha = 1;
+
+      // Inhoud: schaal alles zodat het tussen 740 en 2160 past.
+      const keuze = gekozen();
+      const blokken = data.gangen.map((g) => ({ g, items: keuze.filter((i) => i.gang === g) })).filter((b) => b.items.length);
+      const maat = (s: number) => blokken.reduce((h, b, bi) => h + (bi ? 70 * s : 0) + 50 * s + b.items.reduce((hh, _i, ii) => hh + (ii ? 26 * s : 0) + 72 * s + 50 * s, 0), 0);
+      const top = 760, onder = 2160, ruimte = onder - top;
+      let s = Math.min(1, ruimte / maat(1));
+      s = Math.max(s, .38);
+      let y = top + Math.max(0, (ruimte - maat(s)) / 2);
+      blokken.forEach((b, bi) => {
+        if (bi) y += 70 * s;
+        ctx.fillStyle = ZACHT; ctx.font = `300 ${Math.round(28 * s)}px ${SANS}`;
+        y += 28 * s;
+        gespreid(ctx, b.g.toUpperCase(), W / 2, y, 9 * s);
+        y += 22 * s;
+        b.items.forEach((i, ii) => {
+          if (ii) y += 26 * s;
+          ctx.fillStyle = WIJN;
+          pasIn(ctx, i.titel, (px) => `400 ${px}px ${SERIF}`, Math.round(66 * s), MAXB);
+          y += 66 * s; ctx.fillText(i.titel, W / 2, y); y += 6 * s;
+          ctx.fillStyle = ZACHT;
+          pasIn(ctx, i.slash, (px) => `italic 400 ${px}px ${SERIF}`, Math.round(40 * s), MAXB);
+          y += 44 * s; ctx.fillText(i.slash, W / 2, y); y += 6 * s;
+        });
+      });
+
+      ctx.fillStyle = WIJN; ctx.font = `italic 400 40px ${SERIF}`;
+      ctx.fillText('smaken die je nooit echt vergeet', W / 2, 2270);
+      ctx.fillStyle = ZACHT; ctx.font = `300 24px ${SANS}`;
+      gespreid(ctx, 'ODE CUISINE  ·  ODECUISINE.BE', W / 2, 2340, 8);
+      return c;
+    }
+
+    // Minimale PDF met één JPEG op een A5 pagina.
+    function maakPdf(jpeg: Uint8Array, bw: number, bh: number): Blob {
+      const enc = new TextEncoder();
+      const delen: Uint8Array[] = [];
+      const offsets: number[] = [];
+      let lengte = 0;
+      const voeg = (d: Uint8Array | string) => { const b = typeof d === 'string' ? enc.encode(d) : d; delen.push(b); lengte += b.length; };
+      const pw = 419.53, ph = 595.28;
+      const inhoud = `q ${pw} 0 0 ${ph} 0 0 cm /Im0 Do Q`;
+      voeg('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n');
+      offsets[1] = lengte; voeg('1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n');
+      offsets[2] = lengte; voeg('2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n');
+      offsets[3] = lengte; voeg(`3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${pw} ${ph}] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>\nendobj\n`);
+      offsets[4] = lengte; voeg(`4 0 obj\n<< /Type /XObject /Subtype /Image /Width ${bw} /Height ${bh} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${jpeg.length} >>\nstream\n`);
+      voeg(jpeg); voeg('\nendstream\nendobj\n');
+      offsets[5] = lengte; voeg(`5 0 obj\n<< /Length ${inhoud.length} >>\nstream\n${inhoud}\nendstream\nendobj\n`);
+      const xref = lengte;
+      let x = 'xref\n0 6\n0000000000 65535 f \n';
+      for (let i = 1; i <= 5; i++) x += String(offsets[i]).padStart(10, '0') + ' 00000 n \n';
+      voeg(x + `trailer\n<< /Size 6 /Root 1 0 R /Info << /Title (Menukaartje Ode Cuisine) /Creator (odecuisine.be) >> >>\nstartxref\n${xref}\n%%EOF\n`);
+      return new Blob(delen, { type: 'application/pdf' });
+    }
+
+    knop.addEventListener('click', async () => {
+      if (!gekozen().length) return;
+      const tekst = knop.innerHTML;
+      knop.disabled = true; knop.textContent = 'Even je kaartje drukken…';
+      try {
+        const c = await tekenKaart();
+        const blob: Blob = await new Promise((ok) => c.toBlob((b) => ok(b!), 'image/jpeg', 0.92));
+        const pdf = maakPdf(new Uint8Array(await blob.arrayBuffer()), W, H);
+        const url = URL.createObjectURL(pdf);
+        const a = document.createElement('a');
+        const bestand = titelTekst().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'kerstmenu';
+        a.href = url; a.download = `menukaartje-${bestand}-ode-cuisine.pdf`;
+        document.body.append(a); a.click(); a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 10000);
+        if (typeof (window as any).gtag === 'function') (window as any).gtag('event', 'kerst_menukaartje', { aantal: gekozen().length });
+      } finally {
+        knop.innerHTML = tekst; knop.disabled = !gekozen().length;
+      }
+    });
+  </script>
 </Base>
