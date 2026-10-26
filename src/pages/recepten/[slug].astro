@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { zichtbareRecepten } from '../../lib/recepten';
+import { kerstSlugs } from '../../lib/kerst';
 
 export async function getStaticPaths() {
   const recepten = await zichtbareRecepten();
@@ -90,6 +91,10 @@ const tijd = (m: number) => (m >= 60 ? `${Math.floor(m / 60)} u ${m % 60 ? (m % 
             <h2>vragen over dit recept</h2>
             {d.faq.map((f) => <details><summary>{f.vraag}</summary><p>{f.antwoord}</p></details>)}
           </section>
+        )}
+
+        {kerstSlugs.includes(recept.slug) && (
+          <p class="kerst-tip" style="margin-top:40px;padding:18px 22px;border:1px solid var(--wijn);font-family:var(--serif);font-size:1.2rem">Dit recept staat op ons kerstmenu. <a href="/kerst/" style="color:var(--wijn)">Bekijk Kerst met Ode</a>, met het volledige menu en wat je wanneer op voorhand maakt.</p>
         )}
 
         <div class="cta-kader">
