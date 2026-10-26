@@ -90,7 +90,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'garnaalkroketje-a-la-frank', titel: 'garnaalkroketje à la frank', slash: 'noordzeegarnaal / peterselie / citroen', gang: 'hapjes',
-    zichtbaar: false, concept: true,
+    zichtbaar: false, concept: true, foto: '/fotos/kerst/garnaalkroketje.webp',
+    fotoAlt: 'Goudbruine garnaalkroketjes met gefrituurde peterselie, grof zout en partjes citroen op een crèmekleurig bord in zonlicht',
     porties: 8, voorbereiding: 60, bereiding: 15,
     ingredienten: ["300 g gepelde grijze Noordzeegarnalen", "80 g boter", "100 g bloem", "4 dl volle melk", "1 dl visfumet of garnalenbouillon", "2 eidooiers", "1 eetlepel fijngehakte peterselie", "sap van ½ citroen", "nootmuskaat, peper en zout", "om te paneren: bloem, 2 eieren, fijn paneermeel", "frituurolie, gefrituurde peterselie en partjes citroen"],
     stappen: [
@@ -106,7 +107,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'mini-vol-au-vent', titel: 'mini vol au vent', slash: 'kip / champignon / room', gang: 'hapjes',
-    zichtbaar: false,
+    zichtbaar: false, foto: '/fotos/kerst/mini-vol-au-vent.webp',
+    fotoAlt: 'Mini bladerdeeggebakjes gevuld met kip en champignons in roomsaus, bestrooid met peterselie, op een crèmekleurig bord met een glas witte wijn',
     porties: 8, voorbereiding: 30, bereiding: 45,
     ingredienten: ["24 mini bladerdeeggebakjes (bouchées)", "1 kippenfilet", "5 dl kippenbouillon", "150 g kleine champignons", "40 g boter", "40 g bloem", "1 dl room", "1 eidooier", "sap van ½ citroen", "nootmuskaat, peper en zout", "fijngehakte peterselie"],
     stappen: [
@@ -187,7 +189,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'mini-kaaskroketje', titel: 'mini kaaskroketje', slash: 'oude brugge / peterselie / citroen', gang: 'hapjes',
-    zichtbaar: false,
+    zichtbaar: false, foto: '/fotos/kerst/kaaskroketje.webp',
+    fotoAlt: 'Kaaskroketjes van bovenaf met peterselie en partjes citroen op een crèmekleurig bord, met een glas witte wijn en een schaaltje zout',
     porties: 8, voorbereiding: 45, bereiding: 15,
     ingredienten: ["100 g boter", "120 g bloem", "5 dl volle melk", "2 eidooiers", "200 g geraspte belegen kaas (Oude Brugge of Passendale)", "50 g geraspte parmezaan", "nootmuskaat, peper en weinig zout", "om te paneren: bloem, 2 eieren, fijn paneermeel", "frituurolie, peterselie en partjes citroen"],
     stappen: [
