@@ -14,7 +14,7 @@ const linkVoor = (g: (typeof kerstmenu)[number]): string | null => {
   if (!g.zichtbaar && !toonAlles) return null;
   if (g.recept) {
     const r = recepten.find((x) => x.slug === g.recept);
-    return r && (toonAlles || r.data.datum <= nu) ? `/recepten/${g.recept}/` : null;
+    return r && (toonAlles || r.data.datum <= nu || r.data.vroegLive) ? `/recepten/${g.recept}/` : null;
   }
   return g.stappen ? `/kerst/recept/${g.slug}/` : null;
 };
