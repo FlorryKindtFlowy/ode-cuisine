@@ -128,7 +128,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'steak-tartaar-brioche', titel: 'steak tartaar op brioche', slash: 'rund / kappertjes / eidooier', gang: 'hapjes',
-    zichtbaar: false,
+    zichtbaar: false, foto: '/fotos/kerst/steak-tartaar-brioche.webp',
+    fotoAlt: 'Reepjes geroosterde brioche met steak tartaar, kappertjes, rode ui en een kwarteleidooier in de schaal, tussen champignons en eetbare bloemen in zonlicht',
     porties: 6, voorbereiding: 25, bereiding: 5,
     ingredienten: ["250 g zeer verse rundsfilet of runderstaart", "1 sjalot, heel fijn gesnipperd", "1 eetlepel kleine kappertjes", "2 augurken, fijngehakt", "1 theelepel mosterd", "1 eetlepel mayonaise", "een paar druppels Worcestershiresaus en tabasco", "1 eetlepel fijngehakte peterselie", "6 kwarteleitjes", "6 sneden brioche", "peper en zout"],
     stappen: [
