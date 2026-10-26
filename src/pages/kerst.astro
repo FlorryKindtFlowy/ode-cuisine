@@ -19,7 +19,13 @@ const linkVoor = (g: (typeof kerstmenu)[number]): string | null => {
   return g.stappen ? `/kerst/recept/${g.slug}/` : null;
 };
 
-const perGang = gangen.map((x) => ({ ...x, items: kerstmenu.filter((g) => g.gang === x.gang).map((g) => ({ ...g, link: linkVoor(g) })) }));
+// Foto: eigen kerstfoto, anders de foto van het gekoppelde zondagsrecept.
+const fotoVoor = (g: (typeof kerstmenu)[number]) => {
+  if (g.foto) return { foto: g.foto, fotoAlt: g.fotoAlt };
+  const r = g.recept ? recepten.find((x) => x.slug === g.recept) : undefined;
+  return { foto: r?.data.foto, fotoAlt: r?.data.fotoAlt };
+};
+const perGang = gangen.map((x) => ({ ...x, items: kerstmenu.filter((g) => g.gang === x.gang).map((g) => ({ ...g, ...fotoVoor(g), link: linkVoor(g) })) }));
 const kaartData = {
   gangen: gangen.map((x) => x.gang),
   items: kerstmenu.map((g) => ({ slug: g.slug, titel: g.titel, slash: g.slash, gang: g.gang })),
