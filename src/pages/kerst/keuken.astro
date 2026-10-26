@@ -1,0 +1,55 @@
+---
+// Werkpagina voor Florry: alle gerechten van de kerstkaart met hun status.
+// Niet gelinkt op de site, noindex en niet in de sitemap.
+import Base from '../../layouts/Base.astro';
+import { kerstmenu, gangen } from '../../lib/kerstmenu';
+import { getCollection } from 'astro:content';
+
+const recepten = await getCollection('recepten');
+const nu = new Date();
+const status = (g: (typeof kerstmenu)[number]) => {
+  if (g.recept) {
+    const r = recepten.find((x) => x.slug === g.recept);
+    const live = r && r.data.datum <= nu;
+    return { link: `/recepten/${g.recept}/`, bron: `zondagsrecept${r ? ', live vanaf ' + r.data.datum.toLocaleDateString('nl-BE', { day: 'numeric', month: 'long' }) : ''}${r?.data.concept ? ', concept' : ''}`, klantKlikbaar: g.zichtbaar && live };
+  }
+  return { link: `/kerst/recept/${g.slug}/`, bron: g.concept ? 'kerstrecept, familierecept in concept' : 'kerstrecept', klantKlikbaar: g.zichtbaar };
+};
+---
+<Base title="Keuken · Kerst met Ode" description="Werkpagina kerstkaart." noindex={true}>
+  <section class="sectie" data-kleur="zand">
+    <div class="wrap">
+      <span class="kicker">alleen voor Florry · niet gelinkt</span>
+      <h1>De <em>keuken</em> van de kerstkaart</h1>
+      <p>Alle {kerstmenu.length} gerechten met hun recept. Klanten zien enkel een link als <b>klant ziet link</b> op ja staat. Dat zet je in <code>src/lib/kerstmenu.ts</code> met <code>zichtbaar: true</code>.</p>
+      {gangen.map(({ gang }) => (
+        <div style="margin-top:48px">
+          <h2>{gang}</h2>
+          <table class="keuken">
+            <thead><tr><th>gerecht</th><th>foto</th><th>recept</th><th>klant ziet link</th></tr></thead>
+            <tbody>
+              {kerstmenu.filter((g) => g.gang === gang).map((g) => {
+                const s = status(g);
+                return (
+                  <tr>
+                    <td><a href={s.link}>{g.titel}</a><br /><small>{g.slash}</small></td>
+                    <td>{g.foto ? 'ja' : 'nog niet'}</td>
+                    <td>{s.bron}</td>
+                    <td>{s.klantKlikbaar ? 'ja' : 'nee'}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      ))}
+    </div>
+  </section>
+  <style>
+    .keuken { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: .95rem; }
+    .keuken th { text-align: left; font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--zacht); padding: 10px 8px; border-bottom: 1px solid var(--wijn); }
+    .keuken td { padding: 12px 8px; border-bottom: 1px solid var(--lijn); vertical-align: top; }
+    .keuken a { color: var(--wijn); font-family: var(--serif); font-size: 1.2rem; }
+    .keuken small { color: var(--zacht); font-style: italic; }
+  </style>
+</Base>
