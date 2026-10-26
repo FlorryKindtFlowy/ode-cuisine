@@ -54,9 +54,8 @@ export const kerstmenu: KerstGerecht[] = [
     fotoAlt: 'Krokantjes met grof gestampte guacamole, rode peper en koriander op een donkergroene schaal, met een kom guacamole en limoenen erachter',
   },
   {
-    slug: 'hespenrolletjes-van-mama', titel: 'hespenrolletjes van mama', slash: 'beenham / asperge / mayonaise', gang: 'hapjes',
-    zichtbaar: false, concept: true, familie: 'van mama',
-    verhaal: "Mama maakt de beste hespenrolletjes. Op elk familiefeest stond er een schotel van, en die was altijd als eerste leeg.",
+    slug: 'hespenrolletjes', titel: 'hespenrolletjes', slash: 'beenham / asperge / mayonaise', gang: 'hapjes',
+    zichtbaar: false,
     porties: 6, voorbereiding: 20, bereiding: 0,
     ingredienten: ["12 sneden beenham, niet te dun gesneden", "12 witte asperges uit een bokaal of vers gekookt", "4 eetlepels mayonaise", "1 theelepel mosterd", "1 eetlepel fijngesneden bieslook", "peper"],
     stappen: [
