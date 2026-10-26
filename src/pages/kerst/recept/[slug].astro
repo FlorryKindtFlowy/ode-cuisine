@@ -1,0 +1,58 @@
+---
+// Receptpagina's van de kerstkaart. Ze worden altijd gebouwd, maar staan op noindex
+// en zitten niet in de sitemap. Klanten zien er pas een link naar als `zichtbaar: true`
+// in src/lib/kerstmenu.ts. Florry vindt ze allemaal via /kerst/keuken/.
+import Base from '../../../layouts/Base.astro';
+import { kerstmenu } from '../../../lib/kerstmenu';
+
+export function getStaticPaths() {
+  return kerstmenu.filter((g) => !g.recept && g.stappen).map((g) => ({ params: { slug: g.slug }, props: { g } }));
+}
+const { g } = Astro.props;
+const tijd = (m: number) => (m >= 60 ? `${Math.floor(m / 60)} u ${m % 60 ? (m % 60) + ' min' : ''}` : `${m} min`);
+---
+<Base title={`${g.titel.charAt(0).toUpperCase() + g.titel.slice(1)}: recept · Kerst met Ode`} rawTitle={true} description={`Recept voor ${g.titel} van Ode Cuisine, voor op je kerstmenu.`} noindex={!g.zichtbaar} image={g.foto}>
+  <article>
+    <header class="recept-kop smal">
+      <span class="kicker">kerst met ode · {g.gang}{g.familie ? ` · ${g.familie}` : ''}</span>
+      <h1><span class="lijn"><span>{g.titel}</span></span></h1>
+      <span class="slash">{g.slash}</span>
+      <div class="recept-meta">
+        {g.porties && <div><b>{g.gang === 'bij de koffie' ? 'stuks' : 'personen'}</b>{g.porties}</div>}
+        {g.voorbereiding !== undefined && <div><b>voorbereiding</b>{tijd(g.voorbereiding)}</div>}
+        {!!g.bereiding && <div><b>bereiding</b>{tijd(g.bereiding)}</div>}
+        <div><b>gang</b>{g.gang}</div>
+      </div>
+    </header>
+
+    <div class="wrap"><div class="foto foto--breed reveal-foto">{g.foto ? <img src={g.foto} alt={g.fotoAlt ?? g.titel} /> : <div class="ph"><i class="o-mark"></i><span>foto volgt</span></div>}</div></div>
+
+    <div class="wrap recept-body">
+      <aside class="ingredienten">
+        <h3>ingrediënten</h3>
+        <ul>{(g.ingredienten ?? []).map((i) => <li>{i}</li>)}</ul>
+      </aside>
+      <div class="stappen">
+        {!g.zichtbaar && <p class="concept-melding">Verborgen voor klanten. Zet <code>zichtbaar: true</code> in src/lib/kerstmenu.ts om de link op de kerstpagina te tonen.</p>}
+        {g.concept && <p class="concept-melding">Familierecept in concept. Vervang door het echte recept voor publicatie.</p>}
+        {g.verhaal && <blockquote class="verhaal-blok">{g.verhaal}</blockquote>}
+        <h2>bereiding</h2>
+        <ol>{(g.stappen ?? []).map((s) => <li>{s}</li>)}</ol>
+        {g.opVoorhand && (
+          <section style="margin-top:40px">
+            <h2>op voorhand</h2>
+            <p>{g.opVoorhand}</p>
+          </section>
+        )}
+        {g.tips && g.tips.length > 0 && (
+          <section class="tips" style="margin-top:40px">
+            <h2>tips van de chef</h2>
+            <ul>{g.tips.map((t) => <li>{t}</li>)}</ul>
+          </section>
+        )}
+        <p style="margin-top:48px"><a class="knop" href="/kerst/#kaart">Terug naar de kerstkaart <span class="pijl">→</span></a></p>
+        <p style="margin-top:32px;font-style:italic;color:var(--zacht)">Recept van Florry Kindt, Ode Cuisine.</p>
+      </div>
+    </div>
+  </article>
+</Base>
