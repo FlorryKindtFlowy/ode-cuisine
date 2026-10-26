@@ -23,6 +23,7 @@ const recepten = defineCollection({
     trefwoorden: z.array(z.string()).default([]),
     gerelateerd: z.array(z.string()).default([]),
     concept: z.boolean().default(false),
+    vroegLive: z.boolean().default(false),
     datum: z.date(),
   }),
 });
