@@ -333,7 +333,8 @@ export const kerstmenu: KerstGerecht[] = [
   // ---------- VOORGERECHTEN ----------
   {
     slug: 'coquilles-met-foie-gras', titel: 'coquilles met foie gras', slash: 'coquille / foie gras / porto', gang: 'voorgerechten',
-    zichtbaar: false,
+    zichtbaar: false, foto: '/fotos/kerst/coquilles-met-foie-gras.webp',
+    fotoAlt: 'Gebakken coquilles met een plakje foie gras, portosaus en scheutjes op een crèmekleurig bord aan een feesttafel met granaatappels, druiven en bordeauxrode bloemen',
     porties: 4, voorbereiding: 20, bereiding: 15,
     ingredienten: ["8 grote coquilles", "4 plakjes rauwe foie gras van 40 g", "2 dl rode porto", "1 dl kalfsfond", "30 g koude boter", "1 eetlepel olijfolie", "veldsla of jonge scheuten", "fleur de sel en peper"],
     stappen: [
@@ -347,12 +348,13 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'mosseltjes-a-la-hedwin', titel: 'mosseltjes à la hedwin', slash: 'mossel / curry / room', gang: 'voorgerechten',
-    zichtbaar: false, recept: 'mosseltjes-a-la-hedwin', foto: '/fotos/kerst/mosseltjes-a-la-hedwin.webp',
-    fotoAlt: 'Een groene schaal mosselen in een romige currysaus met groentjes en peterselie, met sneetjes brood ernaast in zonlicht',
+    zichtbaar: false, recept: 'mosseltjes-a-la-hedwin', foto: '/fotos/kerst/mosseltjes-a-la-hedwin-v2.webp',
+    fotoAlt: 'Een bordeauxrode kom mosselen in currysaus met peterselie aan een kersttafel met granaatappels, druiven en kaarsen',
   },
   {
     slug: 'carpaccio-met-truffel', titel: 'carpaccio met truffel', slash: 'rund / truffel / parmezaan', gang: 'voorgerechten',
-    zichtbaar: false,
+    zichtbaar: false, foto: '/fotos/kerst/carpaccio-met-truffel.webp',
+    fotoAlt: 'Rundercarpaccio met rucola, parmezaan, pijnboompitten en plakjes zwarte truffel op een golvend bord aan een gedekte kersttafel',
     porties: 4, voorbereiding: 20, bereiding: 0,
     ingredienten: ["320 g runderfilet, heel vers", "50 g parmezaan, in schilfers", "1 handje rucola", "2 eetlepels pijnboompitten, geroosterd", "1 kleine zwarte truffel of 1 eetlepel truffeltapenade", "olijfolie extra vierge", "een paar druppels truffelolie", "fleur de sel en peper"],
     stappen: [
@@ -366,7 +368,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'gerookte-eendenborst', titel: 'gerookte eendenborst', slash: 'eend / appel / witloof', gang: 'voorgerechten',
-    zichtbaar: false,
+    zichtbaar: false, foto: '/fotos/kerst/gerookte-eendenborst.webp',
+    fotoAlt: 'Plakjes gerookte eendenborst met witloof, appel en walnoten op een golvend bord aan een kersttafel met granaatappels en bloemen',
     porties: 4, voorbereiding: 20, bereiding: 0,
     ingredienten: ["200 g gerookte eendenborst, in dunne plakjes", "2 stronken witloof", "1 zure appel", "30 g walnoten", "1 eetlepel honing", "1 eetlepel grove mosterd", "1 eetlepel ciderazijn", "3 eetlepels walnotenolie of olijfolie", "peper en zout"],
     stappen: [
@@ -380,7 +383,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'paddenstoelen-op-brioche', titel: 'paddenstoelen op brioche', slash: 'paddenstoel / brioche / eidooier', gang: 'voorgerechten',
-    zichtbaar: false,
+    zichtbaar: false, foto: '/fotos/kerst/paddenstoelen-op-brioche.webp',
+    fotoAlt: 'Gebakken paddenstoelen op geroosterde brioche met een eidooier, tijm en parmezaan aan een gedekte kersttafel',
     porties: 4, voorbereiding: 15, bereiding: 15,
     ingredienten: ["400 g gemengde paddenstoelen (oesterzwam, shiitake, kastanjechampignon)", "1 sjalot", "1 teentje look", "40 g boter", "1 dl room", "4 dikke sneden brioche", "4 verse eidooiers", "1 eetlepel fijngehakte peterselie", "peper en zout"],
     stappen: [
