@@ -55,6 +55,7 @@ gerelateerd:
 foto: /fotos/ceviche-met-limoen.webp
 fotoAlt: "Halve limoenen, citroenen en partjes citrus in een matte donkergroene keramische kom op een schotel, op een witte gekalkte ondergrond in zonlicht"
 datum: 2026-12-06
+mail: false
 ---
 
 1. Zet vier bordjes, een glazen of keramische kom en de vis minstens 15 minuten in de koelkast. Alles moet goed koud zijn, ook je handen en je mes.
