@@ -225,7 +225,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'dadels-in-spek', titel: 'dadels in spek', slash: 'dadel / spek / amandel', gang: 'hapjes',
-    zichtbaar: false,
+    zichtbaar: false, foto: '/fotos/kerst/dadels-in-spek.webp',
+    fotoAlt: 'Dadels gevuld met een amandel, gewikkeld in krokant spek op bamboeprikkers, met rozemarijn en peper in zonlicht',
     porties: 6, voorbereiding: 15, bereiding: 12,
     ingredienten: ["18 medjool dadels", "18 geblancheerde amandelen", "9 sneden ontbijtspek, in de lengte gehalveerd", "cocktailprikkers"],
     stappen: [
