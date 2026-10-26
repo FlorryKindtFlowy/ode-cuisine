@@ -124,7 +124,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'scampi-diabolique-prikker', titel: 'scampi diabolique op een prikker', slash: 'scampi / rode peper / cognac', gang: 'hapjes',
-    zichtbaar: true, recept: 'scampi-diabolique',
+    zichtbaar: true, recept: 'scampi-diabolique', foto: '/fotos/kerst/scampi-diabolique-prikker.webp',
+    fotoAlt: 'Gegrilde scampi op bamboeprikkers in een rode pepersaus met schijfjes rode peper en peterselie op een groene schaal',
   },
   {
     slug: 'steak-tartaar-brioche', titel: 'steak tartaar op brioche', slash: 'rund / kappertjes / eidooier', gang: 'hapjes',
@@ -144,7 +145,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'foie-gras-peperkoek', titel: 'foie gras op peperkoek', slash: 'foie gras / peperkoek / vijg', gang: 'hapjes',
-    zichtbaar: false,
+    zichtbaar: false, foto: '/fotos/kerst/foie-gras-peperkoek.webp',
+    fotoAlt: 'Blokjes peperkoek met een plakje foie gras, vijgenconfituur, tijm en grof zout, met partjes verse vijg',
     porties: 8, voorbereiding: 15, bereiding: 5,
     ingredienten: ["200 g foie gras (terrine of bloc)", "6 sneden peperkoek", "4 eetlepels vijgenconfituur", "2 verse vijgen", "grof zeezout (fleur de sel)", "versgemalen peper"],
     stappen: [
@@ -159,7 +161,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'gougeres-comte', titel: 'gougères met comté', slash: 'soezendeeg / comté / nootmuskaat', gang: 'hapjes',
-    zichtbaar: false,
+    zichtbaar: false, foto: '/fotos/kerst/gougeres-comte.webp',
+    fotoAlt: 'Een groene kom vol goudbruine gougères met geraspte kaas en tijm, met een stuk kaas en een opengebroken gougère ernaast',
     porties: 8, voorbereiding: 20, bereiding: 25,
     ingredienten: ["1,25 dl water", "1,25 dl melk", "100 g boter", "1 theelepel zout", "150 g bloem", "4 eieren", "120 g geraspte comté, plus extra om te bestrooien", "een snuifje nootmuskaat en peper"],
     stappen: [
@@ -175,7 +178,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'witloofbootje-blauwe-kaas', titel: 'witloofbootje met blauwe kaas', slash: 'witloof / roquefort / peer', gang: 'hapjes',
-    zichtbaar: false,
+    zichtbaar: false, foto: '/fotos/kerst/witloofbootje-blauwe-kaas.webp',
+    fotoAlt: 'Witloofblaadjes gevuld met blauwe kaas, blokjes peer en walnoten op een groene schaal, met een halve peer en roquefort erachter',
     porties: 6, voorbereiding: 15, bereiding: 0,
     ingredienten: ["2 stronken witloof", "100 g roquefort of andere blauwe kaas", "50 g verse kaas (mascarpone of ricotta)", "1 rijpe peer", "30 g walnoten", "1 theelepel honing", "een paar takjes bieslook"],
     stappen: [
