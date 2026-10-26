@@ -71,8 +71,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'pate-van-opa', titel: 'paté van opa op toast', slash: 'varken / cognac / uienconfituur', gang: 'hapjes',
-    zichtbaar: false, concept: true, familie: 'van opa', foto: '/fotos/kerst/pate-van-opa.webp',
-    fotoAlt: 'Geroosterde toastjes met paté, rode uienconfituur en tijm op een donkergroene schaal, met een glas bubbels erachter',
+    zichtbaar: false, concept: true, familie: 'van opa', foto: '/fotos/kerst/pate-van-opa-v2.webp',
+    fotoAlt: 'Een potje paté met mes, toastjes met paté, uienconfituur en augurkjes op een donkergroene schaal, met tijm en een glas witte wijn',
     verhaal: "Opa was beenhouwer in hart en nieren. Zijn paté stond op elke feesttafel, met een goed stuk brood en niets anders erbij.",
     porties: 10, voorbereiding: 30, bereiding: 90,
     ingredienten: ["500 g varkensgehakt (half mager, half doorregen)", "250 g kippenlevers, schoongemaakt", "150 g gerookt spek in blokjes", "1 ui, fijngesnipperd", "1 teentje look", "1 ei", "4 cl cognac", "1 theelepel gedroogde tijm", "1 laurierblad", "12 g zout en versgemalen peper", "voor erbij: toastjes, uienconfituur en augurken"],
