@@ -5,6 +5,7 @@
 ## Belangrijkste pagina's
 
 - [Recepten](https://www.odecuisine.be/recepten/): Belgische en Vlaamse familierecepten met stappen en het verhaal erachter
+- [Kerst met Ode](https://www.odecuisine.be/kerst/): klassiek Belgisch kerstmenu om op voorhand te maken (oesters met gember, gravad lax, konijn met pruimen, broccolini, citroentaart), met draaiboek per dag, wijn bij elke gang en FAQ
 - [Het verhaal](https://www.odecuisine.be/verhaal/): De Barakke, Hedwin en de familierecepten
 - [Kookboek](https://www.odecuisine.be/kookboek/): digitaal kookboek, wachtlijst
 - [Ode aan](https://www.odecuisine.be/ode-aan/): deel het familierecept van iemand die je dierbaar is, met het verhaal erachter
