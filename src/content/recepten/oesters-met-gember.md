@@ -59,6 +59,7 @@ gerelateerd:
 foto: /fotos/oesters-met-gember.webp
 fotoAlt: "Een geopende holle oester op een bedje van witte parels, met roze mignonette van sjalot, een wolkje gemberschuim, fijne kruidjes en witte bloemetjes, in warm gevlekt zonlicht"
 datum: 2026-11-01
+vroegLive: true
 onderwerp: "Ode Zondag: een oester, net iets wakkerder"
 brief: "Papaatje had 45 jaar een mosselrestaurant en een passie voor oesters. Deze week openen we de zondag zoals hij de avond opende: met een goede oester. Wij leggen er een roze mignonette van sjalot op en een wolkje schuim van het oestervocht en verse gember. Zilt, fris en net genoeg prik om je honger wakker te maken."
 ---
