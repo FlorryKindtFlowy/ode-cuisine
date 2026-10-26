@@ -64,7 +64,7 @@ const schema = [
   image="/fotos/kerst/kersttafel.webp"
 >
   <!-- HERO -->
-  <section class="sectie kerst-hero" data-kleur="zand">
+  <section class="sectie sectie--wijn kerst-hero kerst-bg" data-kleur="wijn">
     <div class="wrap twee">
       <div>
         <span class="kicker">Kerst met Ode · stel je eigen menu samen</span>
@@ -77,13 +77,17 @@ const schema = [
         </div>
       </div>
       <figure class="kerst-foto">
-        <div class="foto foto--boog reveal-foto"><img src="/fotos/kerst/kersttafel.webp" srcset="/fotos/kerst/kersttafel-klein.webp 600w, /fotos/kerst/kersttafel.webp 1024w" sizes="(max-width: 900px) 100vw, 50vw" alt="Gedekte kersttafel met oesters op ijs, bruschetta, gevulde dadels, kaarsen en glazen bubbels" loading="eager" style="object-position:50% 45%" /></div>
+        <div class="kerst-lijst">
+          <div class="foto foto--boog reveal-foto"><img src="/fotos/kerst/kersttafel.webp" srcset="/fotos/kerst/kersttafel-klein.webp 600w, /fotos/kerst/kersttafel.webp 1024w" sizes="(max-width: 900px) 100vw, 50vw" alt="Gedekte kersttafel met oesters op ijs, bruschetta, gevulde dadels, kaarsen en glazen bubbels" loading="eager" style="object-position:50% 45%" /></div>
+        </div>
+        <img class="kerst-slinger" src="/fotos/kerst/slinger.webp" srcset="/fotos/kerst/slinger-klein.webp 800w, /fotos/kerst/slinger.webp 1567w" sizes="(max-width: 900px) 110vw, 55vw" alt="" aria-hidden="true" loading="eager" />
+        <img class="kerst-strik" src="/fotos/kerst/strik.webp" alt="" aria-hidden="true" loading="eager" />
       </figure>
     </div>
   </section>
 
   <!-- DE KAART -->
-  <section class="sectie sectie--zand kk" id="kaart" data-kleur="room">
+  <section class="sectie sectie--wijn kk kerst-bg" id="kaart" data-kleur="wijn">
     <div class="wrap">
       <div class="kk-intro">
         <span class="kicker">de kerstkaart</span>
@@ -123,16 +127,15 @@ const schema = [
         </div>
 
         <aside class="kk-zij" id="kaartje">
-          <div class="kk-kaartje" aria-live="polite">
-            <i class="o-mark kk-o"></i>
-            <span class="kk-kicker">kerst met ode</span>
-            <p class="kk-titel" id="kk-titel">ons kerstmenu</p>
-            <p class="kk-datum" id="kk-datum"></p>
-            <span class="kk-streep"></span>
-            <div id="kk-lijst" class="kk-lijst">
-              <p class="kk-leeg">Klik gerechten aan op de kaart. Ze verschijnen hier.</p>
+          <div class="kk-kaartje">
+            <canvas id="kk-doek" width="874" height="1240" aria-hidden="true"></canvas>
+            <div class="kk-sr" aria-live="polite">
+              <p id="kk-titel">een ode aan kerst</p>
+              <p id="kk-datum"></p>
+              <div id="kk-lijst">
+                <p class="kk-leeg">Klik gerechten aan op de kaart. Ze verschijnen hier.</p>
+              </div>
             </div>
-            <p class="kk-voet">ode cuisine · odecuisine.be</p>
           </div>
           <div class="kk-velden">
             <label for="kk-naam">Titel op je kaartje</label>
@@ -187,77 +190,89 @@ const schema = [
   </section>
 
   <style>
-    .kerst-hero h1 { font-size: clamp(3rem, 7vw, 6rem); }
-    .kerst-foto { margin: 0; }
-    .kerst-foto .bijschrift { margin-top: 12px; }
+    /* Kerstsfeer: diep bordeaux met zachte gloed, goud en room zoals het menukaartje */
+    .kerst-hero, .kk { --k-room: #f4eee6; --k-goud: #c4a06a; --k-goud-diep: #b08d57; --k-zacht: rgba(244, 238, 230, .68); --k-lijn: rgba(196, 160, 106, .45); color: var(--k-room); }
+    .kerst-bg { overflow: hidden; isolation: isolate; }
+    .kerst-bg::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background: radial-gradient(ellipse 80% 60% at 50% 20%, rgba(110, 24, 36, .55), transparent 70%), radial-gradient(ellipse 120% 90% at 50% 110%, rgba(20, 3, 7, .6), transparent 60%); }
+    .kerst-hero .kicker, .kk .kicker { color: var(--k-goud); }
+    .kerst-hero h1, .kk h2, .kk h3 { color: var(--k-room); }
+    .kerst-hero h1 em, .kk h2 em { color: var(--k-goud); }
+    .kerst-hero .knop--vol, .kk .knop--vol { background: var(--k-room); border-color: var(--k-room); color: var(--wijn); }
+    .kerst-hero .knop--vol::before, .kk .knop--vol::before { background: var(--k-goud-diep); }
+    .kerst-hero .knop--vol:hover, .kk .knop--vol:hover { color: var(--k-room); border-color: var(--k-goud-diep); }
+
+    .kerst-hero { padding-top: clamp(130px, 14vw, 190px); }
+    .kerst-hero h1 { font-size: clamp(3rem, 7vw, 6rem); font-weight: 300; }
+    .kerst-hero .lead { color: var(--k-room); }
+    .kerst-hero p { color: var(--k-zacht); }
+
+    /* Foto in een boog met dennenslinger en strik, zoals op het kaartje */
+    .kerst-foto { margin: 0; position: relative; width: min(100%, 470px); justify-self: center; margin-top: 8%; }
+    .kerst-lijst { position: relative; background: var(--k-room); padding: 14px; border-radius: 999px 999px 0 0; box-shadow: 14px 14px 0 #1a0408, 0 40px 80px -30px rgba(0, 0, 0, .6); }
+    .kerst-lijst::after { content: ''; position: absolute; inset: 7px; border: 1.5px solid var(--k-goud-diep); border-radius: 999px 999px 0 0; pointer-events: none; }
+    .kerst-lijst .foto { position: relative; z-index: 1; }
+    .kerst-slinger { position: absolute; left: -9.15%; top: -8.3%; width: 117.7%; max-width: none; height: auto; pointer-events: none; z-index: 2; filter: drop-shadow(0 6px 8px rgba(0, 0, 0, .3)); }
+    .kerst-strik { position: absolute; left: 34.2%; top: -6.25%; width: 31.5%; height: auto; pointer-events: none; z-index: 3; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .35)); }
 
     .kk-intro { max-width: 640px; margin-bottom: 56px; }
-    .kk-raam { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 56px; align-items: start; }
+    .kk-intro p { color: var(--k-zacht); }
+    .kk-raam { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 56px; align-items: start; }
     .kk-gang + .kk-gang { margin-top: 64px; }
-    .kk-gang-kop { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 4px 16px; border-bottom: 1px solid var(--wijn); padding-bottom: 14px; margin-bottom: 26px; }
-    .kk-gang-kop h3 { margin: 0; font-size: clamp(1.8rem, 3vw, 2.4rem); }
-    .kk-gang-kop p { grid-column: 1; margin: 0; font-family: var(--serif); font-style: italic; color: var(--zacht); font-size: 1.1rem; }
-    .kk-aantal { grid-column: 2; grid-row: 1 / span 2; align-self: center; font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--wijn); }
+    .kk-gang-kop { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 4px 16px; border-bottom: 1px solid var(--k-lijn); padding-bottom: 14px; margin-bottom: 26px; }
+    .kk-gang-kop h3 { margin: 0; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 300; }
+    .kk-gang-kop p { grid-column: 1; margin: 0; font-family: var(--serif); font-style: italic; color: var(--k-zacht); font-size: 1.1rem; }
+    .kk-aantal { grid-column: 2; grid-row: 1 / span 2; align-self: center; font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--k-goud); }
     .kk-raster { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 20px; }
     .kk-item { display: flex; flex-direction: column; }
     .kk-kies { cursor: pointer; display: flex; flex-direction: column; }
     .kk-kies input { position: absolute; opacity: 0; pointer-events: none; }
-    .kk-foto { position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; background: var(--creme); margin-bottom: 14px; outline: 1px solid transparent; outline-offset: 4px; transition: outline-color .3s; }
+    .kk-foto { position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; background: rgba(255, 255, 255, .05); margin-bottom: 14px; border-radius: 999px 999px 0 0; outline: 1px solid transparent; outline-offset: 5px; transition: outline-color .3s; }
     .kk-foto img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
-    .kk-foto .ph { background: var(--room); }
+    .kk-foto .ph { background: rgba(255, 255, 255, .06); color: var(--k-goud); }
     .kk-kies:hover .kk-foto img { transform: scale(1.05); }
-    .kk-vink { position: absolute; top: 12px; right: 12px; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--wijn); background: rgba(232, 238, 245, .85); transition: background .3s; }
-    .kk-vink::after { content: ''; position: absolute; left: 10px; top: 6px; width: 7px; height: 12px; border: solid var(--creme); border-width: 0 2px 2px 0; transform: rotate(45deg); opacity: 0; }
-    .kk-kies input:checked + .kk-foto { outline-color: var(--wijn); }
-    .kk-kies input:checked + .kk-foto .kk-vink { background: var(--wijn); }
+    .kk-vink { position: absolute; bottom: 12px; right: 50%; transform: translateX(50%); width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--k-room); background: rgba(42, 10, 16, .45); backdrop-filter: blur(4px); transition: background .3s, border-color .3s; }
+    .kk-vink::after { content: ''; position: absolute; left: 11px; top: 6px; width: 7px; height: 13px; border: solid var(--wijn); border-width: 0 2px 2px 0; transform: rotate(45deg); opacity: 0; }
+    .kk-kies input:checked + .kk-foto { outline-color: var(--k-goud); }
+    .kk-kies input:checked + .kk-foto .kk-vink { background: var(--k-goud); border-color: var(--k-goud); }
     .kk-kies input:checked + .kk-foto .kk-vink::after { opacity: 1; }
-    .kk-kies input:focus-visible + .kk-foto { outline: 2px solid var(--wijn); }
-    .kk-t { font-family: var(--serif); font-size: 1.35rem; line-height: 1.15; color: var(--inkt); transition: color .3s; }
-    .kk-kies input:checked ~ .kk-t { color: var(--wijn); font-style: italic; }
-    .kk-s { font-family: var(--serif); font-style: italic; color: var(--zacht); font-size: 1rem; margin-top: 2px; }
+    .kk-kies input:focus-visible + .kk-foto { outline: 2px solid var(--k-goud); }
+    .kk-t { font-family: var(--serif); font-size: 1.35rem; line-height: 1.15; color: var(--k-room); transition: color .3s; }
+    .kk-kies input:checked ~ .kk-t { color: var(--k-goud); font-style: italic; }
+    .kk-s { font-family: var(--serif); font-style: italic; color: var(--k-zacht); font-size: 1rem; margin-top: 2px; }
     .kk-recept, .kk-volgt { margin-top: 8px; font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; }
-    .kk-recept { color: var(--wijn); text-decoration: none; }
+    .kk-recept { color: var(--k-goud); text-decoration: none; }
     .kk-recept:hover { text-decoration: underline; }
-    .kk-volgt { color: var(--zacht); opacity: .7; }
+    .kk-volgt { color: var(--k-zacht); opacity: .7; }
 
-    .kk-zij { position: sticky; top: 100px; }
-    .kk-kaartje { background: #fff; color: var(--wijn); padding: 40px 34px 30px; text-align: center; box-shadow: 0 30px 60px -30px rgba(42, 10, 16, .35); position: relative; min-height: 420px; display: flex; flex-direction: column; align-items: center; }
-    .kk-kaartje::before { content: ''; position: absolute; inset: 10px; border: 1px solid var(--lijn); pointer-events: none; }
-    .kk-o { width: 30px; }
-    .kk-kicker { margin-top: 14px; font-size: .6rem; letter-spacing: .32em; text-transform: uppercase; }
-    .kk-titel { margin: 10px 0 0; font-family: var(--serif); font-style: italic; font-size: 1.9rem; line-height: 1.1; }
-    .kk-datum { margin: 6px 0 0; font-size: .62rem; letter-spacing: .24em; text-transform: uppercase; color: var(--zacht); min-height: 1em; }
-    .kk-streep { display: block; width: 40px; height: 1px; background: var(--wijn); margin: 18px 0 8px; opacity: .5; }
-    .kk-lijst { flex: 1; width: 100%; max-height: 52vh; overflow: auto; }
-    .kk-lijst :global(.kk-g) { margin-top: 16px; }
-    .kk-lijst :global(.kk-gl) { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: var(--zacht); margin: 0 0 6px; }
-    .kk-lijst :global(.kk-gt) { font-family: var(--serif); font-size: 1.2rem; line-height: 1.15; margin: 6px 0 0; }
-    .kk-lijst :global(.kk-gs) { font-family: var(--serif); font-style: italic; font-size: .92rem; color: var(--zacht); margin: 0; }
-    .kk-lijst :global(.kk-leeg) { font-family: var(--serif); font-style: italic; color: var(--zacht); margin-top: 28px; }
-    .kk-voet { margin: 22px 0 0; font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: var(--zacht); }
+    .kk-zij { position: sticky; top: 96px; }
+    .kk-kaartje { position: relative; box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .7), 0 0 0 1px rgba(196, 160, 106, .25); line-height: 0; }
+    .kk-kaartje canvas { display: block; width: 100%; height: auto; aspect-ratio: 1748 / 2480; background: #430d16; }
+    .kk-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
     .kk-velden { margin-top: 26px; display: grid; gap: 6px; }
-    .kk-velden label { font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: var(--zacht); margin-top: 8px; }
-    .kk-velden input { font: inherit; font-family: var(--serif); font-size: 1.15rem; padding: 10px 12px; border: 1px solid var(--lijn); background: #fff; color: var(--inkt); }
-    .kk-velden input:focus { outline: 1px solid var(--wijn); }
+    .kk-velden label { font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: var(--k-goud); margin-top: 8px; }
+    .kk-velden input { font: inherit; font-family: var(--serif); font-size: 1.15rem; padding: 10px 12px; border: 1px solid var(--k-lijn); background: rgba(255, 255, 255, .05); color: var(--k-room); }
+    .kk-velden input::placeholder { color: rgba(244, 238, 230, .4); }
+    .kk-velden input:focus { outline: 1px solid var(--k-goud); }
     .kk-download { width: 100%; justify-content: center; margin-top: 22px; }
     .kk-download[disabled] { opacity: .45; cursor: not-allowed; }
-    .kk-klein { font-size: .85rem; color: var(--zacht); margin: 12px 0 0; }
-    .kk-wis { background: none; border: 0; padding: 0; margin-top: 10px; font: inherit; font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: var(--zacht); cursor: pointer; text-decoration: underline; }
+    .kk-klein { font-size: .85rem; color: var(--k-zacht); margin: 12px 0 0; }
+    .kk-wis { background: none; border: 0; padding: 0; margin-top: 10px; font: inherit; font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: var(--k-zacht); cursor: pointer; text-decoration: underline; }
     .kk-balk { display: none; }
 
     .kk-regels { margin: 24px 0 0; padding-left: 20px; }
     .kk-regels li { margin-bottom: 12px; }
 
     @media (max-width: 1100px) {
-      .kk-raam { grid-template-columns: minmax(0, 1fr) 320px; gap: 36px; }
+      .kk-raam { grid-template-columns: minmax(0, 1fr) 330px; gap: 36px; }
       .kk-raster { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 900px) {
       .kerst-hero .twee { grid-template-columns: 1fr; }
+      .kerst-foto { width: min(84%, 420px); margin-top: 12%; }
       .kk-raam { grid-template-columns: 1fr; }
-      .kk-zij { position: static; }
-      .kk-lijst { max-height: none; }
-      .kk-balk:not([hidden]) { display: flex; position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 50; justify-content: space-between; gap: 12px; padding: 14px 20px; background: var(--wijn); color: var(--creme); text-decoration: none; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; border-radius: 999px; box-shadow: 0 12px 30px -10px rgba(42, 10, 16, .5); }
+      .kk-zij { position: static; max-width: 440px; margin: 0 auto; width: 100%; }
+      .kk-balk:not([hidden]) { display: flex; position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 50; justify-content: space-between; gap: 12px; padding: 14px 20px; background: #f4eee6; color: var(--wijn); text-decoration: none; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; border-radius: 999px; box-shadow: 0 12px 30px -10px rgba(0, 0, 0, .6); }
     }
     @media (max-width: 480px) {
       .kk-raster { gap: 22px 14px; }
@@ -291,7 +306,7 @@ const schema = [
       const set = new Set(vakjes.filter((v) => v.checked).map((v) => v.value));
       return data.items.filter((i) => set.has(i.slug));
     };
-    const titelTekst = () => naam.value.trim() || 'ons kerstmenu';
+    const titelTekst = () => naam.value.trim() || 'een ode aan kerst';
 
     const el = (tag: string, cls: string, tekst: string) => { const e = document.createElement(tag); e.className = cls; e.textContent = tekst; return e; };
 
@@ -321,13 +336,13 @@ const schema = [
       teller.textContent = `${keuze.length} ${keuze.length === 1 ? 'gerecht' : 'gerechten'}`;
       balk.hidden = !keuze.length;
       bewaar({ keuze: keuze.map((i) => i.slug), naam: naam.value, dag: dag.value });
+      tekenVoorbeeld();
     }
 
     vakjes.forEach((v) => v.addEventListener('change', teken));
     naam.addEventListener('input', teken);
     dag.addEventListener('input', teken);
     document.getElementById('kk-wis')!.addEventListener('click', () => { vakjes.forEach((v) => { v.checked = false; }); teken(); });
-    teken();
 
     // Verberg de balk onderaan zodra het kaartje zelf in beeld is.
     const zij = document.getElementById('kaartje');
@@ -335,14 +350,32 @@ const schema = [
       new IntersectionObserver(([e]) => { balk.style.visibility = e.isIntersecting ? 'hidden' : ''; }).observe(zij);
     }
 
-    // ---------- PDF ----------
+    // ---------- KAARTJE (voorbeeld en PDF delen dezelfde tekening) ----------
+    // Ontwerp "een ode aan kerst": bordeaux achtergrond, roomkleurige boog met gouden kader, dennenslinger en strik.
     const WIJN = '#51121a';
-    const ZACHT = '#6b5560';
+    const ZACHT = '#7b4a52';
+    const GOUD = '#b08d57';
     const W = 1748, H = 2480; // A5 op 300 dpi
+    const SERIF = '"Cormorant Garamond", Georgia, serif';
+    const SANS = '"Jost", "Helvetica Neue", Arial, sans-serif';
+    // Boog (in pixels van het A5 doek)
+    const BL = 211, BR = 1532, BB = 2223, BS = 966; // links, rechts, onder, waar de boog begint
+    const BM = (BL + BR) / 2, BRAD = (BR - BL) / 2;
 
     function laadBeeld(src: string): Promise<HTMLImageElement | null> {
       return new Promise((ok) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => ok(null); i.src = src; });
     }
+    let beelden: Promise<{ slinger: HTMLImageElement | null; strik: HTMLImageElement | null }> | null = null;
+    const laadBeelden = () => (beelden ??= Promise.all([laadBeeld('/fotos/kerst/slinger.webp'), laadBeeld('/fotos/kerst/strik.webp')]).then(([slinger, strik]) => ({ slinger, strik })));
+    let fonts: Promise<unknown> | null = null;
+    const laadFonts = () => (fonts ??= Promise.all([
+      document.fonts.load(`300 60px ${SERIF}`),
+      document.fonts.load(`italic 300 60px ${SERIF}`),
+      document.fonts.load(`400 60px ${SERIF}`),
+      document.fonts.load(`italic 400 60px ${SERIF}`),
+      document.fonts.load(`300 30px ${SANS}`),
+      document.fonts.load(`400 30px ${SANS}`),
+    ]).catch(() => {}));
 
     function gespreid(ctx: CanvasRenderingContext2D, tekst: string, x: number, y: number, ruimte: number) {
       const tekens = Array.from(tekst);
@@ -357,73 +390,145 @@ const schema = [
       ctx.font = font(px);
       let w = ctx.measureText(tekst).width;
       while (w > max && px > 10) { px -= 2; ctx.font = font(px); w = ctx.measureText(tekst).width; }
+      return px;
     }
 
-    async function tekenKaart(): Promise<HTMLCanvasElement> {
-      await Promise.all([
-        document.fonts.load('400 60px "Cormorant Garamond"'),
-        document.fonts.load('italic 400 60px "Cormorant Garamond"'),
-        document.fonts.load('italic 500 60px "Cormorant Garamond"'),
-        document.fonts.load('300 30px "Jost"'),
-      ]).catch(() => {});
-      const c = document.createElement('canvas'); c.width = W; c.height = H;
+    // Titel: woorden met "kerst" erin komen cursief, zoals "een ode aan kerst".
+    function tekenTitel(ctx: CanvasRenderingContext2D, tekst: string, y: number, max: number) {
+      const delen = tekst.split(/(\s+)/).filter(Boolean).map((t) => ({ t, cursief: /kerst/i.test(t) }));
+      const font = (px: number, c: boolean) => `${c ? 'italic ' : ''}300 ${px}px ${SERIF}`;
+      const breedte = (px: number) => delen.reduce((s, d) => { ctx.font = font(px, d.cursief); return s + ctx.measureText(d.t).width; }, 0);
+      let px = 112;
+      while (breedte(px) > max && px > 30) px -= 2;
+      let x = W / 2 - breedte(px) / 2;
+      ctx.textAlign = 'left';
+      delen.forEach((d) => { ctx.font = font(px, d.cursief); ctx.fillText(d.t, x, y); x += ctx.measureText(d.t).width; });
+      ctx.textAlign = 'center';
+    }
+
+    function boogPad(ctx: CanvasRenderingContext2D, inset: number) {
+      ctx.beginPath();
+      ctx.moveTo(BL + inset, BB - inset);
+      ctx.lineTo(BL + inset, BS);
+      ctx.arc(BM, BS, BRAD - inset, Math.PI, 0);
+      ctx.lineTo(BR - inset, BB - inset);
+      ctx.closePath();
+    }
+
+    async function tekenKaart(c: HTMLCanvasElement): Promise<HTMLCanvasElement> {
+      const [{ slinger, strik }] = await Promise.all([laadBeelden(), laadFonts()]);
+      const schaal = c.width / W;
       const ctx = c.getContext('2d')!;
-      ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, H);
-      ctx.strokeStyle = 'rgba(81,18,26,0.35)'; ctx.lineWidth = 3; ctx.strokeRect(70, 70, W - 140, H - 140);
+      ctx.setTransform(schaal, 0, 0, schaal, 0, 0);
+      ctx.imageSmoothingQuality = 'high';
+
+      // Achtergrond: bordeaux met zachte gloed bovenaan
+      const bg = ctx.createRadialGradient(W / 2, H * .2, 0, W / 2, H * .45, H * .8);
+      bg.addColorStop(0, '#4f111b'); bg.addColorStop(.55, '#3e0c15'); bg.addColorStop(1, '#22060b');
+      ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+
+      // Schaduw van de boog
+      ctx.save();
+      ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = 60; ctx.shadowOffsetY = 30;
+      ctx.translate(18, 18); boogPad(ctx, 0); ctx.fillStyle = '#1a0408'; ctx.fill();
+      ctx.restore();
+
+      // De boog zelf, room met een lichte verloop
+      const room = ctx.createLinearGradient(0, BS - BRAD, 0, BB);
+      room.addColorStop(0, '#f9f6f1'); room.addColorStop(1, '#efe7dd');
+      boogPad(ctx, 0); ctx.fillStyle = room; ctx.fill();
+      boogPad(ctx, 30); ctx.strokeStyle = GOUD; ctx.lineWidth = 3; ctx.stroke();
+
+      // Slinger en strik
+      ctx.save(); ctx.shadowColor = 'rgba(20,3,7,.35)'; ctx.shadowBlur = 14; ctx.shadowOffsetY = 8;
+      if (slinger) ctx.drawImage(slinger, 90, 168, 1555, 1017);
+      if (strik) ctx.drawImage(strik, 664, 202, 416, 477);
+      ctx.restore();
+
       ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+      const MAXB = BR - BL - 200;
 
-      const logo = await laadBeeld('/logo/ode-o.png');
-      if (logo) {
-        const lh = 150, lw = lh * (logo.naturalWidth / logo.naturalHeight);
-        const o = document.createElement('canvas'); o.width = Math.ceil(lw); o.height = lh;
-        const octx = o.getContext('2d')!;
-        octx.drawImage(logo, 0, 0, lw, lh);
-        octx.globalCompositeOperation = 'source-in'; octx.fillStyle = WIJN; octx.fillRect(0, 0, o.width, o.height);
-        ctx.drawImage(o, (W - lw) / 2, 190);
-      }
-      const SERIF = '"Cormorant Garamond", Georgia, serif';
-      const SANS = '"Jost", "Helvetica Neue", Arial, sans-serif';
-      const MAXB = W - 360;
-
-      ctx.fillStyle = WIJN; ctx.font = `300 30px ${SANS}`;
-      gespreid(ctx, 'KERST MET ODE', W / 2, 420, 10);
-      pasIn(ctx, titelTekst(), (px) => `italic 500 ${px}px ${SERIF}`, 110, MAXB);
-      ctx.fillText(titelTekst(), W / 2, 545);
+      // Titel, datum en sierlijn
+      ctx.fillStyle = WIJN;
+      tekenTitel(ctx, titelTekst(), 980, MAXB);
       const d = dag.value.trim();
-      if (d) { ctx.fillStyle = ZACHT; ctx.font = `300 28px ${SANS}`; gespreid(ctx, d.toUpperCase(), W / 2, 615, 7); }
-      ctx.fillStyle = WIJN; ctx.globalAlpha = .5; ctx.fillRect(W / 2 - 50, 670, 100, 2); ctx.globalAlpha = 1;
+      const lijnY = d ? 1135 : 1080;
+      if (d) { ctx.fillStyle = WIJN; ctx.font = `300 ${pasIn(ctx, d.toUpperCase(), (px) => `300 ${px}px ${SANS}`, 25, MAXB - 200)}px ${SANS}`; gespreid(ctx, d.toUpperCase(), W / 2, 1056, 9); }
+      ctx.strokeStyle = 'rgba(81,18,26,.5)'; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.moveTo(W / 2 - 260, lijnY); ctx.lineTo(W / 2 - 40, lijnY); ctx.moveTo(W / 2 + 40, lijnY); ctx.lineTo(W / 2 + 260, lijnY); ctx.stroke();
+      ctx.save(); ctx.translate(W / 2, lijnY); ctx.rotate(Math.PI / 4); ctx.fillStyle = WIJN; ctx.fillRect(-7, -7, 14, 14); ctx.restore();
 
-      // Inhoud: schaal alles zodat het tussen 740 en 2160 past.
+      // Gerechten: alles schalen zodat het tussen de sierlijn en de voet past, desnoods in twee kolommen.
       const keuze = gekozen();
       const blokken = data.gangen.map((g) => ({ g, items: keuze.filter((i) => i.gang === g) })).filter((b) => b.items.length);
-      const maat = (s: number) => blokken.reduce((h, b, bi) => h + (bi ? 70 * s : 0) + 50 * s + b.items.reduce((hh, _i, ii) => hh + (ii ? 26 * s : 0) + 72 * s + 50 * s, 0), 0);
-      const top = 760, onder = 2160, ruimte = onder - top;
-      let s = Math.min(1, ruimte / maat(1));
-      s = Math.max(s, .38);
-      let y = top + Math.max(0, (ruimte - maat(s)) / 2);
-      blokken.forEach((b, bi) => {
-        if (bi) y += 70 * s;
-        ctx.fillStyle = ZACHT; ctx.font = `300 ${Math.round(28 * s)}px ${SANS}`;
-        y += 28 * s;
-        gespreid(ctx, b.g.toUpperCase(), W / 2, y, 9 * s);
-        y += 22 * s;
-        b.items.forEach((i, ii) => {
-          if (ii) y += 26 * s;
-          ctx.fillStyle = WIJN;
-          pasIn(ctx, i.titel, (px) => `400 ${px}px ${SERIF}`, Math.round(66 * s), MAXB);
-          y += 66 * s; ctx.fillText(i.titel, W / 2, y); y += 6 * s;
-          ctx.fillStyle = ZACHT;
-          pasIn(ctx, i.slash, (px) => `italic 400 ${px}px ${SERIF}`, Math.round(40 * s), MAXB);
-          y += 44 * s; ctx.fillText(i.slash, W / 2, y); y += 6 * s;
+      const blokH = (b: { items: Item[] }, s: number) => 54 * s + b.items.reduce((h, _i, ii) => h + (ii ? 30 * s : 0) + 62 * s + 46 * s, 0);
+      const kolomH = (lijst: typeof blokken, s: number) => lijst.reduce((h, b, bi) => h + (bi ? 84 * s : 0) + blokH(b, s), 0);
+      const top = lijnY + 70, onder = 2030, ruimte = onder - top;
+
+      let kolommen: (typeof blokken)[] = [blokken];
+      let s = blokken.length ? Math.min(1, ruimte / kolomH(blokken, 1)) : 1;
+      if (s < .62 && blokken.length > 1) {
+        // Verdeel de gangen over twee kolommen met zo gelijk mogelijke hoogte.
+        let best = 1, beste = Infinity;
+        for (let k = 1; k < blokken.length; k++) {
+          const h = Math.max(kolomH(blokken.slice(0, k), 1), kolomH(blokken.slice(k), 1));
+          if (h < beste) { beste = h; best = k; }
+        }
+        kolommen = [blokken.slice(0, best), blokken.slice(best)];
+        s = Math.min(.85, ruimte / beste);
+      }
+      const kolomB = kolommen.length > 1 ? (BR - BL - 180) / 2 : MAXB;
+      const kolomX = kolommen.length > 1 ? [W / 2 - kolomB / 2 - 10, W / 2 + kolomB / 2 + 10] : [W / 2];
+
+      const hoogste = Math.max(...kolommen.map((k) => kolomH(k, s)));
+      kolommen.forEach((kol, ki) => {
+        const x = kolomX[ki];
+        let y = top + Math.max(0, (ruimte - hoogste) / 2);
+        kol.forEach((b, bi) => {
+          if (bi) y += 84 * s;
+          ctx.fillStyle = WIJN; ctx.font = `400 ${Math.round(22 * s)}px ${SANS}`;
+          y += 22 * s;
+          gespreid(ctx, b.g.toUpperCase(), x, y, 8 * s);
+          y += 32 * s;
+          b.items.forEach((i, ii) => {
+            if (ii) y += 30 * s;
+            ctx.fillStyle = WIJN;
+            pasIn(ctx, i.titel, (px) => `400 ${px}px ${SERIF}`, Math.round(58 * s), kolomB);
+            y += 58 * s; ctx.fillText(i.titel, x, y); y += 4 * s;
+            ctx.fillStyle = ZACHT;
+            pasIn(ctx, i.slash, (px) => `italic 400 ${px}px ${SERIF}`, Math.round(38 * s), kolomB);
+            y += 42 * s; ctx.fillText(i.slash, x, y);
+          });
         });
       });
+      if (!blokken.length) {
+        ctx.fillStyle = 'rgba(81,18,26,.55)'; ctx.font = `italic 400 44px ${SERIF}`;
+        ctx.fillText('kies je gerechten op de kaart', W / 2, top + ruimte / 2 - 20);
+        ctx.fillText('en ze verschijnen hier', W / 2, top + ruimte / 2 + 40);
+      }
 
-      ctx.fillStyle = WIJN; ctx.font = `italic 400 40px ${SERIF}`;
-      ctx.fillText('smaken die je nooit echt vergeet', W / 2, 2270);
-      ctx.fillStyle = ZACHT; ctx.font = `300 24px ${SANS}`;
-      gespreid(ctx, 'ODE CUISINE  ·  ODECUISINE.BE', W / 2, 2340, 8);
+      // Voet in de boog en onder de boog
+      ctx.fillStyle = 'rgba(81,18,26,.5)'; ctx.font = `300 21px ${SANS}`;
+      gespreid(ctx, 'KERST MET ODE  ·  ODECUISINE.BE', W / 2, 2112, 9);
+      ctx.fillStyle = '#f4ece3'; ctx.font = `italic 300 46px ${SERIF}`;
+      ctx.fillText('Smaken die je nooit echt vergeet.', W / 2, 2318);
+      ctx.fillStyle = 'rgba(244,236,227,.72)'; ctx.font = `italic 300 33px ${SERIF}`;
+      ctx.fillText('ode cuisine.', W / 2, 2380);
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       return c;
     }
+
+    // Live voorbeeld naast de kaart
+    const doek = document.getElementById('kk-doek') as HTMLCanvasElement;
+    let bezig = false, opnieuw = false;
+    async function tekenVoorbeeld() {
+      if (bezig) { opnieuw = true; return; }
+      bezig = true;
+      try { await tekenKaart(doek); } finally { bezig = false; }
+      if (opnieuw) { opnieuw = false; tekenVoorbeeld(); }
+    }
+    teken();
+    document.fonts?.ready.then(() => tekenVoorbeeld());
 
     // Minimale PDF met één JPEG op een A5 pagina.
     function maakPdf(jpeg: Uint8Array, bw: number, bh: number): Blob {
@@ -453,7 +558,8 @@ const schema = [
       const tekst = knop.innerHTML;
       knop.disabled = true; knop.textContent = 'Even je kaartje drukken…';
       try {
-        const c = await tekenKaart();
+        const c = document.createElement('canvas'); c.width = W; c.height = H;
+        await tekenKaart(c);
         const blob: Blob = await new Promise((ok) => c.toBlob((b) => ok(b!), 'image/jpeg', 0.92));
         const pdf = maakPdf(new Uint8Array(await blob.arrayBuffer()), W, H);
         const url = URL.createObjectURL(pdf);
