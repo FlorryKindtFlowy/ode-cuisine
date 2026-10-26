@@ -209,8 +209,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'bitterbal-konijn-pruimen', titel: 'bitterbal van konijn met pruimen', slash: 'konijn / pruim / bruin bier', gang: 'hapjes',
-    zichtbaar: false, foto: '/fotos/kerst/bitterbal-konijn-pruimen.webp',
-    fotoAlt: 'Goudbruine bitterballen op een toefje mosterdmayonaise met grove mosterd, een gedroogde pruim en scheutjes, met een kommetje mosterd en pruimen ernaast',
+    zichtbaar: false, foto: '/fotos/kerst/bitterbal-konijn-pruimen-v2.webp',
+    fotoAlt: 'Goudbruine bitterballen van konijn op een toefje mosterdmayonaise, met grove mosterd, pruim en scheutjes, op een oude houten plank met een kommetje mosterd',
     porties: 10, voorbereiding: 45, bereiding: 15,
     ingredienten: ["400 g gestoofd konijn met pruimen, van het bot gehaald (restje van het hoofdgerecht of apart gestoofd)", "2 dl stoofsaus", "40 g boter", "50 g bloem", "4 gedroogde pruimen, fijngehakt", "1 eetlepel fijngehakte peterselie", "om te paneren: bloem, 2 eieren, fijn paneermeel", "frituurolie en grove mosterd"],
     stappen: [
@@ -240,7 +240,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'gevulde-champignon', titel: 'gevulde champignon', slash: 'champignon / lookboter / broodkruim', gang: 'hapjes',
-    zichtbaar: false,
+    zichtbaar: false, foto: '/fotos/kerst/gevulde-champignon.webp',
+    fotoAlt: 'Gegratineerde gevulde champignons met een goudbruine korst van broodkruim, kruiden en rozemarijn op een oude houten plank in zonlicht',
     porties: 6, voorbereiding: 15, bereiding: 15,
     ingredienten: ["18 middelgrote champignons", "80 g zachte boter", "2 teentjes look, geperst", "2 eetlepels fijngehakte peterselie", "30 g fijn paneermeel of panko", "20 g geraspte parmezaan", "peper en zout"],
     stappen: [
