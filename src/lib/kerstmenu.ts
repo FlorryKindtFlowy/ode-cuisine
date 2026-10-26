@@ -488,6 +488,44 @@ export const kerstmenu: KerstGerecht[] = [
     opVoorhand: "De dag ervoor maken en koel bewaren.",
   },
 
+  {
+    slug: 'moelleux', titel: 'moelleux', slash: 'chocolade / vanille-ijs / hazelnoot', gang: 'desserts',
+    zichtbaar: false,
+    porties: 6, voorbereiding: 20, bereiding: 11,
+    ingredienten: ["150 g pure chocolade (70%)", "125 g boter, plus extra voor de vormpjes", "3 eieren", "2 eidooiers", "75 g suiker", "40 g bloem", "snuifje zout", "cacaopoeder voor de vormpjes", "voor erbij: vanille-ijs en een handje geroosterde hazelnoten"],
+    stappen: [
+      "Vet 6 vormpjes in met boter en bestuif ze met cacao. Klop de overtollige cacao eruit.",
+      "Smelt de chocolade en de boter samen op een zacht vuur of au bain-marie. Laat iets afkoelen.",
+      "Klop de eieren, de dooiers, de suiker en het zout luchtig en licht van kleur.",
+      "Roer de chocolade door het eimengsel en spatel er de gezeefde bloem door.",
+      "Verdeel over de vormpjes en zet minstens een uur in de koelkast.",
+      "Verwarm de oven voor op 200 °C. Bak de moelleux 10 tot 12 minuten: de rand is gestold, het hart nog zacht.",
+      "Laat 1 minuut rusten, ga met een mesje langs de rand en stort op een bord. Serveer met vanille-ijs en hazelnoten.",
+    ],
+    tips: ["Bak eerst één proefexemplaar. Elke oven is anders, en één minuut maakt het verschil tussen een vloeibaar en een gebakken hart."],
+    opVoorhand: "Gevuld tot een dag op voorhand in de koelkast, of tot een maand in de diepvriezer. Bevroren 2 tot 3 minuten langer bakken.",
+  },
+  {
+    slug: 'chocomousse-van-florry', titel: 'chocomousse van florry', slash: 'melkchocolade / room / eiwit', gang: 'desserts',
+    zichtbaar: false,
+    verhaal: "Mijn eigen chocomousse. Veel eiwit, zodat hij luchtig is als een wolkje, en Callebaut omdat het met minder gewoon niet hetzelfde smaakt.",
+    porties: 8, voorbereiding: 30, bereiding: 0,
+    ingredienten: ["400 g melkchocolade van Callebaut", "100 g boter", "4 dooiers van eieren van organisch gevoede kippen (de dooiers zijn geler en sterker)", "10 eiwitten van eieren van organisch gevoede kippen (het schuim klopt stijver op)", "100 g room", "100 g griessuiker"],
+    stappen: [
+      "Zet een pot met dikke bodem op een zeer laag vuur en smelt hierin de chocolade en de boter.",
+      "Doe 50 g suiker bij de dooiers en klop ze op tot schuim.",
+      "Doe de andere 50 g suiker bij het eiwit in een kom en klop stijf. Draai daarbij voortdurend met de kom, zodat er geen klonters in je eiwit komen.",
+      "Klop in een andere kom de room stijf.",
+      "Is de chocolade net gesmolten, haal de pot dan van het vuur en zet de bodem even in koud water.",
+      "Roer direct het schuim van de dooiers onder de chocolade.",
+      "Roer dan de room eronder.",
+      "Schep voorzichtig het stijfgeklopte eiwit onder de chocoladeroom.",
+      "Laat de mousse minstens 2 uur opstijven in de koelkast.",
+    ],
+    tips: ["Schep het eiwit er in drie keer onder, met een grote spatel van onder naar boven. Zo blijft de mousse luchtig."],
+    opVoorhand: "De dag ervoor maken en afgedekt in de koelkast bewaren.",
+  },
+
   // ---------- BIJ DE KOFFIE ----------
   {
     slug: 'wafeltjes-van-oma', titel: 'wafeltjes van oma', slash: 'boter / suiker / vanille', gang: 'bij de koffie',
