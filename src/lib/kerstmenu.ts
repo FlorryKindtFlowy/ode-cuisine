@@ -472,7 +472,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'crepe-suzette', titel: 'crêpe suzette', slash: 'sinaasappel / grand marnier / boter', gang: 'desserts',
-    zichtbaar: false,
+    zichtbaar: false, foto: '/fotos/kerst/crepe-suzette.webp',
+    fotoAlt: 'Gevouwen crêpes in een koperen pan met sinaasappelsaus, schijfjes gekonfijte sinaasappel en rasp in zonlicht',
     porties: 4, voorbereiding: 20, bereiding: 20,
     ingredienten: ["voor de crêpes: 125 g bloem, 2 eieren, 3 dl melk, 25 g gesmolten boter, snuifje zout", "voor de saus: 80 g boter, 80 g suiker, rasp en sap van 2 sinaasappels, sap van ½ citroen, 4 cl Grand Marnier"],
     stappen: [
