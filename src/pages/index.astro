@@ -154,7 +154,7 @@ const kaart = [
       </div>
       {hoofd && (
         <a class="kol-7 feature reveal" href={`/recepten/${hoofd.slug}/`}>
-          <figure class="beeld-feature"><div class="ph ph--rijk"><i class="o-mark"></i><b>{hoofd.data.titel}</b></div></figure>
+          <figure class="beeld-feature">{hoofd.data.foto ? <img src={hoofd.data.foto} alt={hoofd.data.fotoAlt || hoofd.data.titel} loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" /> : <div class="ph ph--rijk"><i class="o-mark"></i><b>{hoofd.data.titel}</b></div>}</figure>
           <span class="label">Recept van zondag {dag(hoofd.data.datum)}{hoofd.data.familie ? ` · ${labels[hoofd.data.familie]}` : ''}</span>
           <h3>{hoofd.data.titel}</h3>
           <p class="mk-s">{hoofd.data.slash}</p>
