@@ -488,7 +488,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'sabayon-champagne', titel: 'sabayon met champagne', slash: 'eidooier / champagne / rood fruit', gang: 'desserts',
-    zichtbaar: false,
+    zichtbaar: false, foto: '/fotos/kerst/sabayon-champagne.webp',
+    fotoAlt: 'Luchtige sabayon in een geribbelde coupe met frambozen, aardbeien, rode bessen, sinaasappelrasp en poedersuiker in zonlicht',
     porties: 4, voorbereiding: 10, bereiding: 10,
     ingredienten: ["4 eidooiers", "60 g suiker", "1,5 dl champagne of cava", "250 g rood fruit (frambozen, aardbeien, bessen)"],
     stappen: [
