@@ -55,7 +55,7 @@ gerelateerd:
   - "savooikoolstoemp"
   - "pruimentaart"
 foto: /fotos/konijn-met-pruimen.webp
-fotoAlt: "Donkerpaarse pruimen, gehalveerd en in parten, met glanzend oranje vruchtvlees en zichtbare pit op een lichte gekalkte tafel tegen een beige muur, in scherp zonlicht met bladschaduwen"
+fotoAlt: "Konijn met pruimen in een crèmekleurige gietijzeren braadpan: goudbruin gestoofd konijn met gehalveerde pruimen, laurier en tijm in een donkere saus, met een schaaltje verse pruimen ernaast, in zonlicht met bladschaduwen"
 datum: 2026-10-25
 ---
 
