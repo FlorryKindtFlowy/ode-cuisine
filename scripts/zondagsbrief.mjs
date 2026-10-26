@@ -53,6 +53,7 @@ function leesRecepten() {
       const { data, content } = matter(fs.readFileSync(path.join(MAP, f), 'utf8'));
       return { slug: f.replace(/\.md$/, ''), ...data, datumIso: isoDag(new Date(data.datum)), body: content };
     })
+    .filter((r) => r.mail !== false) // mail: false in een recept = nooit mailen
     .sort((a, b) => a.datumIso.localeCompare(b.datumIso));
 }
 
