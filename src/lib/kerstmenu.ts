@@ -427,7 +427,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'lamskroontje-kruidenkorst', titel: 'lamskroontje met kruidenkorst', slash: 'lam / kruidenkorst / seizoengroenten', gang: 'hoofdgerechten',
-    zichtbaar: false,
+    zichtbaar: false, foto: '/fotos/kerst/lamskroontje-kruidenkorst.webp',
+    fotoAlt: 'Rosé gebakken lamskroontje met groene kruidenkorst en jus, met worteltjes, tomaatjes en gratin, en kommen krieltjes, wortels en boontjes in spek aan een kersttafel',
     porties: 4, voorbereiding: 30, bereiding: 25,
     ingredienten: ["2 lamskroontjes van elk 6 tot 8 ribben", "60 g paneermeel", "1 bosje peterselie", "4 takjes tijm", "2 takjes rozemarijn", "2 teentjes look", "60 g zachte boter", "2 eetlepels mosterd", "olijfolie, peper en zout", "voor erbij: geroosterde wortel, pastinaak en krielaardappelen"],
     stappen: [
