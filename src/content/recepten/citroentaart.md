@@ -62,7 +62,7 @@ gerelateerd:
   - "pruimentaart"
 foto: /fotos/citroentaart.webp
 fotoAlt: "Twee citroenen en partjes citroen en limoen op een licht houten plankje op een witte gekalkte ondergrond, in zacht zonlicht met scherpe schaduwen"
-datum: 2026-11-29
+datum: 2026-11-22
 ---
 
 1. Wrijf de bloem, poedersuiker, het zout en de koude boter met je vingertoppen tot een kruimelig zand. Voeg de eidooier en 1 eetlepel koud water toe en kneed kort tot een bal, met nog een scheutje water als het deeg te droog is.
