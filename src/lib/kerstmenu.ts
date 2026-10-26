@@ -7,7 +7,8 @@
 //   en Google indexeert ze niet.
 // - `recept` verwijst naar een zondagsrecept in src/content/recepten. Dan linkt de kaart naar
 //   dat recept, maar pas als het live staat (zijn zondag is gepasseerd) en zichtbaar true is.
-// - `foto` is een pad in /public, bv. "/fotos/kerst/guacamole-krokantje.webp".
+// - `foto` is een pad in /public, bv. "/fotos/kerst/guacamole-krokantje.webp". Zonder foto neemt
+//   de kaart automatisch de foto van het gekoppelde zondagsrecept.
 // - `concept: true` = familierecept dat Florry nog moet nakijken of vervangen.
 
 export type Gang = 'hapjes' | 'voorgerechten' | 'hoofdgerechten' | 'desserts' | 'bij de koffie';
@@ -45,7 +46,7 @@ export const kerstmenu: KerstGerecht[] = [
   // ---------- HAPJES ----------
   {
     slug: 'oesters-met-gember', titel: 'ode oestertjes met gember', slash: 'oester / gember / sjalot', gang: 'hapjes',
-    zichtbaar: true, recept: 'oesters-met-gember', foto: '/fotos/oesters-met-gember.webp', fotoAlt: 'Verse gemberwortel in het zonlicht',
+    zichtbaar: true, recept: 'oesters-met-gember',
   },
   {
     slug: 'guacamole-krokantje', titel: 'guacamole op een krokantje', slash: 'avocado / limoen / koriander', gang: 'hapjes',
@@ -120,7 +121,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'scampi-diabolique-prikker', titel: 'scampi diabolique op een prikker', slash: 'scampi / rode peper / cognac', gang: 'hapjes',
-    zichtbaar: true, recept: 'scampi-diabolique', foto: '/fotos/scampi-diabolique.webp', fotoAlt: 'Glanzende rode pepers in het zonlicht',
+    zichtbaar: true, recept: 'scampi-diabolique',
   },
   {
     slug: 'steak-tartaar-brioche', titel: 'steak tartaar op brioche', slash: 'rund / kappertjes / eidooier', gang: 'hapjes',
@@ -382,7 +383,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'konijn-met-pruimen', titel: 'konijn met pruimen', slash: 'konijn / pruim / donker bier', gang: 'hoofdgerechten',
-    zichtbaar: true, recept: 'konijn-met-pruimen', foto: '/fotos/konijn-met-pruimen.webp', fotoAlt: 'Donkerpaarse pruimen in het zonlicht',
+    zichtbaar: true, recept: 'konijn-met-pruimen',
   },
   {
     slug: 'hertenstoverij-peperkoek', titel: 'hertenstoverij met peperkoek', slash: 'hert / bruin bier / peperkoek', gang: 'hoofdgerechten',
@@ -439,7 +440,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'citroentaart', titel: 'citroentaart met meringue', slash: 'citroen / boter / meringue', gang: 'desserts',
-    zichtbaar: true, recept: 'citroentaart', foto: '/fotos/citroentaart.webp', fotoAlt: 'Citroenen en limoen in de lage winterzon',
+    zichtbaar: true, recept: 'citroentaart',
   },
   {
     slug: 'crepe-suzette', titel: 'crêpe suzette', slash: 'sinaasappel / grand marnier / boter', gang: 'desserts',
