@@ -462,7 +462,8 @@ export const kerstmenu: KerstGerecht[] = [
   // ---------- DESSERTS ----------
   {
     slug: 'tiramisu-van-oma', titel: 'tiramisu van oma', slash: 'mascarpone / espresso / stoute vingertjes', gang: 'desserts',
-    zichtbaar: false, recept: 'tiramisu-van-oma',
+    zichtbaar: false, recept: 'tiramisu-van-oma', foto: '/fotos/kerst/tiramisu-van-oma.webp',
+    fotoAlt: 'Tiramisu in een geribbelde coupe met vallende cacao, naast een groene ovenschaal tiramisu en een bordje met een lepel in zonlicht',
   },
   {
     slug: 'citroentaart', titel: 'citroentaart met meringue', slash: 'citroen / boter / meringue', gang: 'desserts',
