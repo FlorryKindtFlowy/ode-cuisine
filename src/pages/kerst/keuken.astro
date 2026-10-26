@@ -33,7 +33,7 @@ const status = (g: (typeof kerstmenu)[number]) => {
                 return (
                   <tr>
                     <td><a href={s.link}>{g.titel}</a><br /><small>{g.slash}</small></td>
-                    <td>{g.foto ? 'ja' : 'nog niet'}</td>
+                    <td>{g.foto || (g.recept && recepten.find((x) => x.slug === g.recept)?.data.foto) ? 'ja' : 'nog niet'}</td>
                     <td>{s.bron}</td>
                     <td>{s.klantKlikbaar ? 'ja' : 'nee'}</td>
                   </tr>
