@@ -10,7 +10,7 @@ const nu = new Date();
 const status = (g: (typeof kerstmenu)[number]) => {
   if (g.recept) {
     const r = recepten.find((x) => x.slug === g.recept);
-    const live = r && r.data.datum <= nu;
+    const live = r && (r.data.datum <= nu || r.data.vroegLive);
     return { link: `/recepten/${g.recept}/`, bron: `zondagsrecept${r ? ', live vanaf ' + r.data.datum.toLocaleDateString('nl-BE', { day: 'numeric', month: 'long' }) : ''}${r?.data.concept ? ', concept' : ''}`, klantKlikbaar: g.zichtbaar && live };
   }
   return { link: `/kerst/recept/${g.slug}/`, bron: g.concept ? 'kerstrecept, familierecept in concept' : 'kerstrecept', klantKlikbaar: g.zichtbaar };
