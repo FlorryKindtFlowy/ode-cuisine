@@ -51,7 +51,7 @@ gerelateerd:
   - "ceviche-met-limoen"
 foto: /fotos/oesters-met-gember.webp
 fotoAlt: "Grillige verse gemberwortel die rechtop staat als een sculptuur op een warm bruin getextureerd doek, met strepen zonlicht erover"
-datum: 2026-11-08
+datum: 2026-11-01
 ---
 
 1. Bewaar de oesters tot het serveren in de koelkast op 4 tot 6 °C, met de bolle kant naar onder en afgedekt met een vochtige keukenhanddoek. Leg ze nooit in water of in een afgesloten plastic zak.
