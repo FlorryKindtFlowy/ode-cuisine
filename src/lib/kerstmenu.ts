@@ -194,8 +194,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'mini-kaaskroketje', titel: 'mini kaaskroketje', slash: 'oude brugge / peterselie / citroen', gang: 'hapjes',
-    zichtbaar: false, foto: '/fotos/kerst/kaaskroketje.webp',
-    fotoAlt: 'Kaaskroketjes van bovenaf met peterselie en partjes citroen op een crèmekleurig bord, met een glas witte wijn en een schaaltje zout',
+    zichtbaar: false, foto: '/fotos/kerst/kaaskroketje-v2.webp',
+    fotoAlt: 'Ronde kaaskroketjes met gefrituurde peterselie en citroenrasp, eentje opengebroken met gesmolten kaas, en een partje citroen in zonlicht',
     porties: 8, voorbereiding: 45, bereiding: 15,
     ingredienten: ["100 g boter", "120 g bloem", "5 dl volle melk", "2 eidooiers", "200 g geraspte belegen kaas (Oude Brugge of Passendale)", "50 g geraspte parmezaan", "nootmuskaat, peper en weinig zout", "om te paneren: bloem, 2 eieren, fijn paneermeel", "frituurolie, peterselie en partjes citroen"],
     stappen: [
@@ -209,7 +209,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'bitterbal-konijn-pruimen', titel: 'bitterbal van konijn met pruimen', slash: 'konijn / pruim / bruin bier', gang: 'hapjes',
-    zichtbaar: false,
+    zichtbaar: false, foto: '/fotos/kerst/bitterbal-konijn-pruimen.webp',
+    fotoAlt: 'Goudbruine bitterballen op een toefje mosterdmayonaise met grove mosterd, een gedroogde pruim en scheutjes, met een kommetje mosterd en pruimen ernaast',
     porties: 10, voorbereiding: 45, bereiding: 15,
     ingredienten: ["400 g gestoofd konijn met pruimen, van het bot gehaald (restje van het hoofdgerecht of apart gestoofd)", "2 dl stoofsaus", "40 g boter", "50 g bloem", "4 gedroogde pruimen, fijngehakt", "1 eetlepel fijngehakte peterselie", "om te paneren: bloem, 2 eieren, fijn paneermeel", "frituurolie en grove mosterd"],
     stappen: [
