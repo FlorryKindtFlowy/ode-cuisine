@@ -1,15 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { zichtbareRecepten } from '../../lib/recepten';
 import { kerstSlugs } from '../../lib/kerst';
 
 export async function getStaticPaths() {
   const recepten = await zichtbareRecepten();
-  // vroegLive: true in een recept = de pagina staat al online via de directe link,
-  // maar verschijnt pas op de receptenpagina, de home en in de lijsten op zijn zondag.
-  const vroeg = await getCollection('recepten', (r) => r.data.vroegLive && !recepten.some((z) => z.slug === r.slug));
-  return [...recepten, ...vroeg].map((r) => ({ params: { slug: r.slug }, props: { recept: r, alle: recepten } }));
+  return recepten.map((r) => ({ params: { slug: r.slug }, props: { recept: r, alle: recepten } }));
 }
 const { recept, alle } = Astro.props;
 const d = recept.data;
@@ -98,7 +94,7 @@ const tijd = (m: number) => (m >= 60 ? `${Math.floor(m / 60)} u ${m % 60 ? (m % 
         )}
 
         {kerstSlugs.includes(recept.slug) && (
-          <p class="kerst-tip" style="margin-top:40px;padding:18px 22px;border:1px solid var(--wijn);font-family:var(--serif);font-size:1.2rem">Dit recept staat op ons kerstmenu. <a href="/kerst/" style="color:var(--wijn)">Bekijk Kerst met Ode</a>, met het volledige menu en wat je wanneer op voorhand maakt.</p>
+          <p class="kerst-tip" style="margin-top:40px;padding:18px 22px;border:1px solid var(--wijn);font-family:var(--serif);font-size:1.2rem">Dit recept staat op onze kerstkaart. <a href="/kerst/#kaart" style="color:var(--wijn)">Stel je eigen kerstmenu samen</a> en download je menukaartje voor op tafel.</p>
         )}
 
         <div class="cta-kader">
