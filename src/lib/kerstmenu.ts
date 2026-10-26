@@ -410,7 +410,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'hertenstoverij-peperkoek', titel: 'hertenstoverij met peperkoek', slash: 'hert / bruin bier / peperkoek', gang: 'hoofdgerechten',
-    zichtbaar: false,
+    zichtbaar: false, foto: '/fotos/kerst/hertenstoverij-peperkoek.webp',
+    fotoAlt: 'Hertenstoverij met blokjes peperkoek, zilveruitjes en tijm in een crèmekleurige schaal, met kroketten, appelmoes en witloofsalade aan een gedekte kersttafel',
     porties: 6, voorbereiding: 30, bereiding: 180,
     ingredienten: ["1,2 kg hertenstoofvlees (schouder of bil), in blokken", "2 grote uien", "2 eetlepels bloem", "75 cl donker abdijbier", "4 sneden peperkoek", "2 eetlepels mosterd", "2 laurierbladeren", "4 takjes tijm", "4 jeneverbessen, gekneusd", "1 eetlepel bruine suiker", "1 eetlepel azijn", "boter, peper en zout"],
     stappen: [
@@ -442,7 +443,8 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'varkenswangetjes', titel: 'varkenswangetjes', slash: 'varken / rode wijn / wortel', gang: 'hoofdgerechten',
-    zichtbaar: false,
+    zichtbaar: false, foto: '/fotos/kerst/varkenswangetjes.webp',
+    fotoAlt: 'Gestoofde varkenswangetjes in glanzende rodewijnsaus met zilveruitjes, met puree, glanzende worteltjes, rode kool en een kannetje saus aan een gedekte kersttafel',
     porties: 4, voorbereiding: 25, bereiding: 180,
     ingredienten: ["12 varkenswangetjes (ongeveer 1 kg)", "1 ui", "2 wortels", "2 stengels selder", "2 teentjes look", "1 eetlepel tomatenpuree", "5 dl rode wijn", "3 dl kalfsfond", "2 laurierbladeren", "4 takjes tijm", "boter, peper en zout", "voor erbij: glanzende worteltjes en puree"],
     stappen: [
