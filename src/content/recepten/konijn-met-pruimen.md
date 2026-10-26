@@ -54,7 +54,7 @@ trefwoorden:
 gerelateerd:
   - "savooikoolstoemp"
   - "pruimentaart"
-foto: /fotos/konijn-met-pruimen.webp
+foto: /fotos/konijn-met-pruimen-v2.webp
 fotoAlt: "Konijn met pruimen in een crèmekleurige gietijzeren braadpan: goudbruin gestoofd konijn met gehalveerde pruimen, laurier en tijm in een donkere saus, met een schaaltje verse pruimen ernaast, in zonlicht met bladschaduwen"
 datum: 2026-10-25
 ---
