@@ -149,7 +149,7 @@ const schema = [
         </aside>
       </div>
     </div>
-    <a class="kk-balk" href="#kaartje" hidden><span id="kk-teller">0 gerechten</span><span>bekijk je kaartje →</span></a>
+    <a class="kk-balk" href="#kaartje" hidden><canvas class="kk-mini" id="kk-mini" width="140" height="199" aria-hidden="true"></canvas><span class="kk-balk-t"><span id="kk-teller">0 gerechten</span><span>bekijk je kaartje →</span></span></a>
     <script type="application/json" id="kk-data" set:html={JSON.stringify(kaartData)} />
   </section>
 
@@ -192,7 +192,8 @@ const schema = [
   <style>
     /* Kerstsfeer: diep bordeaux met zachte gloed, goud en room zoals het menukaartje */
     .kerst-hero, .kk { --k-room: #f4eee6; --k-goud: #c4a06a; --k-goud-diep: #b08d57; --k-zacht: rgba(244, 238, 230, .68); --k-lijn: rgba(196, 160, 106, .45); color: var(--k-room); }
-    .kerst-bg { overflow: hidden; isolation: isolate; }
+    /* clip i.p.v. hidden: anders werkt position sticky niet voor het kaartje */
+    .kerst-bg { overflow: hidden; overflow: clip; isolation: isolate; }
     .kerst-bg::before { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
       background: radial-gradient(ellipse 80% 60% at 50% 20%, rgba(110, 24, 36, .55), transparent 70%), radial-gradient(ellipse 120% 90% at 50% 110%, rgba(20, 3, 7, .6), transparent 60%); }
     .kerst-hero .kicker, .kk .kicker { color: var(--k-goud); }
@@ -245,7 +246,9 @@ const schema = [
     .kk-recept:hover { text-decoration: underline; }
     .kk-volgt { color: var(--k-zacht); opacity: .7; }
 
-    .kk-zij { position: sticky; top: 96px; }
+    .kk-zij { position: sticky; top: 90px; }
+    /* Kaartje zo groot dat kaartje, velden en knop samen in beeld blijven tijdens het scrollen */
+    .kk-zij .kk-kaartje { width: clamp(220px, calc((100vh - 470px) * 0.705), 100%); margin-inline: auto; }
     .kk-kaartje { position: relative; box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .7), 0 0 0 1px rgba(196, 160, 106, .25); line-height: 0; }
     .kk-kaartje canvas { display: block; width: 100%; height: auto; aspect-ratio: 1748 / 2480; background: #430d16; }
     .kk-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -272,7 +275,12 @@ const schema = [
       .kerst-foto { width: min(84%, 420px); margin-top: 12%; }
       .kk-raam { grid-template-columns: 1fr; }
       .kk-zij { position: static; max-width: 440px; margin: 0 auto; width: 100%; }
-      .kk-balk:not([hidden]) { display: flex; position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 50; justify-content: space-between; gap: 12px; padding: 14px 20px; background: #f4eee6; color: var(--wijn); text-decoration: none; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; border-radius: 999px; box-shadow: 0 12px 30px -10px rgba(0, 0, 0, .6); }
+      .kk-zij .kk-kaartje { width: auto; }
+      /* Op gsm: mini kaartje dat vast onderaan blijft terwijl je gerechten kiest */
+      .kk-balk:not([hidden]) { display: flex; align-items: center; position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 50; gap: 14px; padding: 8px 18px 8px 8px; background: #f4eee6; color: var(--wijn); text-decoration: none; font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; border-radius: 14px; box-shadow: 0 12px 30px -10px rgba(0, 0, 0, .6); }
+      .kk-mini { width: 56px; height: auto; aspect-ratio: 1748 / 2480; flex: none; background: #430d16; box-shadow: 0 0 0 1px rgba(196, 160, 106, .4); }
+      .kk-balk-t { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+      .kk-balk-t span + span { color: var(--k-goud-diep); }
     }
     @media (max-width: 480px) {
       .kk-raster { gap: 22px 14px; }
@@ -524,7 +532,12 @@ const schema = [
     async function tekenVoorbeeld() {
       if (bezig) { opnieuw = true; return; }
       bezig = true;
-      try { await tekenKaart(doek); } finally { bezig = false; }
+      try {
+        await tekenKaart(doek);
+        const mini = document.getElementById('kk-mini') as HTMLCanvasElement | null;
+        const mc = mini?.getContext('2d');
+        if (mini && mc) { mc.imageSmoothingQuality = 'high'; mc.clearRect(0, 0, mini.width, mini.height); mc.drawImage(doek, 0, 0, mini.width, mini.height); }
+      } finally { bezig = false; }
       if (opnieuw) { opnieuw = false; tekenVoorbeeld(); }
     }
     teken();
