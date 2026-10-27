@@ -68,7 +68,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'steak-tartaar-brioche', titel: 'steak tartaar op brioche', slash: 'rund / kappertjes / eidooier', gang: 'hapjes',
-    zichtbaar: false, foto: '/fotos/kerst/steak-tartaar-brioche.webp',
+    zichtbaar: true, foto: '/fotos/kerst/steak-tartaar-brioche.webp',
     fotoAlt: 'Reepjes geroosterde brioche met steak tartaar, kappertjes, rode ui en een kwarteleidooier in de schaal, tussen champignons en eetbare bloemen in zonlicht',
     porties: 6, voorbereiding: 25, bereiding: 5,
     ingredienten: ["250 g zeer verse rundsfilet of runderstaart", "1 sjalot, heel fijn gesnipperd", "1 eetlepel kleine kappertjes", "2 augurken, fijngehakt", "1 theelepel mosterd", "1 eetlepel mayonaise", "een paar druppels Worcestershiresaus en tabasco", "1 eetlepel fijngehakte peterselie", "6 kwarteleitjes", "6 sneden brioche", "peper en zout"],
@@ -84,7 +84,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'mini-vol-au-vent', titel: 'mini vol au vent', slash: 'kip / champignon / room', gang: 'hapjes',
-    zichtbaar: false, foto: '/fotos/kerst/mini-vol-au-vent-v3.webp',
+    zichtbaar: true, foto: '/fotos/kerst/mini-vol-au-vent-v3.webp',
     fotoAlt: 'Bladerdeeggebakjes gevuld met kip en champignons, met roomsaus die over de rand loopt en verse tijm, in zonlicht met schaduwen',
     porties: 8, voorbereiding: 30, bereiding: 45,
     ingredienten: ["24 mini bladerdeeggebakjes (bouchées)", "1 kippenfilet", "5 dl kippenbouillon", "150 g kleine champignons", "40 g boter", "40 g bloem", "1 dl room", "1 eidooier", "sap van ½ citroen", "nootmuskaat, peper en zout", "fijngehakte peterselie"],
@@ -117,7 +117,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'foie-gras-peperkoek', titel: 'foie gras op peperkoek', slash: 'foie gras / peperkoek / vijg', gang: 'hapjes',
-    zichtbaar: false, foto: '/fotos/kerst/foie-gras-peperkoek.webp',
+    zichtbaar: true, foto: '/fotos/kerst/foie-gras-peperkoek.webp',
     fotoAlt: 'Blokjes peperkoek met een plakje foie gras, vijgenconfituur, tijm en grof zout, met partjes verse vijg',
     porties: 8, voorbereiding: 15, bereiding: 5,
     ingredienten: ["200 g foie gras (terrine of bloc)", "6 sneden peperkoek", "4 eetlepels vijgenconfituur", "2 verse vijgen", "grof zeezout (fleur de sel)", "versgemalen peper"],
@@ -138,7 +138,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'mini-kaaskroketje', titel: 'mini kaaskroketje', slash: 'oude brugge / peterselie / citroen', gang: 'hapjes',
-    zichtbaar: false, foto: '/fotos/kerst/kaaskroketje-v2.webp',
+    zichtbaar: true, foto: '/fotos/kerst/kaaskroketje-v2.webp',
     fotoAlt: 'Ronde kaaskroketjes met gefrituurde peterselie en citroenrasp, eentje opengebroken met gesmolten kaas, en een partje citroen in zonlicht',
     porties: 8, voorbereiding: 45, bereiding: 15,
     ingredienten: ["100 g boter", "120 g bloem", "5 dl volle melk", "2 eidooiers", "200 g geraspte belegen kaas (Oude Brugge of Passendale)", "50 g geraspte parmezaan", "nootmuskaat, peper en weinig zout", "om te paneren: bloem, 2 eieren, fijn paneermeel", "frituurolie, peterselie en partjes citroen"],
@@ -153,7 +153,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'gougeres-comte', titel: 'gougères met comté', slash: 'soezendeeg / comté / nootmuskaat', gang: 'hapjes',
-    zichtbaar: false, foto: '/fotos/kerst/gougeres-comte.webp',
+    zichtbaar: true, foto: '/fotos/kerst/gougeres-comte.webp',
     fotoAlt: 'Een groene kom vol goudbruine gougères met geraspte kaas en tijm, met een stuk kaas en een opengebroken gougère ernaast',
     porties: 8, voorbereiding: 20, bereiding: 25,
     ingredienten: ["1,25 dl water", "1,25 dl melk", "100 g boter", "1 theelepel zout", "150 g bloem", "4 eieren", "120 g geraspte comté, plus extra om te bestrooien", "een snuifje nootmuskaat en peper"],
@@ -193,7 +193,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'witloofbootje-blauwe-kaas', titel: 'witloofbootje met blauwe kaas', slash: 'witloof / roquefort / peer', gang: 'hapjes',
-    zichtbaar: false, foto: '/fotos/kerst/witloofbootje-blauwe-kaas.webp',
+    zichtbaar: true, foto: '/fotos/kerst/witloofbootje-blauwe-kaas.webp',
     fotoAlt: 'Witloofblaadjes gevuld met blauwe kaas, blokjes peer en walnoten op een groene schaal, met een halve peer en roquefort erachter',
     porties: 6, voorbereiding: 15, bereiding: 0,
     ingredienten: ["2 stronken witloof", "100 g roquefort of andere blauwe kaas", "50 g verse kaas (mascarpone of ricotta)", "1 rijpe peer", "30 g walnoten", "1 theelepel honing", "een paar takjes bieslook"],
@@ -209,7 +209,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'carpaccio-rolletje', titel: 'carpaccio rolletje', slash: 'rund / truffel / rucola', gang: 'hapjes',
-    zichtbaar: false, foto: '/fotos/kerst/carpaccio-rolletje.webp',
+    zichtbaar: true, foto: '/fotos/kerst/carpaccio-rolletje.webp',
     fotoAlt: 'Rolletjes rundercarpaccio gevuld met rucola, met schilfers parmezaan en pijnboompitten op een groene schaal tegen een witte muur met palmschaduw',
     porties: 6, voorbereiding: 20, bereiding: 0,
     ingredienten: ["12 flinterdunne plakjes rundercarpaccio", "1 handje rucola", "30 g parmezaan, in schilfers", "2 eetlepels truffelmayonaise", "een paar druppels truffelolie", "peper en fleur de sel"],
@@ -224,7 +224,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'dadels-in-spek', titel: 'dadels in spek', slash: 'dadel / spek / amandel', gang: 'hapjes',
-    zichtbaar: false, foto: '/fotos/kerst/dadels-in-spek.webp',
+    zichtbaar: true, foto: '/fotos/kerst/dadels-in-spek.webp',
     fotoAlt: 'Dadels gevuld met een amandel, gewikkeld in krokant spek op bamboeprikkers, met rozemarijn en peper in zonlicht',
     porties: 6, voorbereiding: 15, bereiding: 12,
     ingredienten: ["18 medjool dadels", "18 geblancheerde amandelen", "9 sneden ontbijtspek, in de lengte gehalveerd", "cocktailprikkers"],
@@ -239,7 +239,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'pompoensoepje', titel: 'pompoensoepje in een glaasje', slash: 'pompoen / gember / room', gang: 'hapjes',
-    zichtbaar: false, foto: '/fotos/kerst/pompoensoepje.webp',
+    zichtbaar: true, foto: '/fotos/kerst/pompoensoepje.webp',
     fotoAlt: 'Drie witte kommetjes pompoensoep met een toefje room, geroosterde pompoenpitten en tijm, met een stuk pompoen erachter',
     porties: 12, voorbereiding: 15, bereiding: 30,
     ingredienten: ["1 kg pompoen (butternut of potimarron)", "1 ui", "2 cm verse gember", "1 l groentebouillon", "1 dl room, plus extra om af te werken", "1 klontje boter", "peper en zout", "pompoenpitten om af te werken"],
@@ -254,7 +254,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'bitterbal-konijn-pruimen', titel: 'bitterbal van konijn met pruimen', slash: 'konijn / pruim / bruin bier', gang: 'hapjes',
-    zichtbaar: false, foto: '/fotos/kerst/bitterbal-konijn-pruimen-v2.webp',
+    zichtbaar: true, foto: '/fotos/kerst/bitterbal-konijn-pruimen-v2.webp',
     fotoAlt: 'Goudbruine bitterballen van konijn op een toefje mosterdmayonaise, met grove mosterd, pruim en scheutjes, op een oude houten plank met een kommetje mosterd',
     porties: 10, voorbereiding: 45, bereiding: 15,
     ingredienten: ["400 g gestoofd konijn met pruimen, van het bot gehaald (restje van het hoofdgerecht of apart gestoofd)", "2 dl stoofsaus", "40 g boter", "50 g bloem", "4 gedroogde pruimen, fijngehakt", "1 eetlepel fijngehakte peterselie", "om te paneren: bloem, 2 eieren, fijn paneermeel", "frituurolie en grove mosterd"],
@@ -286,7 +286,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'gevulde-champignon', titel: 'gevulde champignon', slash: 'champignon / lookboter / broodkruim', gang: 'hapjes',
-    zichtbaar: false, foto: '/fotos/kerst/gevulde-champignon.webp',
+    zichtbaar: true, foto: '/fotos/kerst/gevulde-champignon.webp',
     fotoAlt: 'Gegratineerde gevulde champignons met een goudbruine korst van broodkruim, kruiden en rozemarijn op een oude houten plank in zonlicht',
     porties: 6, voorbereiding: 15, bereiding: 15,
     ingredienten: ["18 middelgrote champignons", "80 g zachte boter", "2 teentjes look, geperst", "2 eetlepels fijngehakte peterselie", "30 g fijn paneermeel of panko", "20 g geraspte parmezaan", "peper en zout"],
@@ -301,7 +301,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'coquille-spek-lepel', titel: 'coquille met spek op een lepel', slash: 'coquille / spek / appel', gang: 'hapjes',
-    zichtbaar: false, foto: '/fotos/kerst/coquille-spek-lepel.webp',
+    zichtbaar: true, foto: '/fotos/kerst/coquille-spek-lepel.webp',
     fotoAlt: 'Gebakken coquilles met krokant spek, appelstaafjes en tijm op witte proeflepels op een groene schaal',
     porties: 6, voorbereiding: 15, bereiding: 10,
     ingredienten: ["12 kleine coquilles (zonder koraal)", "4 sneden gerookt spek", "1 zure appel (Granny Smith)", "1 klontje boter", "1 eetlepel olijfolie", "een paar druppels balsamicoreductie", "fleur de sel en peper"],
@@ -317,7 +317,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'bladerdeegstengels', titel: 'bladerdeegstengels', slash: 'bladerdeeg / parmezaan / tijm', gang: 'hapjes',
-    zichtbaar: false, foto: '/fotos/kerst/bladerdeegstengels.webp',
+    zichtbaar: true, foto: '/fotos/kerst/bladerdeegstengels.webp',
     fotoAlt: 'Gedraaide bladerdeegstengels met parmezaan en tijm in een donkergroen bekertje, met vallende kaas en een stuk parmezaan op een houten tafel',
     porties: 8, voorbereiding: 15, bereiding: 15,
     ingredienten: ["1 rol roomboterbladerdeeg", "1 ei", "60 g fijngeraspte parmezaan", "1 theelepel verse tijmblaadjes", "grof zeezout en peper"],
@@ -334,7 +334,7 @@ export const kerstmenu: KerstGerecht[] = [
   // ---------- VOORGERECHTEN ----------
   {
     slug: 'coquilles-met-foie-gras', titel: 'coquilles met foie gras', slash: 'coquille / foie gras / porto', gang: 'voorgerechten',
-    zichtbaar: false, foto: '/fotos/kerst/coquilles-met-foie-gras.webp',
+    zichtbaar: true, foto: '/fotos/kerst/coquilles-met-foie-gras.webp',
     fotoAlt: 'Gebakken coquilles met een plakje foie gras, portosaus en scheutjes op een crèmekleurig bord aan een feesttafel met granaatappels, druiven en bordeauxrode bloemen',
     porties: 4, voorbereiding: 20, bereiding: 15,
     ingredienten: ["8 grote coquilles", "4 plakjes rauwe foie gras van 40 g", "2 dl rode porto", "1 dl kalfsfond", "30 g koude boter", "1 eetlepel olijfolie", "veldsla of jonge scheuten", "fleur de sel en peper"],
@@ -354,7 +354,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'carpaccio-met-truffel', titel: 'carpaccio met truffel', slash: 'rund / truffel / parmezaan', gang: 'voorgerechten',
-    zichtbaar: false, foto: '/fotos/kerst/carpaccio-met-truffel.webp',
+    zichtbaar: true, foto: '/fotos/kerst/carpaccio-met-truffel.webp',
     fotoAlt: 'Rundercarpaccio met rucola, parmezaan, pijnboompitten en plakjes zwarte truffel op een golvend bord aan een gedekte kersttafel',
     porties: 4, voorbereiding: 20, bereiding: 0,
     ingredienten: ["320 g runderfilet, heel vers", "50 g parmezaan, in schilfers", "1 handje rucola", "2 eetlepels pijnboompitten, geroosterd", "1 kleine zwarte truffel of 1 eetlepel truffeltapenade", "olijfolie extra vierge", "een paar druppels truffelolie", "fleur de sel en peper"],
@@ -369,7 +369,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'gerookte-eendenborst', titel: 'gerookte eendenborst', slash: 'eend / appel / witloof', gang: 'voorgerechten',
-    zichtbaar: false, foto: '/fotos/kerst/gerookte-eendenborst.webp',
+    zichtbaar: true, foto: '/fotos/kerst/gerookte-eendenborst.webp',
     fotoAlt: 'Plakjes gerookte eendenborst met witloof, appel en walnoten op een golvend bord aan een kersttafel met granaatappels en bloemen',
     porties: 4, voorbereiding: 20, bereiding: 0,
     ingredienten: ["200 g gerookte eendenborst, in dunne plakjes", "2 stronken witloof", "1 zure appel", "30 g walnoten", "1 eetlepel honing", "1 eetlepel grove mosterd", "1 eetlepel ciderazijn", "3 eetlepels walnotenolie of olijfolie", "peper en zout"],
@@ -384,7 +384,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'paddenstoelen-op-brioche', titel: 'paddenstoelen op brioche', slash: 'paddenstoel / brioche / eidooier', gang: 'voorgerechten',
-    zichtbaar: false, foto: '/fotos/kerst/paddenstoelen-op-brioche.webp',
+    zichtbaar: true, foto: '/fotos/kerst/paddenstoelen-op-brioche.webp',
     fotoAlt: 'Gebakken paddenstoelen op geroosterde brioche met een eidooier, tijm en parmezaan aan een gedekte kersttafel',
     porties: 4, voorbereiding: 15, bereiding: 15,
     ingredienten: ["400 g gemengde paddenstoelen (oesterzwam, shiitake, kastanjechampignon)", "1 sjalot", "1 teentje look", "40 g boter", "1 dl room", "4 dikke sneden brioche", "4 verse eidooiers", "1 eetlepel fijngehakte peterselie", "peper en zout"],
@@ -410,7 +410,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'hertenstoverij-peperkoek', titel: 'hertenstoverij met peperkoek', slash: 'hert / bruin bier / peperkoek', gang: 'hoofdgerechten',
-    zichtbaar: false, foto: '/fotos/kerst/hertenstoverij-peperkoek.webp',
+    zichtbaar: true, foto: '/fotos/kerst/hertenstoverij-peperkoek.webp',
     fotoAlt: 'Hertenstoverij met blokjes peperkoek, zilveruitjes en tijm in een crèmekleurige schaal, met kroketten, appelmoes en witloofsalade aan een gedekte kersttafel',
     porties: 6, voorbereiding: 30, bereiding: 180,
     ingredienten: ["1,2 kg hertenstoofvlees (schouder of bil), in blokken", "2 grote uien", "2 eetlepels bloem", "75 cl donker abdijbier", "4 sneden peperkoek", "2 eetlepels mosterd", "2 laurierbladeren", "4 takjes tijm", "4 jeneverbessen, gekneusd", "1 eetlepel bruine suiker", "1 eetlepel azijn", "boter, peper en zout"],
@@ -427,7 +427,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'lamskroontje-kruidenkorst', titel: 'lamskroontje met kruidenkorst', slash: 'lam / kruidenkorst / seizoengroenten', gang: 'hoofdgerechten',
-    zichtbaar: false, foto: '/fotos/kerst/lamskroontje-kruidenkorst.webp',
+    zichtbaar: true, foto: '/fotos/kerst/lamskroontje-kruidenkorst.webp',
     fotoAlt: 'Rosé gebakken lamskroontje met groene kruidenkorst en jus, met worteltjes, tomaatjes en gratin, en kommen krieltjes, wortels en boontjes in spek aan een kersttafel',
     porties: 4, voorbereiding: 30, bereiding: 25,
     ingredienten: ["2 lamskroontjes van elk 6 tot 8 ribben", "60 g paneermeel", "1 bosje peterselie", "4 takjes tijm", "2 takjes rozemarijn", "2 teentjes look", "60 g zachte boter", "2 eetlepels mosterd", "olijfolie, peper en zout", "voor erbij: geroosterde wortel, pastinaak en krielaardappelen"],
@@ -444,7 +444,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'varkenswangetjes', titel: 'varkenswangetjes', slash: 'varken / rode wijn / wortel', gang: 'hoofdgerechten',
-    zichtbaar: false, foto: '/fotos/kerst/varkenswangetjes.webp',
+    zichtbaar: true, foto: '/fotos/kerst/varkenswangetjes.webp',
     fotoAlt: 'Gestoofde varkenswangetjes in glanzende rodewijnsaus met zilveruitjes, met puree, glanzende worteltjes, rode kool en een kannetje saus aan een gedekte kersttafel',
     porties: 4, voorbereiding: 25, bereiding: 180,
     ingredienten: ["12 varkenswangetjes (ongeveer 1 kg)", "1 ui", "2 wortels", "2 stengels selder", "2 teentjes look", "1 eetlepel tomatenpuree", "5 dl rode wijn", "3 dl kalfsfond", "2 laurierbladeren", "4 takjes tijm", "boter, peper en zout", "voor erbij: glanzende worteltjes en puree"],
@@ -472,7 +472,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'crepe-suzette', titel: 'crêpe suzette', slash: 'sinaasappel / grand marnier / boter', gang: 'desserts',
-    zichtbaar: false, foto: '/fotos/kerst/crepe-suzette.webp',
+    zichtbaar: true, foto: '/fotos/kerst/crepe-suzette.webp',
     fotoAlt: 'Gevouwen crêpes in een koperen pan met sinaasappelsaus, schijfjes gekonfijte sinaasappel en rasp in zonlicht',
     porties: 4, voorbereiding: 20, bereiding: 20,
     ingredienten: ["voor de crêpes: 125 g bloem, 2 eieren, 3 dl melk, 25 g gesmolten boter, snuifje zout", "voor de saus: 80 g boter, 80 g suiker, rasp en sap van 2 sinaasappels, sap van ½ citroen, 4 cl Grand Marnier"],
@@ -488,7 +488,7 @@ export const kerstmenu: KerstGerecht[] = [
   },
   {
     slug: 'sabayon-champagne', titel: 'sabayon met champagne', slash: 'eidooier / champagne / rood fruit', gang: 'desserts',
-    zichtbaar: false, foto: '/fotos/kerst/sabayon-champagne.webp',
+    zichtbaar: true, foto: '/fotos/kerst/sabayon-champagne.webp',
     fotoAlt: 'Luchtige sabayon in een geribbelde coupe met frambozen, aardbeien, rode bessen, sinaasappelrasp en poedersuiker in zonlicht',
     porties: 4, voorbereiding: 10, bereiding: 10,
     ingredienten: ["4 eidooiers", "60 g suiker", "1,5 dl champagne of cava", "250 g rood fruit (frambozen, aardbeien, bessen)"],
