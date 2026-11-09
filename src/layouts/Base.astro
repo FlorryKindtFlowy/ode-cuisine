@@ -27,6 +27,11 @@ const orgSchema = {
     { '@type': 'Person', name: 'Florry Kindt' },
   ],
   areaServed: ['Oost-Vlaanderen', 'West-Vlaanderen'],
+  sameAs: [
+    'https://www.instagram.com/odecuisine/',
+    'https://www.facebook.com/profile.php?id=61595750739453',
+    'https://www.pinterest.com/ode_cuisine_be/',
+  ],
 };
 const websiteSchema = {
   '@context': 'https://schema.org',
@@ -156,8 +161,10 @@ const huidig = (p: string) => (pad.startsWith(p) ? 'page' : undefined);
           <a href="/ode-aan/">Ode aan</a>
         </div>
         <div>
-          <a href="https://www.instagram.com/" rel="noopener">Instagram</a>
-          <a href="https://www.pinterest.com/" rel="noopener">Pinterest</a>
+          <a href="https://www.instagram.com/odecuisine/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.facebook.com/profile.php?id=61595750739453" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://www.pinterest.com/ode_cuisine_be/" target="_blank" rel="noopener">Pinterest</a>
+          <a href="https://www.tiktok.com/@florrybrigittekindt" target="_blank" rel="noopener">TikTok</a>
           <a href="/ode-aan/#inzenden">Contact</a>
         </div>
         <p class="klein">© {new Date().getFullYear()} Ode Cuisine · www.odecuisine.be · <span class="credit">Ontwerp en website door <a href="https://www.flowyagency.com" target="_blank" rel="noopener">Flowy</a></span> · <button type="button" class="cookie-link" data-cookie-open>Cookies</button></p>
