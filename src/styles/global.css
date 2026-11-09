@@ -512,7 +512,7 @@ a.zij-item:hover h3 { font-style: italic; color: var(--wijn); }
   .galerij-teller, .galerij-tag { display: none; }
 }
 .intro-lucien { background: var(--zand); padding-top: 40px; }
-.intro-lucien h2 { font-size: clamp(3rem, 6.5vw, 6rem); }
+.intro-lucien h1, .intro-lucien h2 { font-size: clamp(3rem, 6.5vw, 6rem); }
 .galerij-regel { animation: paneel-in .8s var(--ease); }
 .kop.klein { background: rgba(164,185,206,.92) !important; backdrop-filter: blur(8px); padding-top: 14px; padding-bottom: 14px; }
 .kop.klein .logo .o-mark { width: 24px; }
