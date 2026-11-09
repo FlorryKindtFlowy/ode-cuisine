@@ -12,6 +12,7 @@ interface Props {
   noindex?: boolean;
 }
 const { title, description, schema, image, rawTitle, noindex } = Astro.props;
+const pad0 = Astro.url.pathname;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const fullTitle = rawTitle ? title : title === 'Ode Cuisine' ? 'Ode Cuisine · Een ode aan de recepten die ons hebben grootgebracht' : `${title} · Ode Cuisine`;
 
@@ -27,7 +28,34 @@ const orgSchema = {
   ],
   areaServed: ['Oost-Vlaanderen', 'West-Vlaanderen'],
 };
-const schemas = [orgSchema, ...(schema ? (Array.isArray(schema) ? schema : [schema]) : [])];
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Ode Cuisine',
+  url: 'https://www.odecuisine.be/',
+  inLanguage: 'nl-BE',
+  publisher: { '@type': 'Organization', name: 'Ode Cuisine', url: 'https://www.odecuisine.be' },
+};
+// Enkel tussenpagina's die echt bestaan komen in het broodkruimelpad
+const ouders: Record<string, string> = { '/recepten/': 'Recepten', '/kerst/': 'Kerst met Ode' };
+const segmenten = pad0.split('/').filter(Boolean);
+const crumbs = segmenten
+  .map((_, i) => '/' + segmenten.slice(0, i + 1).join('/') + '/')
+  .filter((p, i) => i === segmenten.length - 1 || ouders[p]);
+const breadcrumbSchema = crumbs.length ? {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Ode Cuisine', item: 'https://www.odecuisine.be/' },
+    ...crumbs.map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 2,
+      name: i === crumbs.length - 1 ? fullTitle.replace(/ · (Kerst met Ode|Ode Cuisine)$/, '') : ouders[c],
+      item: new URL(c, Astro.site).toString(),
+    })),
+  ],
+} : null;
+const schemas = [orgSchema, websiteSchema, ...(breadcrumbSchema ? [breadcrumbSchema] : []), ...(schema ? (Array.isArray(schema) ? schema : [schema]) : [])];
 const pad = Astro.url.pathname;
 const huidig = (p: string) => (pad.startsWith(p) ? 'page' : undefined);
 ---
@@ -39,7 +67,10 @@ const huidig = (p: string) => (pad.startsWith(p) ? 'page' : undefined);
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {!noindex && <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />}
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="nl-BE" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
@@ -47,7 +78,12 @@ const huidig = (p: string) => (pad.startsWith(p) ? 'page' : undefined);
     <meta name="theme-color" content="#51121a" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={pad0.startsWith('/recepten/') && pad0 !== '/recepten/' ? 'article' : 'website'} />
+    <meta property="og:site_name" content="Ode Cuisine" />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
     <meta property="og:locale" content="nl_BE" />
     <meta property="og:image" content={new URL(image ?? '/logo/ode-o.png', Astro.site)} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -201,7 +237,7 @@ const huidig = (p: string) => (pad.startsWith(p) ? 'page' : undefined);
         Array.from(g.children).forEach((c, i) => (c as HTMLElement).style.setProperty('--i', String(i)));
       });
       document.querySelectorAll('.reveal, .reveal-foto').forEach((el) => io.observe(el));
-      document.querySelectorAll('main .sectie h2, main .sectie > .wrap > p, main .smal > p, main .kaart, main .formule, main .faq, main .cta-kader, main .gerecht-rij').forEach((el) => {
+      document.querySelectorAll('main .sectie h2, main .intro-lucien h1, main .sectie > .wrap > p, main .smal > p, main .kaart, main .formule, main .faq, main .cta-kader, main .gerecht-rij').forEach((el) => {
         if (el.closest('.hero') || el.classList.contains('reveal')) return;
         el.classList.add('reveal'); io.observe(el);
       });
